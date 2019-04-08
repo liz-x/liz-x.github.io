@@ -1,0 +1,3132 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<html class="theme-next muse" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
+
+<link rel="stylesheet" href="/css/main.css?v=7.1.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="https://ws2.sinaimg.cn/large/006tNc79gy1fzc2280i3hj301s01s3ya.jpg?v=7.1.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="https://ws2.sinaimg.cn/large/006tNc79gy1fzc21ho1d9j300w00w741.jpg?v=7.1.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="https://ws2.sinaimg.cn/large/006tNc79gy1fzc1yv48nwj300g00g0ox.jpg?v=7.1.0">
+
+
+  <link rel="mask-icon" href="https://ws2.sinaimg.cn/large/006tNc79gy1fzc2280i3hj301s01s3ya.jpg?v=7.1.0" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '7.1.0',
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false,"dimmer":false},
+    back2top: true,
+    back2top_sidebar: false,
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="keywords" content="技术分享|Docker|Mac|Mac 工具使用|LNMP|Go|CI|DevOps">
+<meta property="og:type" content="website">
+<meta property="og:title" content="不负">
+<meta property="og:url" content="https://blog.liz-x.com/index.html">
+<meta property="og:site_name" content="不负">
+<meta property="og:locale" content="zh-CN">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="不负">
+
+
+
+
+
+  
+  
+  <link rel="canonical" href="https://blog.liz-x.com/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>不负</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left 
+  page-home">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">不负</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home menu-item-active">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+
+      
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>搜索</a>
+        </li>
+      
+    </ul>
+  
+
+  
+    
+
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+  <section id="posts" class="posts-expand">
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://blog.liz-x.com/2019/04/07/Travis-CI-构建/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="liz">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://ws4.sinaimg.cn/large/006tNc79ly1fzc1i18qexj30wz0u0gr3.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="不负">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/04/07/Travis-CI-构建/" class="post-title-link" itemprop="url">Travis CI 构建</a>
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-04-07 22:51:50" itemprop="dateCreated datePublished" datetime="2019-04-07T22:51:50+08:00">2019-04-07</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-04-08 11:22:17" itemprop="dateModified" datetime="2019-04-08T11:22:17+08:00">2019-04-08</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/工具/" itemprop="url" rel="index"><span itemprop="name">工具</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="环境准备"><a href="#环境准备" class="headerlink" title="环境准备"></a>环境准备</h2><h3 id="GitHub-Token"><a href="#GitHub-Token" class="headerlink" title="GitHub Token"></a>GitHub Token</h3><p>登陆 <code>GitHub</code>–<code>Settings</code> 选项，找到 <code>Personal access tokens</code>页面：</p>
+<ol>
+<li><a href="https://github.com/settings/tokens" target="_blank" rel="noopener">https://github.com/settings/tokens</a></li>
+<li><a href="https://developer.github.com/apps/building-oauth-apps/understanding-scopes-for-oauth-apps/" target="_blank" rel="noopener">Oauth 权限说明</a></li>
+</ol>
+<p>Token 只显示一次，需要记录好，如果丢失只能重新生成。</p>
+<p><img src="https://ws3.sinaimg.cn/large/006tNc79gy1g02lydhjsjj31hm0u0jug.jpg" alt=""></p>
+<h3 id="Travis-CI-添加-Token"><a href="#Travis-CI-添加-Token" class="headerlink" title="Travis CI 添加 Token"></a>Travis CI 添加 Token</h3><p>添加 <code>Environment Variables</code>：<br>Name：变量名，建议与 GitHub 保持一致<br>Token：GitHub personal access token</p>
+<p><strong>不勾选</strong> <code>Display value in build log</code>，否则会在日志文件中暴露 <code>token</code> 信息，且日志文件是公开可见。</p>
+<p><img src="https://ws4.sinaimg.cn/large/006tNc79gy1g02lz55e9bj31y00eugmc.jpg" alt=""></p>
+<p><img src="https://ws2.sinaimg.cn/large/006tNc79gy1g02lyosx7zj31xo0g0aal.jpg" alt=""></p>
+<h3 id="Travis-SSH-Key"><a href="#Travis-SSH-Key" class="headerlink" title="Travis SSH Key"></a>Travis SSH Key</h3><p><strong>本地安装 Travis</strong></p>
+<p>先安装 <code>ruby</code>，<a href="./install-ruby.md">安装教程</a>。</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 安装 travis</span></span><br><span class="line">gem install travis</span><br><span class="line"></span><br><span class="line"><span class="comment"># travis 登录，使用 GitHub 用户名及密码</span></span><br><span class="line"><span class="comment"># --auto 自动登录</span></span><br><span class="line">travis login --auto</span><br></pre></td></tr></table></figure>
+<p><strong>生成 ssh key</strong></p>
+<ol>
+<li><p>生成 <code>travis</code>，<code>travis.pub</code></p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> ~/.ssh</span><br><span class="line">ssh-keygen -t rsa -C <span class="string">"travis"</span> -f travis</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>拷贝公钥 <code>travis.pub</code> 的内容到服务器 <code>/home/www-data/.ssh/authorized_keys</code>（使用非 root 账户）</p>
+</li>
+<li><p>通过 <code>travis</code> 加密私钥</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># -r：仓库</span></span><br><span class="line">travis encrypt-file /home/www-data/.ssh/travis -r username/repository</span><br><span class="line"></span><br><span class="line"><span class="comment"># 输出配置：openssl aes-256-cbc -K $encrypted_xxx_key -iv $encrypted_xxx_iv -in travis.enc -out ~\/.ssh/travis -d</span></span><br><span class="line"><span class="comment"># 去掉“\”，复制到 .travis.yml</span></span><br></pre></td></tr></table></figure>
+<p><strong>Travis</strong> <code>Environment Variables</code> 会生成两个参数：</p>
+<ul>
+<li>encrypted_xxx_key</li>
+<li>encrypted_xxx_iv</li>
+</ul>
+</li>
+<li><p>将 <code>travis.enc</code>，添加到 <code>master</code> 分支的根目录下</p>
+</li>
+</ol>
+<h2 id="travis-yml-配置"><a href="#travis-yml-配置" class="headerlink" title="travis.yml 配置"></a>travis.yml 配置</h2><p><a href="https://docs.travis-ci.com/" target="_blank" rel="noopener">官方文档</a></p>
+<p><code>master</code> 分支根目录下，创建 <strong>.travis.yml</strong>：</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 说明</span></span><br><span class="line"><span class="comment"># TRAVIS_BUILD_DIR：默认，Travis 的全局变量</span></span><br><span class="line"><span class="comment"># DEPLOY_HOST：改成你的域名或 IP</span></span><br><span class="line"><span class="comment"># DEPLOY_PATH：改成你的构建路径，例如：/websvr/www/blog</span></span><br><span class="line"><span class="comment"># 示例：https://github.com/liz-x/liz-x.github.io/blob/master/.travis.yml</span></span><br><span class="line"></span><br><span class="line"><span class="attr">language:</span> <span class="string">node_js</span> <span class="comment"># 语言</span></span><br><span class="line"><span class="attr">node_js:</span> <span class="string">stable</span> <span class="comment"># node 版本</span></span><br><span class="line"><span class="attr">branches:</span></span><br><span class="line"><span class="attr">    only:</span></span><br><span class="line"><span class="bullet">        -</span> <span class="string">master</span> <span class="comment"># 监测 master 分支</span></span><br><span class="line"><span class="attr">install:</span></span><br><span class="line"><span class="bullet">    -</span> <span class="literal">true</span> <span class="comment"># 跳过 install 阶段</span></span><br><span class="line"><span class="attr">script:</span></span><br><span class="line"><span class="bullet">    -</span> <span class="literal">true</span> <span class="comment"># 跳过 script 阶段</span></span><br><span class="line"><span class="attr">before_deploy:</span></span><br><span class="line"><span class="bullet">    -</span> <span class="string">openssl</span> <span class="string">aes-256-cbc</span> <span class="bullet">-K</span> <span class="string">$encrypted_xxx_key</span> <span class="bullet">-iv</span> <span class="string">$encrypted_xxx_iv</span> <span class="bullet">-in</span> <span class="string">travis.enc</span> <span class="bullet">-out</span> <span class="string">~/.ssh/id_rsa</span> <span class="bullet">-d</span></span><br><span class="line"><span class="bullet">    -</span> <span class="string">chmod</span> <span class="number">600</span> <span class="string">~/.ssh/id_rsa</span></span><br><span class="line"><span class="attr">addons:</span></span><br><span class="line"><span class="attr">    ssh_known_hosts:</span> <span class="string">$DEPLOY_HOST</span></span><br><span class="line"><span class="attr">deploy:</span></span><br><span class="line"><span class="attr">    on:</span></span><br><span class="line"><span class="attr">        branch:</span> <span class="string">master</span></span><br><span class="line"><span class="attr">    provider:</span> <span class="string">script</span></span><br><span class="line"><span class="attr">    skip_cleanup:</span> <span class="literal">true</span></span><br><span class="line"><span class="attr">    script:</span> <span class="string">rsync</span> <span class="bullet">-r</span> <span class="bullet">--delete-after</span> <span class="bullet">--quiet</span> <span class="string">$TRAVIS_BUILD_DIR</span> <span class="string">www-data/$DEPLOY_HOST:$DEPLOY_PATH</span></span><br></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://blog.liz-x.com/2019/03/20/Mac-+-Vagrant-+-Docker---LNMP/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="liz">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://ws4.sinaimg.cn/large/006tNc79ly1fzc1i18qexj30wz0u0gr3.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="不负">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/03/20/Mac-+-Vagrant-+-Docker---LNMP/" class="post-title-link" itemprop="url">Mac + Vagrant + Docker - LNMP</a>
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-03-20 19:53:50" itemprop="dateCreated datePublished" datetime="2019-03-20T19:53:50+08:00">2019-03-20</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-04-02 16:03:20" itemprop="dateModified" datetime="2019-04-02T16:03:20+08:00">2019-04-02</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/Mac/" itemprop="url" rel="index"><span itemprop="name">Mac</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h2><ol>
+<li>VirtualBox</li>
+<li>Vagrant</li>
+<li>CentOS 镜像</li>
+</ol>
+<p><a href="https://www.virtualbox.org/wiki/Downloads" target="_blank" rel="noopener">VirtualBox 下载地址</a></p>
+<p><img src="https://ws4.sinaimg.cn/large/006tKfTcgy1g17wq1rcvaj30jy04o0sm.jpg" alt=""></p>
+<p><a href="https://www.vagrantup.com/downloads.html" target="_blank" rel="noopener">Vagrant 下载地址</a></p>
+<p>安装完成后，终端输入：<code>vagrant -v</code></p>
+<p><img src="https://ws1.sinaimg.cn/large/006tKfTcgy1g17wstjxb2j30d404a0sk.jpg" alt=""></p>
+<p><a href="https://app.vagrantup.com/boxes/search" target="_blank" rel="noopener">官方镜像</a></p>
+<p><img src="https://ws2.sinaimg.cn/large/006tKfTcgy1g17y0nk47lj31kq0u0tjv.jpg" alt="image-20190319112851082"></p>
+<h2 id="Vagrant"><a href="#Vagrant" class="headerlink" title="Vagrant"></a>Vagrant</h2><h3 id="安装-CentOS"><a href="#安装-CentOS" class="headerlink" title="安装 CentOS"></a>安装 CentOS</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 新建 vagrant 目录</span></span><br><span class="line">mkdir ~/vagrant</span><br><span class="line">cd ~/vagrant</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 官方镜像：在线安装</span></span><br><span class="line">vagrant init centos/7</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 下载镜像：自定义镜像名、指定镜像路径(推荐)</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 官方：https://vagrantcloud.com/centos/boxes/7/versions/1902.01/providers/virtualbox.box</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> vagrant box add &lt;boxName&gt; &lt;boxFilePath&gt;</span></span><br><span class="line">vagrant box add centos7 ~/Downloads/centos-7.0-x86_64.box</span><br></pre></td></tr></table></figure>
+<p><strong>备注：</strong>目录下会生成配置文件 —— Vagrantfile</p>
+<h3 id="安装插件"><a href="#安装插件" class="headerlink" title="安装插件"></a>安装插件</h3><ol>
+<li>vagrant-hostmanage —— 用主机名访问（虚拟机之间访问、宿主机访问虚机）</li>
+<li>vagrant-vbguest —— 自定义共享目录（必须，解决异常：mount: unknown filesystem type ‘vboxsf’）</li>
+</ol>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">vagrant plugin install vagrant-hostmanage</span><br><span class="line">vagrant plugin install vagrant-vbguest</span><br></pre></td></tr></table></figure>
+<h3 id="自定义配置"><a href="#自定义配置" class="headerlink" title="自定义配置"></a>自定义配置</h3><p>修改 Vagrantfile(在 end 之前)</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">config.vm.network</span> <span class="string">"private_network"</span><span class="string">,</span> <span class="attr">ip:</span> <span class="string">"192.168.33.10"</span>    <span class="comment"># 虚拟机 IP</span></span><br><span class="line"><span class="string">config.vm.synced_folder</span> <span class="string">"~/websvr"</span><span class="string">,</span> <span class="string">"/websvr"</span>               <span class="comment"># 共享目录</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 可选</span></span><br><span class="line"><span class="string">config.vm.provision</span> <span class="string">"shell"</span><span class="string">,</span> <span class="attr">path:</span> <span class="string">"bootstrap.sh"</span>           <span class="comment"># 启动时运行脚本</span></span><br></pre></td></tr></table></figure>
+<h3 id="Vagrantfile-参数说明"><a href="#Vagrantfile-参数说明" class="headerlink" title="Vagrantfile 参数说明"></a>Vagrantfile 参数说明</h3><p><strong>config.vm.define 多台主机</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">config.vm.define "node1" do |node1|</span><br><span class="line">end</span><br><span class="line">config.vm.define "node1" do |node2|</span><br><span class="line">end</span><br><span class="line">config.vm.define "node1" do |node3|</span><br><span class="line">end</span><br></pre></td></tr></table></figure>
+<p><strong>*.vm.network 虚拟机网络</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">nat             # 默认方式</span><br><span class="line">forwarded_port  # 端口转发</span><br><span class="line">private network # 私有网络（仅主机模式）</span><br><span class="line">public network  # 公有网络（桥接模式）</span><br><span class="line"></span><br><span class="line">config.vm.network "forwarded_port", guest: 80, host: 8080</span><br><span class="line">config.vm.network "private_network", ip: "192.168.33.10"</span><br><span class="line">config.vm.network "public_network"</span><br></pre></td></tr></table></figure>
+<p><strong>*.vm.hostname 定义虚机主机名</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">config.vm.define "node1" do |node1|</span><br><span class="line">    node1.vm.network "private_network", ip: "192.168.33.11"</span><br><span class="line">    node1.vm.network "public_network"</span><br><span class="line">    node1.vm.hostname = "node1"</span><br><span class="line">end</span><br></pre></td></tr></table></figure>
+<h3 id="访问-CentOS"><a href="#访问-CentOS" class="headerlink" title="访问 CentOS"></a>访问 CentOS</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 新建共享目录</span></span><br><span class="line">mkdir ~/websvr</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">vagrant up      # 启动虚拟机(默认用户：vagrant)</span><br><span class="line">vagrant ssh     # 访问虚拟机</span><br></pre></td></tr></table></figure>
+<p>宿主机：ping 192.168.33.10</p>
+<p><strong>备注：</strong></p>
+<ol>
+<li>每次更改 Vagrantfile 后，需要重启虚拟机 <code>vagrant reload</code>。</li>
+<li><strong>提高安全性</strong>，root 账户建议通过密钥登录。</li>
+</ol>
+<p>如果出现一下报错：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Permission denied - /Users/xxx/.vagrant.d/data/machine-index/index (Errno::EACCES)</span><br></pre></td></tr></table></figure>
+<ol>
+<li>rm -rf ~/.vagrant.d</li>
+<li>启动：vagrant up</li>
+</ol>
+<h3 id="打包镜像"><a href="#打包镜像" class="headerlink" title="打包镜像"></a>打包镜像</h3><ol>
+<li>关闭虚拟机：<code>vagrant halt</code></li>
+<li><code>mkdir -p backup/centos7</code></li>
+<li>打包：<code>vagrant package --output backup/centos7/centos7.box --vagrantfile Vagrantfile</code></li>
+</ol>
+<h3 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">vagrant -v          # 查看版本</span><br><span class="line">vagrant status      # 查看状态</span><br><span class="line">vagrant up          # 启动虚拟机</span><br><span class="line">vagrant ssh         # 访问虚拟机</span><br><span class="line">vagrant reload      # 重启虚拟机</span><br><span class="line">vagrant suspend     # 挂起虚拟机（虚拟机内存都保存在硬盘上，启动可快速恢复）</span><br><span class="line">vagrant resume      # 恢复虚拟机(与挂起对应)</span><br><span class="line">vagrant halt        # 关闭虚拟机</span><br><span class="line">vagrant destroy     # 销毁虚拟机</span><br><span class="line">vagrant package     # 打包镜像（以后任何地方都能用）</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> box</span></span><br><span class="line">vagrant box list    # 镜像列表</span><br><span class="line">vagrant box add     # 添加镜像</span><br><span class="line">vagrant box remove  # 删除镜像</span><br></pre></td></tr></table></figure>
+<h2 id="Docker"><a href="#Docker" class="headerlink" title="Docker"></a>Docker</h2><h3 id="克隆-Docker-Compose"><a href="#克隆-Docker-Compose" class="headerlink" title="克隆 Docker Compose"></a>克隆 <a href="https://github.com/liz-x/docker-server" target="_blank" rel="noopener">Docker Compose</a></h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 宿主机</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 文件共享目录是 /Users</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 所以只能挂载 /User 的文件</span></span><br><span class="line">cd ~</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 拉取项目</span></span><br><span class="line">git clone https://github.com/liz-x/docker-server.git websvr</span><br><span class="line">cd websvr</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 删除 git 信息</span></span><br><span class="line">rm -rf .git*</span><br></pre></td></tr></table></figure>
+<h3 id="系统初始化"><a href="#系统初始化" class="headerlink" title="系统初始化"></a>系统初始化</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">cd ~/vagrant</span><br><span class="line">vagrant ssh</span><br><span class="line"></span><br><span class="line">cd /websvr/</span><br><span class="line">sh centos-vagrant-init.sh</span><br></pre></td></tr></table></figure>
+<p><strong>备注：</strong>vagrant 内 <code>chown -R www-data:www-data /websvr/</code> 无效</p>
+<ol>
+<li>退出虚拟机</li>
+<li><p>修改 Vagrantfile</p>
+ <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">config.vm.synced_folder "~/websvr", "/websvr"       # 共享目录</span><br><span class="line">    owner: "www-data", group: "www-data"            # 指定目录的拥有者和拥有组</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>vagrant reload</p>
+</li>
+</ol>
+<h3 id="启动容器"><a href="#启动容器" class="headerlink" title="启动容器"></a>启动容器</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">cd ~/vagrant</span><br><span class="line">vagrant ssh</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> Demo 服务</span></span><br><span class="line">cd /websrv/compose/demo</span><br><span class="line">docker-compose up -d</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 查看容器状态</span></span><br><span class="line">docker-compose ps</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 测试</span></span><br><span class="line">[vagrant@localhost ~] curl 127.0.0.1</span><br><span class="line">Hello World.</span><br></pre></td></tr></table></figure>
+<p><strong>备注：</strong>根据工作所需，安装工具与服务，确认一切正常后，就可以打包镜像，共享给其他开发小伙伴啦！！！</p>
+<p>如果容器启动报错：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker: Error response from daemon: OCI runtime create failed: container_linux.go:344: starting container process caused "process_linux.go:297: getting the final child's pid from pipe caused \"read init-p: connection reset by peer\"": unknown.</span><br></pre></td></tr></table></figure>
+<p>原因：docker 版本过高，内核版本过低造成。<br>解决：降低 docker 版本或升级内核版本。</p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://blog.liz-x.com/2019/03/18/绩效面谈模板/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="liz">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://ws4.sinaimg.cn/large/006tNc79ly1fzc1i18qexj30wz0u0gr3.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="不负">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/03/18/绩效面谈模板/" class="post-title-link" itemprop="url">绩效面谈模板</a>
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-03-18 15:28:18" itemprop="dateCreated datePublished" datetime="2019-03-18T15:28:18+08:00">2019-03-18</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-04-02 16:03:20" itemprop="dateModified" datetime="2019-04-02T16:03:20+08:00">2019-04-02</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/管理/" itemprop="url" rel="index"><span itemprop="name">管理</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>最近在做团队绩效面谈，总结下具体流程，精简出一个模板。<br>本模板是根据个人工作经验与公司敏捷团队管理模式所提炼，谨供参考。</p>
+<p>面谈目的：回顾过去，展望未来。<br>面谈原则：极度求真，极度透明。</p>
+<h2 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h2><ol>
+<li><a href="https://www.jianshu.com/p/a614d8ec3536" target="_blank" rel="noopener">Coaching</a>：通过启发式提问，激发个人潜能；</li>
+<li>表扬：简单罗列个人去年关键成果，并针对具体的事项进行表扬（先认可对方）；</li>
+<li>改进：针对去年做得不足的地方（以事实说话），共同讨论如何改进（聆听为主，适当提供建议）；</li>
+<li>批评：可选，如果有严重不良的行为或错误的思想导向，必须指明；</li>
+<li>期望：根据过去的成果、个人发展潜力、组织未来的目标，表达新一年对个人成长的期望；</li>
+<li>总结：根据实际情况，总结讨论内容，同步绩效与调薪结果（要明确以成果为导向）；</li>
+<li>反馈：会后总结交流内容，补充规划、目标、寄语，发送面谈反馈邮件。</li>
+</ol>
+<p>备注：邮件会补充绩效说明与个人寄语，同步企业价值观。</p>
+<h2 id="模板"><a href="#模板" class="headerlink" title="模板"></a>模板</h2><blockquote>
+<p>面谈模板含：Coaching、表扬、改进、批评、期望、总结<br>邮件反馈模板含：表扬、改进、期望、小结、寄语</p>
+</blockquote>
+<h3 id="Coaching"><a href="#Coaching" class="headerlink" title="Coaching"></a>Coaching</h3><ol>
+<li>去年感觉自己有什么变化？（让个人意识自己有哪些成长）</li>
+<li>觉得自己有哪些做得好的地方？（表扬好的习惯并表示希望继续坚持）</li>
+<li>觉得自己有哪些不足？（发现个人盲区并思考如何改进）</li>
+<li>今年有什么计划？（树立个人目标）</li>
+<li>如何帮助身边的小伙伴成长？</li>
+<li>对团队或公司有什么建议？</li>
+</ol>
+<blockquote>
+<p>备注：不是逐个询问已知的问题就完事了，而是每个问题都有捕捉里面的细节，挖掘更深层次的子问题。</p>
+</blockquote>
+<h3 id="表扬"><a href="#表扬" class="headerlink" title="表扬"></a>表扬</h3><blockquote>
+<p>罗列具体的成果。<br>说明哪里做得好，为什么值得肯定，好的行为习惯希望继续保持。</p>
+</blockquote>
+<p>关键成果：</p>
+<ol>
+<li>xxx；</li>
+<li>xxx；</li>
+<li>……</li>
+</ol>
+<h3 id="改进"><a href="#改进" class="headerlink" title="改进"></a>改进</h3><blockquote>
+<p>罗列具体做得不足的地方。<br>说明问题的影响，共同讨论如何改进，聆听为主，适当提供建议，最后对改进方案达成共识。</p>
+</blockquote>
+<p>不足之处：</p>
+<ol>
+<li>xxx；</li>
+<li>xxx；</li>
+<li>……</li>
+</ol>
+<p>改进方案：</p>
+<ol>
+<li>xxx；</li>
+<li>xxx；</li>
+<li>……</li>
+</ol>
+<h3 id="批评"><a href="#批评" class="headerlink" title="批评"></a>批评</h3><blockquote>
+<p>可选，如果有严重不良的行为或错误的思想导向，必须指明。</p>
+</blockquote>
+<h3 id="期望"><a href="#期望" class="headerlink" title="期望"></a>期望</h3><blockquote>
+<p>根据过去的成果、个人发展潜力、组织未来的目标，表达新一年对个人成长的期望；</p>
+</blockquote>
+<ol>
+<li>完成 xxx 专项；</li>
+<li>提升 xxx 能力；</li>
+<li>……</li>
+</ol>
+<p>备注：<a href="https://en.wikipedia.org/wiki/Personal_development_planning" target="_blank" rel="noopener">PDP</a> 规划中，一定要有一个里程碑的规划，目标是要有可量化的成果。</p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><blockquote>
+<p>小结一番后，明确绩效以成果为导向，同步绩效与调薪结果。</p>
+</blockquote>
+<h4 id="绩效"><a href="#绩效" class="headerlink" title="绩效"></a>绩效</h4><blockquote>
+<p>突出个人对团队的价值体现，同步绩效结果。</p>
+</blockquote>
+<p>绩效评级：A<br>奖金系数：2<br>奖金金额：100W</p>
+<h4 id="调薪"><a href="#调薪" class="headerlink" title="调薪"></a>调薪</h4><blockquote>
+<p>突出公司对个人未来的期望，同步结果。</p>
+</blockquote>
+<p>上涨：10%<br>月薪：10W</p>
+<h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><blockquote>
+<p>邮件反馈通用模板</p>
+</blockquote>
+<p>绩效面向过去，调薪面向未来。</p>
+<p><strong>关于绩效</strong>：无论是团队，还是个人，绩效都是以结果为导向，根据去年的成果与表现，得到合理的收获。<br><strong>关于调薪：</strong>综合工作成果、工作表现、发展潜力（对未来的期待），再根据职级的薪资范围，给予调整。<br>备注：入职半年以上，享受调薪机会（根据公司政策调整）。</p>
+<p>产品优秀、服务稳定、客户认可，团队高质量完成 OKR（业绩目标+产品目标），年终绩效得优，团队奖金包大，大家都有一个好丰收。</p>
+<p>相反，整天需要处理一堆重复而杂乱的问题，产品毫无亮点，个人没成长、工作没干劲。企业为了长远的发展，也会调整资源、升级人才，团队 Leader 和 PM 随时都会下课。</p>
+<p><strong>PS：要有创业者的危机感，路才能走得更远。</strong></p>
+<h3 id="寄语"><a href="#寄语" class="headerlink" title="寄语"></a>寄语</h3><blockquote>
+<p>邮件反馈通用模板，可添加针对性补充。</p>
+</blockquote>
+<p>我们一直倡导<a href="https://book.douban.com/subject/26308014/" target="_blank" rel="noopener">联盟</a>文化，相互投资，共生共赢，一个人能力再强，也敌不过团队的力量。<br>好比一支篮球队，有前锋、中锋、后卫、教练等同伴，大家的目标一致：赢得比赛，拿到冠军。<br>—— 加盟、转会都是为了打造更合适、更凝聚、更优秀的球队！</p>
+<p><strong>对于个人：</strong><br>持续成长，让你能从容应对未来的挑战。<br>敬畏工作，让你拥有更广阔的职业空间。</p>
+<p><strong>对于团队：</strong><br>以<strong>共同</strong>解决问题为导向，与团队一起成长，传播正能量。<br>互相信任、互相帮助、互相驱动，整体的力量超乎想象。</p>
+<p><strong>人生是所有选择的总和！！！</strong><br>越努力，越幸运。</p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://blog.liz-x.com/2019/03/13/Mac-npm、node-安装与更新/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="liz">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://ws4.sinaimg.cn/large/006tNc79ly1fzc1i18qexj30wz0u0gr3.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="不负">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/03/13/Mac-npm、node-安装与更新/" class="post-title-link" itemprop="url">Mac npm、node 安装与更新</a>
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-03-13 17:29:17" itemprop="dateCreated datePublished" datetime="2019-03-13T17:29:17+08:00">2019-03-13</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-04-02 16:03:20" itemprop="dateModified" datetime="2019-04-02T16:03:20+08:00">2019-04-02</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/Mac/" itemprop="url" rel="index"><span itemprop="name">Mac</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="Mac-npm、node-安装与更新"><a href="#Mac-npm、node-安装与更新" class="headerlink" title="Mac npm、node 安装与更新"></a>Mac npm、node 安装与更新</h1><h2 id="npm-安装"><a href="#npm-安装" class="headerlink" title="npm 安装"></a>npm 安装</h2><p>homebrew 方式：<code>brew install npm</code></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 使用淘宝镜像</span></span><br><span class="line"><span class="comment"># 支持 npm 除了 publish 之外的所有命令</span></span><br><span class="line"><span class="comment"># 如果 npm 安装缓慢或失败，可使用 cnpm</span></span><br><span class="line">sudo npm install -g cnpm --registry=https://registry.npm.taobao.org</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看版本</span></span><br><span class="line">cnpm -v</span><br></pre></td></tr></table></figure>
+<h2 id="查看版本"><a href="#查看版本" class="headerlink" title="查看版本"></a>查看版本</h2><p>本地版本：<code>npm -v</code></p>
+<p><code>npm outdated</code> 检查模块是否已经过时</p>
+<p><img src="https://ws1.sinaimg.cn/large/006tKfTcgy1g11akrx54pj30uu05odg0.jpg" alt=""></p>
+<h2 id="更新版本"><a href="#更新版本" class="headerlink" title="更新版本"></a>更新版本</h2><p>最新版本：<code>sudo npm -g install npm@latest</code><br>指定版本：<code>sudo npm -g install npm@6.0.0</code></p>
+<p><strong>常用命令</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">npm help # 查看某条命令的详细帮助</span><br><span class="line">npm install # 安装模块</span><br><span class="line">npm uninstall # 卸载模块</span><br><span class="line">npm update # 更新模块</span><br><span class="line">npm start # 启动模块</span><br><span class="line">npm stop # 停止模块</span><br><span class="line">npm restart # 重新启动模块</span><br><span class="line">npm test # 测试模块</span><br><span class="line">npm version # 查看模块版本</span><br></pre></td></tr></table></figure>
+<h2 id="node-安装"><a href="#node-安装" class="headerlink" title="node 安装"></a>node 安装</h2><p>—— node 版本管理工具</p>
+<h3 id="n"><a href="#n" class="headerlink" title="n"></a>n</h3><p><a href="https://github.com/tj/n" target="_blank" rel="noopener">https://github.com/tj/n</a></p>
+<ol>
+<li>清除 node.js cache：<code>sudo npm cache clean -f</code></li>
+<li>安装 n 工具（node.js 版本管理工具）：<code>sudo npm install -g n</code></li>
+<li>安装稳定版：<code>sudo n stable</code></li>
+<li>查看 node 版本：<code>node -v</code></li>
+</ol>
+<p>安装稳定版本：<code>sudo n stable</code><br>安装指定版本：<code>sudo n v8.0.0</code><br>删除指定版本：<code>sudo n rm v8.0.0</code></p>
+<h3 id="nvm"><a href="#nvm" class="headerlink" title="nvm"></a>nvm</h3><p><a href="https://github.com/creationix/nvm" target="_blank" rel="noopener">https://github.com/creationix/nvm</a></p>
+<ol>
+<li><code>brew install nvm</code></li>
+<li><p>在 shell 配置文件（~/.bashrc 或 ~/.zshrc）中添加以下内容：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 在 shell 中使用 nvm 指令</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 查看官方最新说明：https://github.com/creationix/nvm<span class="comment">#manual-install</span></span></span><br><span class="line">export NVM_DIR="$HOME/.nvm"</span><br><span class="line">[ -s "$NVM_DIR/nvm.sh" ] &amp;&amp; \. "$NVM_DIR/nvm.sh" # This loads nvm</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>重新source<br><code>. ~/.bashrc</code><br><code>. ~/.zshrc</code></p>
+</li>
+</ol>
+<p>安装稳定版本：<code>sudo nvm install stable</code><br>安装指定版本：<code>sudo nvm install v8.0.0</code><br>删除指定版本：<code>sudo nvm uninstall v8.0.0</code></p>
+<p>列出本地版本：<code>nvm ls</code><br>切换本地版本：<code>nvm use v8.0.0</code></p>
+<h3 id="n-与-nvm"><a href="#n-与-nvm" class="headerlink" title="n 与 nvm"></a>n 与 nvm</h3><p><strong>n</strong></p>
+<ol>
+<li>不支持  win</li>
+<li>node 模块，安装简单</li>
+<li>n 切换版本时，共用全局的 node/npm 目录</li>
+</ol>
+<p><strong>nvm</strong></p>
+<ol>
+<li>更加流行</li>
+<li>shell 脚本，需要手动指定路径</li>
+<li>不同版本都会安装自有的 node 模块（版本间不冲突，但占用硬盘资源）</li>
+</ol>
+<p>普通用户二选一即可，专业开发建议使用 nvm。</p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://blog.liz-x.com/2019/02/25/通过-Docker-快速搭建-Web-服务(CentOS-版)/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="liz">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://ws4.sinaimg.cn/large/006tNc79ly1fzc1i18qexj30wz0u0gr3.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="不负">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/02/25/通过-Docker-快速搭建-Web-服务(CentOS-版)/" class="post-title-link" itemprop="url">通过 Docker 快速搭建 Web 服务(CentOS 版)</a>
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-02-25 18:00:37" itemprop="dateCreated datePublished" datetime="2019-02-25T18:00:37+08:00">2019-02-25</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-04-02 16:03:20" itemprop="dateModified" datetime="2019-04-02T16:03:20+08:00">2019-04-02</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/Linux/" itemprop="url" rel="index"><span itemprop="name">Linux</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p><a href="https://github.com/liz-x/docker-server" target="_blank" rel="noopener">git 仓库</a></p>
+<h2 id="文件说明"><a href="#文件说明" class="headerlink" title="文件说明"></a>文件说明</h2><p><strong>centos-init.sh：</strong><br>—— 系统初始化</p>
+<ul>
+<li>更换 YUM 源</li>
+<li>安装 Docker</li>
+<li>安装 Docker-Compose —— 通过 YMAL 配置，定义和运行多个 Docker 应用的工具</li>
+</ul>
+<p><strong>Dockerfile：</strong></p>
+<p>dockerfile/php72/Dockerfile<br>本地构建镜像：docker build -t php-fpm:7.2 .</p>
+<p><strong>websvr 目录：</strong></p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 项目目录</span></span><br><span class="line">/websvr/www <span class="comment"># web 站点</span></span><br><span class="line">/websvr/ssl <span class="comment"># cert key</span></span><br><span class="line">/websvr/<span class="built_in">log</span> <span class="comment"># svr 日志</span></span><br><span class="line">/websvr/vhost <span class="comment"># 虚拟主机</span></span><br><span class="line">/websvr/script <span class="comment"># 脚本</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># docker-compose</span></span><br><span class="line">/websvr/compose <span class="comment"># compose 根目录</span></span><br><span class="line">/websvr/compose/conf <span class="comment"># 基础配置</span></span><br><span class="line">/websvr/compose/demo <span class="comment"># demo 服务</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># NMP LOG 目录</span></span><br><span class="line">/websvr/<span class="built_in">log</span>/nginx <span class="comment"># nginx 日志</span></span><br><span class="line">/websvr/<span class="built_in">log</span>/mysql <span class="comment"># mysql 日志</span></span><br><span class="line">/websvr/<span class="built_in">log</span>/php <span class="comment"># php 日志</span></span><br></pre></td></tr></table></figure>
+<p><strong>/websvr/compose：</strong></p>
+<p>存放 docker-compose.ymal，在 compose 目录中可以建立不同的服务，例如：</p>
+<ul>
+<li>/websvr/compose/demo</li>
+<li>/websvr/compose/nginx-proxy</li>
+<li>/websvr/compose/api-gateway</li>
+</ul>
+<h2 id="搭建服务"><a href="#搭建服务" class="headerlink" title="搭建服务"></a>搭建服务</h2><h3 id="初始化"><a href="#初始化" class="headerlink" title="初始化"></a>初始化</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> /</span><br><span class="line"></span><br><span class="line"><span class="comment"># 拉取项目</span></span><br><span class="line">git <span class="built_in">clone</span> https://github.com/liz-x/docker-server.git websvr</span><br><span class="line"><span class="built_in">cd</span> websvr</span><br><span class="line"></span><br><span class="line"><span class="comment"># 删除 git 信息</span></span><br><span class="line">rm -rf .git*</span><br><span class="line"></span><br><span class="line"><span class="comment"># 系统初始化（ECS 版）</span></span><br><span class="line">sudo sh ./centos-init.sh</span><br></pre></td></tr></table></figure>
+<h3 id="启动-Demo"><a href="#启动-Demo" class="headerlink" title="启动 Demo"></a>启动 Demo</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Demo 服务</span></span><br><span class="line"><span class="built_in">cd</span> /websrv/compose/demo</span><br><span class="line">docker-compose up -d</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看容器状态</span></span><br><span class="line">[root@zsky sky] docker-compose ps</span><br><span class="line"></span><br><span class="line"><span class="comment"># 测试</span></span><br><span class="line">[root@zsky ~] curl localhost</span><br><span class="line">Hello World.</span><br></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://blog.liz-x.com/2019/02/23/编程修养/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="liz">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://ws4.sinaimg.cn/large/006tNc79ly1fzc1i18qexj30wz0u0gr3.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="不负">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/02/23/编程修养/" class="post-title-link" itemprop="url">编程修养</a>
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-02-23 11:02:11" itemprop="dateCreated datePublished" datetime="2019-02-23T11:02:11+08:00">2019-02-23</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-04-02 16:03:20" itemprop="dateModified" datetime="2019-04-02T16:03:20+08:00">2019-04-02</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/编程/" itemprop="url" rel="index"><span itemprop="name">编程</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/编程/规范/" itemprop="url" rel="index"><span itemprop="name">规范</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="开发禁忌"><a href="#开发禁忌" class="headerlink" title="开发禁忌"></a>开发禁忌</h2><ol>
+<li>禁止系统物理删除数据（可根据规范定期清理历史无效数据）；</li>
+<li>禁止在控制器写业务逻辑；</li>
+<li>禁止在事务中调用接口；</li>
+<li>禁止嵌套事务，嵌套事务不易掌控；</li>
+<li>禁止提交本地日志、测试文件、测试数据到仓库；</li>
+<li>禁止硬编码，使用 .env 配置文件（如：接口地址、环境参数）；</li>
+<li>大表禁止删除字段 —— 避免索引重建，通过备注说明字段“已失效”；</li>
+<li>大表禁止更新字段名称、类型、减少长度 —— 避免索引重建；</li>
+<li>项目内文件存储，非 OSS 存储对象，只存相对路径。</li>
+</ol>
+<h2 id="安全准测"><a href="#安全准测" class="headerlink" title="安全准测"></a>安全准测</h2><ol>
+<li>服务启用 SSL，敏感信息必须使用 POST 请求；</li>
+<li>接口一律使用 Oauth2 鉴权；</li>
+<li>必须使用 PDO 库执行 SQL（避免 SQL 注入）；</li>
+<li>前端安全防范：XSS、CSRF；</li>
+<li>文件上传必须校验格式并且重命名，文件目录关闭执行权限；</li>
+<li>日志文件敏感数据过滤（登陆密码、交易密码、银行卡号、身份证号等）；</li>
+<li>敏感数据操作必须记录日志。</li>
+</ol>
+<h2 id="编码规范"><a href="#编码规范" class="headerlink" title="编码规范"></a>编码规范</h2><ol>
+<li>业务配置流水化，历史数据关联配置快照；</li>
+<li>涉及文件上传（如：图片、附件），使用 OSS 服务；</li>
+<li>前端防止重复点击，接口防止重复提交；</li>
+<li>并发控制使用 Redis 原子锁；</li>
+<li>记录所有调用第三方接口的请求日志；</li>
+<li>导入数据上传的文件需备份且记录关联的操作（可定期归档）；</li>
+<li>回调接口、消费端处理必须保证幂等性。</li>
+</ol>
+<h2 id="数据操作"><a href="#数据操作" class="headerlink" title="数据操作"></a>数据操作</h2><ol>
+<li>SQL 查询、删改条件必须使用索引；</li>
+<li>数据导入导出异步处理；</li>
+<li>尽量不做联表查询，杜绝两个业务领域的联表查询；</li>
+<li>迭代 SQL 发布，支持提前执行（增量、幂等）。</li>
+</ol>
+<h2 id="心中秩序"><a href="#心中秩序" class="headerlink" title="心中秩序"></a>心中秩序</h2><ol>
+<li>注释、注释、注释，一定要写注释；</li>
+<li>修改被人引用的代码、别人写的代码，通知相关人并加入注释。</li>
+</ol>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://blog.liz-x.com/2019/02/20/Mac-Iterm2-支持-rz-sz-命令/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="liz">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://ws4.sinaimg.cn/large/006tNc79ly1fzc1i18qexj30wz0u0gr3.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="不负">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/02/20/Mac-Iterm2-支持-rz-sz-命令/" class="post-title-link" itemprop="url">Mac Iterm2 支持 rz sz 命令</a>
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-02-20 12:56:32" itemprop="dateCreated datePublished" datetime="2019-02-20T12:56:32+08:00">2019-02-20</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-04-02 16:03:20" itemprop="dateModified" datetime="2019-04-02T16:03:20+08:00">2019-04-02</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/Mac/" itemprop="url" rel="index"><span itemprop="name">Mac</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="Mac-Iterm2-支持-rz-sz-命令"><a href="#Mac-Iterm2-支持-rz-sz-命令" class="headerlink" title="Mac Iterm2 支持 rz sz 命令"></a>Mac Iterm2 支持 rz sz 命令</h1><h2 id="安装-lrzsz"><a href="#安装-lrzsz" class="headerlink" title="安装 lrzsz"></a>安装 lrzsz</h2><p><code>brew install lrzsz</code></p>
+<h2 id="配置-iterm2"><a href="#配置-iterm2" class="headerlink" title="配置 iterm2"></a>配置 iterm2</h2><h3 id="脚本"><a href="#脚本" class="headerlink" title="脚本"></a>脚本</h3><p>拉取 <a href="https://github.com/mmastrac/iterm2-zmodem" target="_blank" rel="noopener">https://github.com/mmastrac/iterm2-zmodem</a> 两个 sh 文件，拷贝到 /usr/local/bin 文件夹中。</p>
+<p>一定要赋予执行权限：</p>
+<p><code>sudo chmod +x /usr/local/bin/iterm2*</code></p>
+<h3 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h3><p>打开 iterm2，Preferences -&gt; Profiles -&gt; Default -&gt; Advanced 的 tab 页 -&gt; Triggers - Edit，添加两条规则：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Regular expression: rz waiting to receive.\*\*B0100</span><br><span class="line">Action: Run Silent Coprocess</span><br><span class="line">Parameters: /usr/local/bin/iterm2-send-zmodem.sh</span><br><span class="line"></span><br><span class="line">Regular expression: \*\*B00000000000000</span><br><span class="line">Action: Run Silent Coprocess</span><br><span class="line">Parameters: /usr/local/bin/iterm2-recv-zmodem.sh</span><br></pre></td></tr></table></figure>
+<p><img src="https://ws2.sinaimg.cn/large/006tKfTcgy1g0aeayrm04j31cb0u0ac1.jpg" alt=""><br><img src="https://ws4.sinaimg.cn/large/006tKfTcgy1g0ae9gpl8tj31c00u00u6.jpg" alt=""></p>
+<h3 id="命令说明"><a href="#命令说明" class="headerlink" title="命令说明"></a>命令说明</h3><p>文件上传：rz</p>
+<p>文件下载：sz filename filename1 …</p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://blog.liz-x.com/2019/02/18/RabbmitMQ-整理/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="liz">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://ws4.sinaimg.cn/large/006tNc79ly1fzc1i18qexj30wz0u0gr3.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="不负">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/02/18/RabbmitMQ-整理/" class="post-title-link" itemprop="url">RabbmitMQ 整理</a>
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-02-18 10:50:52" itemprop="dateCreated datePublished" datetime="2019-02-18T10:50:52+08:00">2019-02-18</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-04-02 16:03:20" itemprop="dateModified" datetime="2019-04-02T16:03:20+08:00">2019-04-02</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/工具/" itemprop="url" rel="index"><span itemprop="name">工具</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="基础概念"><a href="#基础概念" class="headerlink" title="基础概念"></a>基础概念</h2><p>Broker - 消息队列服务器的实体<br>Connection - 建立一个 TCP 连接<br>Channel - 虚拟连接，消息通道，数据流动都是在Channel中进行的，每个 Channel 代表一个会话<br>Exchange - 接收消息，转发消息到绑定的队列上，指定消息按什么规则，路由到哪个队列<br>Queue - 消息队列载体，用来存储消息，有自己的 erlang 进程<br>Binding - 绑定，它的作用就是把 Exchange 和 Queue 按照路由规则绑定起来<br>Routing Key - 路由关键字，Exchange 根据这个关键字进行消息投递<br>Vhost - 虚拟主机，一个broker里可以开设多个vhost，用作不同用户的权限分离<br>Producter - 消息生产者，产生消息的程序<br>Consumer - 消息消费者，接收消息的程序<br>Prefetch  Count - 限制 Queue 每次发送给每个消费者的消息数（待消费处理完再重新发送）</p>
+<p>MessageQueue - 队列声明</p>
+<ul>
+<li>消费者是无法订阅或者获取不存在的 MessageQueue 中信息；</li>
+<li>消息被 Exchange 接受以后，如果没有匹配的 Queue，则会被丢弃；</li>
+<li>队列属性：Exclusive：排他队列、Auto-delete：自动删除、Durable：持久化。</li>
+</ul>
+<p>Message Acknowledgment - 消息回执</p>
+<ul>
+<li>Pub Message 没有 ack</li>
+<li>如果未启用持久化，服务重启消息会丢失</li>
+</ul>
+<p><strong>备注：</strong></p>
+<ol>
+<li>多个消费者可以订阅同一个 Queue，这时 Queue 中的消息会被平均分摊给多个消费者进行处理；</li>
+<li>即使使用持久化，也存在小概率丢失事件，需要在业务逻辑上加上事务或者重试机制；</li>
+<li>每个 Queue 中存放的 message 理论上无上限，取决于机器的内存；</li>
+<li>Channel 是真实 TCP 连接之上的虚拟连接，所有 AMQP 命令都是通过 Channel 发送的；</li>
+<li>一个 Channel 只能被单独一个操作系统线程使用，一个操作系统线程上允许使用多个 Channel 。</li>
+</ol>
+<p><strong>为什么使用 Channel，而不是直接使用 TCP 连接？</strong></p>
+<p>建立和关闭 TCP 连接是有代价的，频繁的建立关闭 TCP 连接对于系统的性能有很大的影响，而且 TCP 的连接数也有限制，这也限制了系统处理高并发的能力。在 TCP 连接中建立 Channel 是没有上述代价的。对于 Producer 或者 Consumer 来说，可以并发的使用多个 Channel 进行 Publish 或者 Receive。</p>
+<p>大部分的业务操作是在 Channel 这个接口中完成的，包括定义 Queue、定义 Exchange、绑定 Queue 与 Exchange、发布消息等。Channel 之间是完全隔离的。</p>
+<h2 id="关键组件-Exchange"><a href="#关键组件-Exchange" class="headerlink" title="关键组件 - Exchange"></a>关键组件 - Exchange</h2><p>Exchange - 接受生产者消息并将消息路由到消息队列（生产者不会直接把消息投给 Queue）</p>
+<ul>
+<li>Routing Key - 指定消息路由规则，决定消息流向哪里；</li>
+<li>Binding - 将 Exchange 与 Queue 关联起来，将消息路由到指定的 Queue；</li>
+<li>Binding Key - 当 binding key 与 routing key 相匹配时，消息将会被路由到对应的 Queue；</li>
+<li>Exchange Type：<ul>
+<li>fanout：广播是式交换器，把所有发送到该 Exchange 的消息投递到所有与它绑定的队列</li>
+<li>direct：直接交换器，把消息投递到那些 binding key 与 routing key 完全匹配的队列</li>
+<li>topic：主题交换器，将消息路由到 binding key 与 routing key 模式匹配的队列</li>
+</ul>
+</li>
+</ul>
+<p><strong>Exchange、Binding</strong></p>
+<p>生产者将消息投递到队列中，实际的情况是，生产者将消息发送到 Exchange（交换器），再通过 Binding 将 Exchange 与 Queue 关联起来。</p>
+<p>在绑定（Binding）Exchange 与 Queue 的同时，一般会指定一个 binding key。在绑定多个 Queue 到同一个Exchange 的时候，这些 Binding 允许使用相同的 binding key。</p>
+<p>生产者在将消息发送给 Exchange 的时候，一般会指定一个 routing key，来指定这个消息的路由规则，生产者就可以在发送消息给 Exchange 时，通过指定 routing key 来决定消息流向哪里。</p>
+<h2 id="流程"><a href="#流程" class="headerlink" title="流程"></a>流程</h2><ol>
+<li>客户端连接（Connection）到消息队列服务器，打开一个 Channel；</li>
+<li>客户端声明一个 Exchange，并设置相关属性；</li>
+<li>客户端声明一个 Queue，并设置相关属性；</li>
+<li>客户端使用 Routing Key，通过 Bind 在 Exchange 和 Queue 之间建立好绑定关系；</li>
+<li>客户端投递消息到 Exchange。</li>
+</ol>
+<p><img src="https://ws1.sinaimg.cn/large/006tNc79gy1fz8jwvlnjjj315e0m91kx.jpg" alt=""></p>
+<p><img src="https://ws2.sinaimg.cn/large/006tNc79gy1fz8jqc012fj30rs0jj75b.jpg" alt=""></p>
+<h2 id="Web-管理说明"><a href="#Web-管理说明" class="headerlink" title="Web 管理说明"></a>Web 管理说明</h2><p>引用：<a href="https://www.jianshu.com/p/7b6e575fd451" target="_blank" rel="noopener">https://www.jianshu.com/p/7b6e575fd451</a></p>
+<h3 id="overview-gt-Totals"><a href="#overview-gt-Totals" class="headerlink" title="overview -&gt; Totals"></a>overview -&gt; Totals</h3><p><img src="https://ws1.sinaimg.cn/large/006tNc79gy1fz8kjtgsfqj314l0e1my0.jpg" alt=""></p>
+<p>Ready：待消费的消息总数<br>Unacked：待应答的消息总数<br>Total：Ready + Unacked</p>
+<p>Publish：producter pub 消息的速率<br>Publisher confirm：broker 确认 pub 消息的速率<br>Deliver(manual ack)：customer 手动确认的速率<br>Deliver( auto ack)：customer 自动确认的速率<br>Consumer ack：customer 正在确认的速率<br>Redelivered：正在传递 ‘redelivered’ 标志集的消息的速率<br>Get (manual ack)：响应 basic.get 而要求确认的消息的传输速率<br>Get (auto ack)：响应于 basic.get 而发送不需要确认的消息的速率<br>Return：将 basic.return 发送给 producter 的速率<br>Disk read：queue 从磁盘读取消息的速率<br>Disk write：queue 从磁盘写入消息的速率</p>
+<p>Connections：client 的 tcp 连接的总数<br>Channels：通道的总数<br>Exchange：交换器的总数<br>Queues：队列的总数<br>Consumers：消费者的总数</p>
+<h3 id="Overview-gt-Nodes"><a href="#Overview-gt-Nodes" class="headerlink" title="Overview -&gt; Nodes"></a>Overview -&gt; Nodes</h3><p>启动一个broker都会产生一个node</p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://blog.liz-x.com/2019/02/13/CentOS-7-安装-Docker/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="liz">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://ws4.sinaimg.cn/large/006tNc79ly1fzc1i18qexj30wz0u0gr3.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="不负">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/02/13/CentOS-7-安装-Docker/" class="post-title-link" itemprop="url">CentOS 7 安装 Docker</a>
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-02-13 18:27:53" itemprop="dateCreated datePublished" datetime="2019-02-13T18:27:53+08:00">2019-02-13</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-04-02 16:03:20" itemprop="dateModified" datetime="2019-04-02T16:03:20+08:00">2019-04-02</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/Linux/" itemprop="url" rel="index"><span itemprop="name">Linux</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 安装 Docker</span></span><br><span class="line"><span class="comment"># 官方文档：https://docs.docker.com/install/linux/docker-ce/centos/</span></span><br><span class="line"><span class="comment"># 阿里文档：https://yq.aliyun.com/articles/110806/</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">cd</span> /tmp/</span><br><span class="line"></span><br><span class="line">curl -fsSL https://get.docker.com | sh -s docker --mirror Aliyun</span><br><span class="line">sudo usermod -aG docker www-data</span><br><span class="line"></span><br><span class="line">sudo systemctl start docker</span><br><span class="line">sudo systemctl <span class="built_in">enable</span> docker</span><br><span class="line"></span><br><span class="line"><span class="comment"># 配置镜像加速器(阿里)</span></span><br><span class="line">sudo mkdir -p /etc/docker</span><br><span class="line">sudo tee /etc/docker/daemon.json &lt;&lt;-<span class="string">'EOF'</span></span><br><span class="line">&#123;</span><br><span class="line">  <span class="string">"registry-mirrors"</span>: [<span class="string">"https://fm9u2lxx.mirror.aliyuncs.com"</span>]</span><br><span class="line">&#125;</span><br><span class="line">EOF</span><br><span class="line">sudo systemctl daemon-reload</span><br><span class="line">sudo systemctl restart docker</span><br><span class="line"></span><br><span class="line"><span class="comment"># 安装 docker-compose</span></span><br><span class="line"><span class="comment"># 官方文档：https://docs.docker.com/compose/install/</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># 超时解决方法：</span></span><br><span class="line"><span class="comment"># 方法1：</span></span><br><span class="line"><span class="comment">#    ping github-cloud.s3.amazonaws.com 获取 IP</span></span><br><span class="line"><span class="comment">#    修改 hosts，添加：ip github-cloud.s3.amazonaws.com</span></span><br><span class="line"><span class="comment"># 方法2：</span></span><br><span class="line"><span class="comment">#    使用 https://get.daocloud.io</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># 这里使用方法 2</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line">sudo curl -L <span class="string">"https://get.daocloud.io/docker/compose/releases/download/1.23.2/docker-compose-<span class="variable">$(uname -s)</span>-<span class="variable">$(uname -m)</span>"</span> -o /usr/<span class="built_in">local</span>/bin/docker-compose</span><br><span class="line"></span><br><span class="line">sudo chmod +x /usr/<span class="built_in">local</span>/bin/docker-compose</span><br></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://blog.liz-x.com/2019/02/12/Let-s-Encrypt-证书申请及配置/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="liz">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://ws4.sinaimg.cn/large/006tNc79ly1fzc1i18qexj30wz0u0gr3.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="不负">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/02/12/Let-s-Encrypt-证书申请及配置/" class="post-title-link" itemprop="url">Let's Encrypt 证书申请及配置</a>
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-02-12 16:25:57" itemprop="dateCreated datePublished" datetime="2019-02-12T16:25:57+08:00">2019-02-12</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-04-02 16:03:20" itemprop="dateModified" datetime="2019-04-02T16:03:20+08:00">2019-04-02</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/工具/" itemprop="url" rel="index"><span itemprop="name">工具</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p><a href="https://letsencrypt.org/" target="_blank" rel="noopener">Let’s Encrypt</a> —— 是一个由非营利性组织 <a href="https://letsencrypt.org/isrg/" target="_blank" rel="noopener">互联网安全研究小组</a>（ISRG）提供的免费、自动化和开放的证书颁发机构（CA），简单的说，就是为网站提供免费的 SSL/TLS 证书。</p>
+<h2 id="签发工具"><a href="#签发工具" class="headerlink" title="签发工具"></a>签发工具</h2><p>Let’s Encrypt 生成证书的<a href="https://letsencrypt.org/docs/client-options/" target="_blank" rel="noopener">工具</a>很多，<a href="https://certbot.eff.org/" target="_blank" rel="noopener">certbot</a> 是官方推荐的签发工具，也可以通过在线服务申请，例如：</p>
+<ul>
+<li><a href="https://freessl.cn/" target="_blank" rel="noopener">FreeSSL</a>（不支持自动续签）</li>
+<li><a href="https://www.qiniu.com/ssl" target="_blank" rel="noopener">七牛</a>（不支持 DV 泛域名）</li>
+<li><a href="https://www.upyun.com/products/ssl" target="_blank" rel="noopener">又拍云</a>（不支持 DV 泛域名）</li>
+</ul>
+<p>在线一站式服务管理方便，但可能需要绑定业务，个人用户还是推荐通过工具生成证书。<br>这里推荐 <a href="https://github.com/Neilpang/acme.sh" target="_blank" rel="noopener">acme.sh</a>，它不仅有详细的<a href="https://github.com/Neilpang/acme.sh/wiki/%E8%AF%B4%E6%98%8E" target="_blank" rel="noopener">中文文档</a>，操作更为方便，还支持 <a href="https://github.com/Neilpang/acme.sh/wiki/Run-acme.sh-in-docker" target="_blank" rel="noopener">Docker</a>。</p>
+<h2 id="acme-sh"><a href="#acme-sh" class="headerlink" title="acme.sh"></a>acme.sh</h2><p>以 root 用户为例</p>
+<h3 id="在线安装"><a href="#在线安装" class="headerlink" title="在线安装"></a>在线安装</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl https://get.acme.sh | sh</span><br></pre></td></tr></table></figure>
+<p>安装过程：</p>
+<ol>
+<li><p><code>home</code>  目录下生成 <code>.acme.sh</code> 文件夹，查看文件夹内容：<code>ls ~/.acme.sh/</code>；</p>
+</li>
+<li><p>自动添加 bash alias：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># ~/.bashrc 添加：</span></span><br><span class="line">. <span class="string">"/root/.acme.sh/acme.sh.env"</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># acme.sh.env 内容：</span></span><br><span class="line"><span class="comment"># alias acme.sh="/root/.acme.sh/acme.sh"</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>自动添加定时任务（时间随机）：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 每天凌晨检查证书的有效期，如有需要，自动续签。</span></span><br><span class="line">30 0 * * * <span class="string">"/root/.acme.sh"</span>/acme.sh --cron --home <span class="string">"/root/.acme.sh"</span> &gt; /dev/null</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h3 id="相关命令"><a href="#相关命令" class="headerlink" title="相关命令"></a>相关命令</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 查看帮助</span></span><br><span class="line">acme.sh -h</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看列表</span></span><br><span class="line">acme.sh --list</span><br><span class="line"></span><br><span class="line"><span class="comment"># 卸载 acme.sh</span></span><br><span class="line"><span class="comment"># 编辑 ~/.bashrc，删除 acme.sh alias</span></span><br><span class="line">acme.sh --uninstall</span><br></pre></td></tr></table></figure>
+<h3 id="脚本更新"><a href="#脚本更新" class="headerlink" title="脚本更新"></a>脚本更新</h3><p>自动更新：<code>acme.sh --upgrade --auto-upgrade</code><br>手动更新：<code>acme.sh --upgrade</code><br>关闭更新：<code>acme.sh --upgrade --auto-upgrade 0</code></p>
+<h2 id="证书申请"><a href="#证书申请" class="headerlink" title="证书申请"></a>证书申请</h2><p>域名所有权验证方式：HTTP 和 DNS</p>
+<ul>
+<li>HTTP：在网站的根目录下添加一个文件</li>
+<li>DNS：在域名上添加一条 txt 解析记录</li>
+</ul>
+<h3 id="HTTP"><a href="#HTTP" class="headerlink" title="HTTP"></a>HTTP</h3><p>acme.sh 会自动生成验证文件，并放到站点的根目录，然后自动完成验证，最后自动删除文件。</p>
+<ul>
+<li>-d：同 <code>--domain</code>，域名</li>
+<li>-w：同 <code>--webroot</code>，站点根目录</li>
+</ul>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">acme.sh --issue -d mydomain.com -d www.mydomain.com -w /websvr/mydomain.com/</span><br></pre></td></tr></table></figure>
+<p>Nginx：自动从配置中获取站点的根目录</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">acme.sh --issue -d mydomain.com --nginx</span><br></pre></td></tr></table></figure>
+<p><strong>注：根据中国大陆工信部的规定，所有托管在中国大陆服务器上的网站均需要备案。</strong></p>
+<p>—— 站点如未备案，80 端口处于禁用状态，acme.sh 无法使用 HTTP 验证域名所有权。</p>
+<h3 id="DNS"><a href="#DNS" class="headerlink" title="DNS"></a>DNS</h3><p>优势：不需要服务器与公网 ip，只要配置 DNS 解析即可。<br>不足：必须配置 Automatic DNS API 才可以自动续签。</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># https://github.com/Neilpang/acme.sh/wiki/dns-manual-mode</span></span><br><span class="line"><span class="comment"># 注：DNS 不支持自动续签</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 步骤：</span></span><br><span class="line"><span class="comment"># 1. 生成相应的解析记录</span></span><br><span class="line"><span class="comment"># 2. 域名解析中添加生成的 txt 记录</span></span><br><span class="line"><span class="comment"># 3. 等待解析其生效</span></span><br><span class="line">acme.sh --issue --dns -d mydomain.com --yes-I-know-dns-manual-mode-enough-go-ahead-please</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查询域名 txt 记录</span></span><br><span class="line">nslookup -<span class="built_in">type</span>=txt _acme-challenge.mydomain.com</span><br><span class="line"></span><br><span class="line"><span class="comment"># 解析生效后，重新生成证书(注：确实是 renew)</span></span><br><span class="line">acme.sh --renew -d mydomain.com --yes-I-know-dns-manual-mode-enough-go-ahead-please</span><br></pre></td></tr></table></figure>
+<h4 id="DNS-API（推荐）"><a href="#DNS-API（推荐）" class="headerlink" title="DNS API（推荐）"></a>DNS API（推荐）</h4><p>根据域名服务商，选择对应的 <a href="https://github.com/Neilpang/acme.sh/blob/master/dnsapi/README.md" target="_blank" rel="noopener">DNS API</a>。</p>
+<p>阿里云：<a href="https://usercenter.console.aliyun.com/#/manage/ak" target="_blank" rel="noopener">控制台</a></p>
+<p>创建 Accesskey</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 获取到 Key 和 Secret 后，设置环境变量</span></span><br><span class="line"><span class="built_in">export</span> Ali_Key=<span class="string">"123"</span></span><br><span class="line"><span class="built_in">export</span> Ali_Secret=<span class="string">"abc"</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 生产证书</span></span><br><span class="line">acme.sh --issue --dns dns_ali -d mydomain.com -d www.mydomain.com</span><br></pre></td></tr></table></figure>
+<p>DNSPod：<a href="https://www.dnspod.cn/console/user/security" target="_blank" rel="noopener">控制台</a>（注：非腾讯云控制台）</p>
+<p>创建 API Token</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 获取到 ID 和 Key 后，设置环境变量</span></span><br><span class="line"><span class="built_in">export</span> DP_Id=<span class="string">"123"</span></span><br><span class="line"><span class="built_in">export</span> DP_Key=<span class="string">"abc"</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 生产证书</span></span><br><span class="line">acme.sh --issue --dns dns_dp -d mydomain.com -d www.mydomain.com</span><br></pre></td></tr></table></figure>
+<h3 id="通配符证书"><a href="#通配符证书" class="headerlink" title="通配符证书"></a>通配符证书</h3><p> Wildcard 证书，目前只支持 <code>DNS-01</code> 验证方式。</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 阿里 DNS API</span></span><br><span class="line">acme.sh --issue --dns dns_ali -d mydomain.com -d *.mydomain.com</span><br></pre></td></tr></table></figure>
+<h2 id="证书配置"><a href="#证书配置" class="headerlink" title="证书配置"></a>证书配置</h2><p>生成的证书都在 <code>home</code> 目录下: <code>~/.acme.sh/</code></p>
+<h3 id="导出证书"><a href="#导出证书" class="headerlink" title="导出证书"></a>导出证书</h3><p>使用 <code>--install-cert</code> 命令</p>
+<ul>
+<li>-d：域名</li>
+<li>–key-file：私钥位置</li>
+<li>–fullchain-file：证书位置</li>
+<li>–reloadcmd：重载命令</li>
+</ul>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">acme.sh --install-cert -d mydomain.com \</span><br><span class="line">        --key-file /websvr/ssl/mydomain.key \</span><br><span class="line">        --fullchain-file /websvr/ssl/fullchain.cer \</span><br><span class="line">        --reloadcmd <span class="string">"docker exec -t nginx nginx -s reload"</span></span><br></pre></td></tr></table></figure>
+<h3 id="Nginx-配置"><a href="#Nginx-配置" class="headerlink" title="Nginx 配置"></a>Nginx 配置</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">server &#123;</span><br><span class="line">    listen 80;</span><br><span class="line">    server_name mydomain.com;</span><br><span class="line">    <span class="comment"># 重定向到 https</span></span><br><span class="line">    rewrite ^(.*)$  https://<span class="variable">$host</span><span class="variable">$1</span> permanent;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">server &#123;</span><br><span class="line">    listen 443;</span><br><span class="line">    server_name mydomain.com;</span><br><span class="line">    root   /websvr/www/mydomain.com;</span><br><span class="line">    index  index.html index.htm;</span><br><span class="line"></span><br><span class="line">    access_log /dev/null;</span><br><span class="line">    error_log  /websvr/<span class="built_in">log</span>/nginx/mydomain.com.error.log warn;</span><br><span class="line"></span><br><span class="line">    <span class="comment"># SSL 配置</span></span><br><span class="line">    ssl on;</span><br><span class="line">    ssl_certificate /websvr/ssl/fullchain.cer; <span class="comment"># 证书文件</span></span><br><span class="line">    ssl_certificate_key /websvr/ssl/mydomain.key; <span class="comment"># 私钥文件</span></span><br><span class="line">    ssl_session_timeout 5m; <span class="comment"># 会话缓存过期时间</span></span><br><span class="line">    ssl_protocols TLSv1 TLSv1.1 TLSv1.2; <span class="comment"># 开启 SSL 支持</span></span><br><span class="line">    ssl_prefer_server_ciphers on; <span class="comment"># 设置协商加密算法时，优先使用服务端的加密套件</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>重启 Nginx 服务：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker <span class="built_in">exec</span> -t nginx nginx -s reload</span><br></pre></td></tr></table></figure>
+<h3 id="SSL-检测"><a href="#SSL-检测" class="headerlink" title="SSL 检测"></a>SSL 检测</h3><p><a href="https://myssl.com" target="_blank" rel="noopener">https://myssl.com</a></p>
+<h3 id="更新证书"><a href="#更新证书" class="headerlink" title="更新证书"></a>更新证书</h3><p>定时任务会自动更新</p>
+<p>强制续签证书：<code>acme.sh --renew -d mydomain.com --force</code></p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+  </section>
+
+  
+  <nav class="pagination">
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+  </nav>
+
+
+
+          </div>
+          
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <div class="site-overview-wrap sidebar-panel sidebar-panel-active">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="https://ws4.sinaimg.cn/large/006tNc79ly1fzc1i18qexj30wz0u0gr3.jpg" alt="liz">
+            
+              <p class="site-author-name" itemprop="name">liz</p>
+              <div class="site-description motion-element" itemprop="description"></div>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">19</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                      <a href="/categories/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">6</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                      <a href="/tags/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">10</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://github.com/liz-x" title="GitHub &rarr; https://github.com/liz-x" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+
+      
+
+    </div>
+  </aside>
+  
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-snowflake-o"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">liz</span>
+
+  
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a></div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/utils.js?v=7.1.0"></script>
+
+  <script src="/js/motion.js?v=7.1.0"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/schemes/muse.js?v=7.1.0"></script>
+
+
+
+  
+
+  
+
+
+  <script src="/js/next-boot.js?v=7.1.0"></script>
+
+
+  
+
+  
+
+  
+
+  
+
+
+
+  
+  <script>
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url).replace(/\/{2,}/g, '/');
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x"></i></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x"></i></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

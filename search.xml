@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search>
+  <entry>
+    <title><![CDATA[Travis CI 构建]]></title>
+    <url>%2F2019%2F04%2F07%2FTravis-CI-%E6%9E%84%E5%BB%BA%2F</url>
+    <content type="text"><![CDATA[环境准备GitHub Token登陆 GitHub–Settings 选项，找到 Personal access tokens页面： https://github.com/settings/tokens Oauth 权限说明 Token 只显示一次，需要记录好，如果丢失只能重新生成。 Travis CI 添加 Token添加 Environment Variables：Name：变量名，建议与 GitHub 保持一致Token：GitHub personal access token 不勾选 Display value in build log，否则会在日志文件中暴露 token 信息，且日志文件是公开可见。 Travis SSH Key本地安装 Travis 先安装 ruby，安装教程。 123456# 安装 travisgem install travis# travis 登录，使用 GitHub 用户名及密码# --auto 自动登录travis login --auto 生成 ssh key 生成 travis，travis.pub 12cd ~/.sshssh-keygen -t rsa -C "travis" -f travis 拷贝公钥 travis.pub 的内容到服务器 /home/www-data/.ssh/authorized_keys（使用非 root 账户） 通过 travis 加密私钥 12345# -r：仓库travis encrypt-file /home/www-data/.ssh/travis -r username/repository# 输出配置：openssl aes-256-cbc -K $encrypted_xxx_key -iv $encrypted_xxx_iv -in travis.enc -out ~\/.ssh/travis -d# 去掉“\”，复制到 .travis.yml Travis Environment Variables 会生成两个参数： encrypted_xxx_key encrypted_xxx_iv 将 travis.enc，添加到 master 分支的根目录下 travis.yml 配置官方文档 master 分支根目录下，创建 .travis.yml： 1234567891011121314151617181920212223242526# 说明# TRAVIS_BUILD_DIR：默认，Travis 的全局变量# DEPLOY_HOST：改成你的域名或 IP# DEPLOY_PATH：改成你的构建路径，例如：/websvr/www/blog# 示例：https://github.com/liz-x/liz-x.github.io/blob/master/.travis.ymllanguage: node_js # 语言node_js: stable # node 版本branches: only: - master # 监测 master 分支install: - true # 跳过 install 阶段script: - true # 跳过 script 阶段before_deploy: - openssl aes-256-cbc -K $encrypted_xxx_key -iv $encrypted_xxx_iv -in travis.enc -out ~/.ssh/id_rsa -d - chmod 600 ~/.ssh/id_rsaaddons: ssh_known_hosts: $DEPLOY_HOSTdeploy: on: branch: master provider: script skip_cleanup: true script: rsync -r --delete-after --quiet $TRAVIS_BUILD_DIR www-data/$DEPLOY_HOST:$DEPLOY_PATH]]></content>
+      <categories>
+        <category>工具</category>
+      </categories>
+  </entry>
+  <entry>
+    <title><![CDATA[Mac + Vagrant + Docker - LNMP]]></title>
+    <url>%2F2019%2F03%2F20%2FMac-%2B-Vagrant-%2B-Docker---LNMP%2F</url>
+    <content type="text"><![CDATA[准备工作 VirtualBox Vagrant CentOS 镜像 VirtualBox 下载地址 Vagrant 下载地址 安装完成后，终端输入：vagrant -v 官方镜像 Vagrant安装 CentOS1234567891011# 新建 vagrant 目录mkdir ~/vagrantcd ~/vagrant# 官方镜像：在线安装vagrant init centos/7# 下载镜像：自定义镜像名、指定镜像路径(推荐)# 官方：https://vagrantcloud.com/centos/boxes/7/versions/1902.01/providers/virtualbox.box# vagrant box add &lt;boxName&gt; &lt;boxFilePath&gt;vagrant box add centos7 ~/Downloads/centos-7.0-x86_64.box 备注：目录下会生成配置文件 —— Vagrantfile 安装插件 vagrant-hostmanage —— 用主机名访问（虚拟机之间访问、宿主机访问虚机） vagrant-vbguest —— 自定义共享目录（必须，解决异常：mount: unknown filesystem type ‘vboxsf’） 12vagrant plugin install vagrant-hostmanagevagrant plugin install vagrant-vbguest 自定义配置修改 Vagrantfile(在 end 之前) 12345config.vm.network "private_network", ip: "192.168.33.10" # 虚拟机 IPconfig.vm.synced_folder "~/websvr", "/websvr" # 共享目录# 可选config.vm.provision "shell", path: "bootstrap.sh" # 启动时运行脚本 Vagrantfile 参数说明config.vm.define 多台主机 123456config.vm.define "node1" do |node1|endconfig.vm.define "node1" do |node2|endconfig.vm.define "node1" do |node3|end *.vm.network 虚拟机网络 12345678nat # 默认方式forwarded_port # 端口转发private network # 私有网络（仅主机模式）public network # 公有网络（桥接模式）config.vm.network "forwarded_port", guest: 80, host: 8080config.vm.network "private_network", ip: "192.168.33.10"config.vm.network "public_network" *.vm.hostname 定义虚机主机名 12345config.vm.define "node1" do |node1| node1.vm.network "private_network", ip: "192.168.33.11" node1.vm.network "public_network" node1.vm.hostname = "node1"end 访问 CentOS12# 新建共享目录mkdir ~/websvr 12vagrant up # 启动虚拟机(默认用户：vagrant)vagrant ssh # 访问虚拟机 宿主机：ping 192.168.33.10 备注： 每次更改 Vagrantfile 后，需要重启虚拟机 vagrant reload。 提高安全性，root 账户建议通过密钥登录。 如果出现一下报错： 1Permission denied - /Users/xxx/.vagrant.d/data/machine-index/index (Errno::EACCES) rm -rf ~/.vagrant.d 启动：vagrant up 打包镜像 关闭虚拟机：vagrant halt mkdir -p backup/centos7 打包：vagrant package --output backup/centos7/centos7.box --vagrantfile Vagrantfile 常用命令123456789101112131415vagrant -v # 查看版本vagrant status # 查看状态vagrant up # 启动虚拟机vagrant ssh # 访问虚拟机vagrant reload # 重启虚拟机vagrant suspend # 挂起虚拟机（虚拟机内存都保存在硬盘上，启动可快速恢复）vagrant resume # 恢复虚拟机(与挂起对应)vagrant halt # 关闭虚拟机vagrant destroy # 销毁虚拟机vagrant package # 打包镜像（以后任何地方都能用）# boxvagrant box list # 镜像列表vagrant box add # 添加镜像vagrant box remove # 删除镜像 Docker克隆 Docker Compose1234567891011# 宿主机# 文件共享目录是 /Users# 所以只能挂载 /User 的文件cd ~# 拉取项目git clone https://github.com/liz-x/docker-server.git websvrcd websvr# 删除 git 信息rm -rf .git* 系统初始化12345cd ~/vagrantvagrant sshcd /websvr/sh centos-vagrant-init.sh 备注：vagrant 内 chown -R www-data:www-data /websvr/ 无效 退出虚拟机 修改 Vagrantfile 12config.vm.synced_folder "~/websvr", "/websvr" # 共享目录 owner: "www-data", group: "www-data" # 指定目录的拥有者和拥有组 vagrant reload 启动容器12345678910111213cd ~/vagrantvagrant ssh# Demo 服务cd /websrv/compose/demodocker-compose up -d# 查看容器状态docker-compose ps# 测试[vagrant@localhost ~] curl 127.0.0.1Hello World. 备注：根据工作所需，安装工具与服务，确认一切正常后，就可以打包镜像，共享给其他开发小伙伴啦！！！ 如果容器启动报错： 1docker: Error response from daemon: OCI runtime create failed: container_linux.go:344: starting container process caused "process_linux.go:297: getting the final child's pid from pipe caused \"read init-p: connection reset by peer\"": unknown. 原因：docker 版本过高，内核版本过低造成。解决：降低 docker 版本或升级内核版本。]]></content>
+      <categories>
+        <category>Mac</category>
+      </categories>
+      <tags>
+        <tag>Docker</tag>
+        <tag>Mac</tag>
+        <tag>Linux</tag>
+        <tag>工具</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[绩效面谈模板]]></title>
+    <url>%2F2019%2F03%2F18%2F%E7%BB%A9%E6%95%88%E9%9D%A2%E8%B0%88%E6%A8%A1%E6%9D%BF%2F</url>
+    <content type="text"><![CDATA[最近在做团队绩效面谈，总结下具体流程，精简出一个模板。本模板是根据个人工作经验与公司敏捷团队管理模式所提炼，谨供参考。 面谈目的：回顾过去，展望未来。面谈原则：极度求真，极度透明。 步骤 Coaching：通过启发式提问，激发个人潜能； 表扬：简单罗列个人去年关键成果，并针对具体的事项进行表扬（先认可对方）； 改进：针对去年做得不足的地方（以事实说话），共同讨论如何改进（聆听为主，适当提供建议）； 批评：可选，如果有严重不良的行为或错误的思想导向，必须指明； 期望：根据过去的成果、个人发展潜力、组织未来的目标，表达新一年对个人成长的期望； 总结：根据实际情况，总结讨论内容，同步绩效与调薪结果（要明确以成果为导向）； 反馈：会后总结交流内容，补充规划、目标、寄语，发送面谈反馈邮件。 备注：邮件会补充绩效说明与个人寄语，同步企业价值观。 模板 面谈模板含：Coaching、表扬、改进、批评、期望、总结邮件反馈模板含：表扬、改进、期望、小结、寄语 Coaching 去年感觉自己有什么变化？（让个人意识自己有哪些成长） 觉得自己有哪些做得好的地方？（表扬好的习惯并表示希望继续坚持） 觉得自己有哪些不足？（发现个人盲区并思考如何改进） 今年有什么计划？（树立个人目标） 如何帮助身边的小伙伴成长？ 对团队或公司有什么建议？ 备注：不是逐个询问已知的问题就完事了，而是每个问题都有捕捉里面的细节，挖掘更深层次的子问题。 表扬 罗列具体的成果。说明哪里做得好，为什么值得肯定，好的行为习惯希望继续保持。 关键成果： xxx； xxx； …… 改进 罗列具体做得不足的地方。说明问题的影响，共同讨论如何改进，聆听为主，适当提供建议，最后对改进方案达成共识。 不足之处： xxx； xxx； …… 改进方案： xxx； xxx； …… 批评 可选，如果有严重不良的行为或错误的思想导向，必须指明。 期望 根据过去的成果、个人发展潜力、组织未来的目标，表达新一年对个人成长的期望； 完成 xxx 专项； 提升 xxx 能力； …… 备注：PDP 规划中，一定要有一个里程碑的规划，目标是要有可量化的成果。 总结 小结一番后，明确绩效以成果为导向，同步绩效与调薪结果。 绩效 突出个人对团队的价值体现，同步绩效结果。 绩效评级：A奖金系数：2奖金金额：100W 调薪 突出公司对个人未来的期望，同步结果。 上涨：10%月薪：10W 小结 邮件反馈通用模板 绩效面向过去，调薪面向未来。 关于绩效：无论是团队，还是个人，绩效都是以结果为导向，根据去年的成果与表现，得到合理的收获。关于调薪：综合工作成果、工作表现、发展潜力（对未来的期待），再根据职级的薪资范围，给予调整。备注：入职半年以上，享受调薪机会（根据公司政策调整）。 产品优秀、服务稳定、客户认可，团队高质量完成 OKR（业绩目标+产品目标），年终绩效得优，团队奖金包大，大家都有一个好丰收。 相反，整天需要处理一堆重复而杂乱的问题，产品毫无亮点，个人没成长、工作没干劲。企业为了长远的发展，也会调整资源、升级人才，团队 Leader 和 PM 随时都会下课。 PS：要有创业者的危机感，路才能走得更远。 寄语 邮件反馈通用模板，可添加针对性补充。 我们一直倡导联盟文化，相互投资，共生共赢，一个人能力再强，也敌不过团队的力量。好比一支篮球队，有前锋、中锋、后卫、教练等同伴，大家的目标一致：赢得比赛，拿到冠军。—— 加盟、转会都是为了打造更合适、更凝聚、更优秀的球队！ 对于个人：持续成长，让你能从容应对未来的挑战。敬畏工作，让你拥有更广阔的职业空间。 对于团队：以共同解决问题为导向，与团队一起成长，传播正能量。互相信任、互相帮助、互相驱动，整体的力量超乎想象。 人生是所有选择的总和！！！越努力，越幸运。]]></content>
+      <categories>
+        <category>管理</category>
+      </categories>
+  </entry>
+  <entry>
+    <title><![CDATA[Mac npm、node 安装与更新]]></title>
+    <url>%2F2019%2F03%2F13%2FMac-npm%E3%80%81node-%E5%AE%89%E8%A3%85%E4%B8%8E%E6%9B%B4%E6%96%B0%2F</url>
+    <content type="text"><![CDATA[Mac npm、node 安装与更新npm 安装homebrew 方式：brew install npm 1234567# 使用淘宝镜像# 支持 npm 除了 publish 之外的所有命令# 如果 npm 安装缓慢或失败，可使用 cnpmsudo npm install -g cnpm --registry=https://registry.npm.taobao.org# 查看版本cnpm -v 查看版本本地版本：npm -v npm outdated 检查模块是否已经过时 更新版本最新版本：sudo npm -g install npm@latest指定版本：sudo npm -g install npm@6.0.0 常用命令 123456789npm help # 查看某条命令的详细帮助npm install # 安装模块npm uninstall # 卸载模块npm update # 更新模块npm start # 启动模块npm stop # 停止模块npm restart # 重新启动模块npm test # 测试模块npm version # 查看模块版本 node 安装—— node 版本管理工具 nhttps://github.com/tj/n 清除 node.js cache：sudo npm cache clean -f 安装 n 工具（node.js 版本管理工具）：sudo npm install -g n 安装稳定版：sudo n stable 查看 node 版本：node -v 安装稳定版本：sudo n stable安装指定版本：sudo n v8.0.0删除指定版本：sudo n rm v8.0.0 nvmhttps://github.com/creationix/nvm brew install nvm 在 shell 配置文件（~/.bashrc 或 ~/.zshrc）中添加以下内容： 1234# 在 shell 中使用 nvm 指令# 查看官方最新说明：https://github.com/creationix/nvm#manual-installexport NVM_DIR="$HOME/.nvm"[ -s "$NVM_DIR/nvm.sh" ] &amp;&amp; \. "$NVM_DIR/nvm.sh" # This loads nvm 重新source. ~/.bashrc. ~/.zshrc 安装稳定版本：sudo nvm install stable安装指定版本：sudo nvm install v8.0.0删除指定版本：sudo nvm uninstall v8.0.0 列出本地版本：nvm ls切换本地版本：nvm use v8.0.0 n 与 nvmn 不支持 win node 模块，安装简单 n 切换版本时，共用全局的 node/npm 目录 nvm 更加流行 shell 脚本，需要手动指定路径 不同版本都会安装自有的 node 模块（版本间不冲突，但占用硬盘资源） 普通用户二选一即可，专业开发建议使用 nvm。]]></content>
+      <categories>
+        <category>Mac</category>
+      </categories>
+      <tags>
+        <tag>Mac</tag>
+        <tag>工具</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[通过 Docker 快速搭建 Web 服务(CentOS 版)]]></title>
+    <url>%2F2019%2F02%2F25%2F%E9%80%9A%E8%BF%87-Docker-%E5%BF%AB%E9%80%9F%E6%90%AD%E5%BB%BA-Web-%E6%9C%8D%E5%8A%A1(CentOS-%E7%89%88)%2F</url>
+    <content type="text"><![CDATA[git 仓库 文件说明centos-init.sh：—— 系统初始化 更换 YUM 源 安装 Docker 安装 Docker-Compose —— 通过 YMAL 配置，定义和运行多个 Docker 应用的工具 Dockerfile： dockerfile/php72/Dockerfile本地构建镜像：docker build -t php-fpm:7.2 . websvr 目录： 12345678910111213141516# 项目目录/websvr/www # web 站点/websvr/ssl # cert key/websvr/log # svr 日志/websvr/vhost # 虚拟主机/websvr/script # 脚本# docker-compose/websvr/compose # compose 根目录/websvr/compose/conf # 基础配置/websvr/compose/demo # demo 服务# NMP LOG 目录/websvr/log/nginx # nginx 日志/websvr/log/mysql # mysql 日志/websvr/log/php # php 日志 /websvr/compose： 存放 docker-compose.ymal，在 compose 目录中可以建立不同的服务，例如： /websvr/compose/demo /websvr/compose/nginx-proxy /websvr/compose/api-gateway 搭建服务初始化1234567891011cd /# 拉取项目git clone https://github.com/liz-x/docker-server.git websvrcd websvr# 删除 git 信息rm -rf .git*# 系统初始化（ECS 版）sudo sh ./centos-init.sh 启动 Demo12345678910# Demo 服务cd /websrv/compose/demodocker-compose up -d# 查看容器状态[root@zsky sky] docker-compose ps# 测试[root@zsky ~] curl localhostHello World.]]></content>
+      <categories>
+        <category>Linux</category>
+      </categories>
+      <tags>
+        <tag>Docker</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[编程修养]]></title>
+    <url>%2F2019%2F02%2F23%2F%E7%BC%96%E7%A8%8B%E4%BF%AE%E5%85%BB%2F</url>
+    <content type="text"><![CDATA[开发禁忌 禁止系统物理删除数据（可根据规范定期清理历史无效数据）； 禁止在控制器写业务逻辑； 禁止在事务中调用接口； 禁止嵌套事务，嵌套事务不易掌控； 禁止提交本地日志、测试文件、测试数据到仓库； 禁止硬编码，使用 .env 配置文件（如：接口地址、环境参数）； 大表禁止删除字段 —— 避免索引重建，通过备注说明字段“已失效”； 大表禁止更新字段名称、类型、减少长度 —— 避免索引重建； 项目内文件存储，非 OSS 存储对象，只存相对路径。 安全准测 服务启用 SSL，敏感信息必须使用 POST 请求； 接口一律使用 Oauth2 鉴权； 必须使用 PDO 库执行 SQL（避免 SQL 注入）； 前端安全防范：XSS、CSRF； 文件上传必须校验格式并且重命名，文件目录关闭执行权限； 日志文件敏感数据过滤（登陆密码、交易密码、银行卡号、身份证号等）； 敏感数据操作必须记录日志。 编码规范 业务配置流水化，历史数据关联配置快照； 涉及文件上传（如：图片、附件），使用 OSS 服务； 前端防止重复点击，接口防止重复提交； 并发控制使用 Redis 原子锁； 记录所有调用第三方接口的请求日志； 导入数据上传的文件需备份且记录关联的操作（可定期归档）； 回调接口、消费端处理必须保证幂等性。 数据操作 SQL 查询、删改条件必须使用索引； 数据导入导出异步处理； 尽量不做联表查询，杜绝两个业务领域的联表查询； 迭代 SQL 发布，支持提前执行（增量、幂等）。 心中秩序 注释、注释、注释，一定要写注释； 修改被人引用的代码、别人写的代码，通知相关人并加入注释。]]></content>
+      <categories>
+        <category>编程</category>
+        <category>规范</category>
+      </categories>
+      <tags>
+        <tag>后端</tag>
+        <tag>规范</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Mac Iterm2 支持 rz sz 命令]]></title>
+    <url>%2F2019%2F02%2F20%2FMac-Iterm2-%E6%94%AF%E6%8C%81-rz-sz-%E5%91%BD%E4%BB%A4%2F</url>
+    <content type="text"><![CDATA[Mac Iterm2 支持 rz sz 命令安装 lrzszbrew install lrzsz 配置 iterm2脚本拉取 https://github.com/mmastrac/iterm2-zmodem 两个 sh 文件，拷贝到 /usr/local/bin 文件夹中。 一定要赋予执行权限： sudo chmod +x /usr/local/bin/iterm2* 配置打开 iterm2，Preferences -&gt; Profiles -&gt; Default -&gt; Advanced 的 tab 页 -&gt; Triggers - Edit，添加两条规则： 1234567Regular expression: rz waiting to receive.\*\*B0100Action: Run Silent CoprocessParameters: /usr/local/bin/iterm2-send-zmodem.shRegular expression: \*\*B00000000000000Action: Run Silent CoprocessParameters: /usr/local/bin/iterm2-recv-zmodem.sh 命令说明文件上传：rz 文件下载：sz filename filename1 …]]></content>
+      <categories>
+        <category>Mac</category>
+      </categories>
+      <tags>
+        <tag>Mac</tag>
+        <tag>工具</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[RabbmitMQ 整理]]></title>
+    <url>%2F2019%2F02%2F18%2FRabbmitMQ-%E6%95%B4%E7%90%86%2F</url>
+    <content type="text"><![CDATA[基础概念Broker - 消息队列服务器的实体Connection - 建立一个 TCP 连接Channel - 虚拟连接，消息通道，数据流动都是在Channel中进行的，每个 Channel 代表一个会话Exchange - 接收消息，转发消息到绑定的队列上，指定消息按什么规则，路由到哪个队列Queue - 消息队列载体，用来存储消息，有自己的 erlang 进程Binding - 绑定，它的作用就是把 Exchange 和 Queue 按照路由规则绑定起来Routing Key - 路由关键字，Exchange 根据这个关键字进行消息投递Vhost - 虚拟主机，一个broker里可以开设多个vhost，用作不同用户的权限分离Producter - 消息生产者，产生消息的程序Consumer - 消息消费者，接收消息的程序Prefetch Count - 限制 Queue 每次发送给每个消费者的消息数（待消费处理完再重新发送） MessageQueue - 队列声明 消费者是无法订阅或者获取不存在的 MessageQueue 中信息； 消息被 Exchange 接受以后，如果没有匹配的 Queue，则会被丢弃； 队列属性：Exclusive：排他队列、Auto-delete：自动删除、Durable：持久化。 Message Acknowledgment - 消息回执 Pub Message 没有 ack 如果未启用持久化，服务重启消息会丢失 备注： 多个消费者可以订阅同一个 Queue，这时 Queue 中的消息会被平均分摊给多个消费者进行处理； 即使使用持久化，也存在小概率丢失事件，需要在业务逻辑上加上事务或者重试机制； 每个 Queue 中存放的 message 理论上无上限，取决于机器的内存； Channel 是真实 TCP 连接之上的虚拟连接，所有 AMQP 命令都是通过 Channel 发送的； 一个 Channel 只能被单独一个操作系统线程使用，一个操作系统线程上允许使用多个 Channel 。 为什么使用 Channel，而不是直接使用 TCP 连接？ 建立和关闭 TCP 连接是有代价的，频繁的建立关闭 TCP 连接对于系统的性能有很大的影响，而且 TCP 的连接数也有限制，这也限制了系统处理高并发的能力。在 TCP 连接中建立 Channel 是没有上述代价的。对于 Producer 或者 Consumer 来说，可以并发的使用多个 Channel 进行 Publish 或者 Receive。 大部分的业务操作是在 Channel 这个接口中完成的，包括定义 Queue、定义 Exchange、绑定 Queue 与 Exchange、发布消息等。Channel 之间是完全隔离的。 关键组件 - ExchangeExchange - 接受生产者消息并将消息路由到消息队列（生产者不会直接把消息投给 Queue） Routing Key - 指定消息路由规则，决定消息流向哪里； Binding - 将 Exchange 与 Queue 关联起来，将消息路由到指定的 Queue； Binding Key - 当 binding key 与 routing key 相匹配时，消息将会被路由到对应的 Queue； Exchange Type： fanout：广播是式交换器，把所有发送到该 Exchange 的消息投递到所有与它绑定的队列 direct：直接交换器，把消息投递到那些 binding key 与 routing key 完全匹配的队列 topic：主题交换器，将消息路由到 binding key 与 routing key 模式匹配的队列 Exchange、Binding 生产者将消息投递到队列中，实际的情况是，生产者将消息发送到 Exchange（交换器），再通过 Binding 将 Exchange 与 Queue 关联起来。 在绑定（Binding）Exchange 与 Queue 的同时，一般会指定一个 binding key。在绑定多个 Queue 到同一个Exchange 的时候，这些 Binding 允许使用相同的 binding key。 生产者在将消息发送给 Exchange 的时候，一般会指定一个 routing key，来指定这个消息的路由规则，生产者就可以在发送消息给 Exchange 时，通过指定 routing key 来决定消息流向哪里。 流程 客户端连接（Connection）到消息队列服务器，打开一个 Channel； 客户端声明一个 Exchange，并设置相关属性； 客户端声明一个 Queue，并设置相关属性； 客户端使用 Routing Key，通过 Bind 在 Exchange 和 Queue 之间建立好绑定关系； 客户端投递消息到 Exchange。 Web 管理说明引用：https://www.jianshu.com/p/7b6e575fd451 overview -&gt; Totals Ready：待消费的消息总数Unacked：待应答的消息总数Total：Ready + Unacked Publish：producter pub 消息的速率Publisher confirm：broker 确认 pub 消息的速率Deliver(manual ack)：customer 手动确认的速率Deliver( auto ack)：customer 自动确认的速率Consumer ack：customer 正在确认的速率Redelivered：正在传递 ‘redelivered’ 标志集的消息的速率Get (manual ack)：响应 basic.get 而要求确认的消息的传输速率Get (auto ack)：响应于 basic.get 而发送不需要确认的消息的速率Return：将 basic.return 发送给 producter 的速率Disk read：queue 从磁盘读取消息的速率Disk write：queue 从磁盘写入消息的速率 Connections：client 的 tcp 连接的总数Channels：通道的总数Exchange：交换器的总数Queues：队列的总数Consumers：消费者的总数 Overview -&gt; Nodes启动一个broker都会产生一个node]]></content>
+      <categories>
+        <category>工具</category>
+      </categories>
+  </entry>
+  <entry>
+    <title><![CDATA[CentOS 7 安装 Docker]]></title>
+    <url>%2F2019%2F02%2F13%2FCentOS-7-%E5%AE%89%E8%A3%85-Docker%2F</url>
+    <content type="text"><![CDATA[12345678910111213141516171819202122232425262728293031323334353637# 安装 Docker# 官方文档：https://docs.docker.com/install/linux/docker-ce/centos/# 阿里文档：https://yq.aliyun.com/articles/110806/cd /tmp/curl -fsSL https://get.docker.com | sh -s docker --mirror Aliyunsudo usermod -aG docker www-datasudo systemctl start dockersudo systemctl enable docker# 配置镜像加速器(阿里)sudo mkdir -p /etc/dockersudo tee /etc/docker/daemon.json &lt;&lt;-'EOF'&#123; "registry-mirrors": ["https://fm9u2lxx.mirror.aliyuncs.com"]&#125;EOFsudo systemctl daemon-reloadsudo systemctl restart docker# 安装 docker-compose# 官方文档：https://docs.docker.com/compose/install/## 超时解决方法：# 方法1：# ping github-cloud.s3.amazonaws.com 获取 IP# 修改 hosts，添加：ip github-cloud.s3.amazonaws.com# 方法2：# 使用 https://get.daocloud.io## 这里使用方法 2#sudo curl -L "https://get.daocloud.io/docker/compose/releases/download/1.23.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-composesudo chmod +x /usr/local/bin/docker-compose]]></content>
+      <categories>
+        <category>Linux</category>
+      </categories>
+      <tags>
+        <tag>Docker</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Let's Encrypt 证书申请及配置]]></title>
+    <url>%2F2019%2F02%2F12%2FLet-s-Encrypt-%E8%AF%81%E4%B9%A6%E7%94%B3%E8%AF%B7%E5%8F%8A%E9%85%8D%E7%BD%AE%2F</url>
+    <content type="text"><![CDATA[简介Let’s Encrypt —— 是一个由非营利性组织 互联网安全研究小组（ISRG）提供的免费、自动化和开放的证书颁发机构（CA），简单的说，就是为网站提供免费的 SSL/TLS 证书。 签发工具Let’s Encrypt 生成证书的工具很多，certbot 是官方推荐的签发工具，也可以通过在线服务申请，例如： FreeSSL（不支持自动续签） 七牛（不支持 DV 泛域名） 又拍云（不支持 DV 泛域名） 在线一站式服务管理方便，但可能需要绑定业务，个人用户还是推荐通过工具生成证书。这里推荐 acme.sh，它不仅有详细的中文文档，操作更为方便，还支持 Docker。 acme.sh以 root 用户为例 在线安装1curl https://get.acme.sh | sh 安装过程： home 目录下生成 .acme.sh 文件夹，查看文件夹内容：ls ~/.acme.sh/； 自动添加 bash alias： 12345# ~/.bashrc 添加：. "/root/.acme.sh/acme.sh.env"# acme.sh.env 内容：# alias acme.sh="/root/.acme.sh/acme.sh" 自动添加定时任务（时间随机）： 12# 每天凌晨检查证书的有效期，如有需要，自动续签。30 0 * * * "/root/.acme.sh"/acme.sh --cron --home "/root/.acme.sh" &gt; /dev/null 相关命令123456789# 查看帮助acme.sh -h# 查看列表acme.sh --list# 卸载 acme.sh# 编辑 ~/.bashrc，删除 acme.sh aliasacme.sh --uninstall 脚本更新自动更新：acme.sh --upgrade --auto-upgrade手动更新：acme.sh --upgrade关闭更新：acme.sh --upgrade --auto-upgrade 0 证书申请域名所有权验证方式：HTTP 和 DNS HTTP：在网站的根目录下添加一个文件 DNS：在域名上添加一条 txt 解析记录 HTTPacme.sh 会自动生成验证文件，并放到站点的根目录，然后自动完成验证，最后自动删除文件。 -d：同 --domain，域名 -w：同 --webroot，站点根目录 1acme.sh --issue -d mydomain.com -d www.mydomain.com -w /websvr/mydomain.com/ Nginx：自动从配置中获取站点的根目录 1acme.sh --issue -d mydomain.com --nginx 注：根据中国大陆工信部的规定，所有托管在中国大陆服务器上的网站均需要备案。 —— 站点如未备案，80 端口处于禁用状态，acme.sh 无法使用 HTTP 验证域名所有权。 DNS优势：不需要服务器与公网 ip，只要配置 DNS 解析即可。不足：必须配置 Automatic DNS API 才可以自动续签。 1234567891011121314# https://github.com/Neilpang/acme.sh/wiki/dns-manual-mode# 注：DNS 不支持自动续签# 步骤：# 1. 生成相应的解析记录# 2. 域名解析中添加生成的 txt 记录# 3. 等待解析其生效acme.sh --issue --dns -d mydomain.com --yes-I-know-dns-manual-mode-enough-go-ahead-please# 查询域名 txt 记录nslookup -type=txt _acme-challenge.mydomain.com# 解析生效后，重新生成证书(注：确实是 renew)acme.sh --renew -d mydomain.com --yes-I-know-dns-manual-mode-enough-go-ahead-please DNS API（推荐）根据域名服务商，选择对应的 DNS API。 阿里云：控制台 创建 Accesskey 123456# 获取到 Key 和 Secret 后，设置环境变量export Ali_Key="123"export Ali_Secret="abc"# 生产证书acme.sh --issue --dns dns_ali -d mydomain.com -d www.mydomain.com DNSPod：控制台（注：非腾讯云控制台） 创建 API Token 123456# 获取到 ID 和 Key 后，设置环境变量export DP_Id="123"export DP_Key="abc"# 生产证书acme.sh --issue --dns dns_dp -d mydomain.com -d www.mydomain.com 通配符证书 Wildcard 证书，目前只支持 DNS-01 验证方式。 12# 阿里 DNS APIacme.sh --issue --dns dns_ali -d mydomain.com -d *.mydomain.com 证书配置生成的证书都在 home 目录下: ~/.acme.sh/ 导出证书使用 --install-cert 命令 -d：域名 –key-file：私钥位置 –fullchain-file：证书位置 –reloadcmd：重载命令 1234acme.sh --install-cert -d mydomain.com \ --key-file /websvr/ssl/mydomain.key \ --fullchain-file /websvr/ssl/fullchain.cer \ --reloadcmd "docker exec -t nginx nginx -s reload" Nginx 配置123456789101112131415161718192021222324server &#123; listen 80; server_name mydomain.com; # 重定向到 https rewrite ^(.*)$ https://$host$1 permanent;&#125;server &#123; listen 443; server_name mydomain.com; root /websvr/www/mydomain.com; index index.html index.htm; access_log /dev/null; error_log /websvr/log/nginx/mydomain.com.error.log warn; # SSL 配置 ssl on; ssl_certificate /websvr/ssl/fullchain.cer; # 证书文件 ssl_certificate_key /websvr/ssl/mydomain.key; # 私钥文件 ssl_session_timeout 5m; # 会话缓存过期时间 ssl_protocols TLSv1 TLSv1.1 TLSv1.2; # 开启 SSL 支持 ssl_prefer_server_ciphers on; # 设置协商加密算法时，优先使用服务端的加密套件&#125; 重启 Nginx 服务： 1docker exec -t nginx nginx -s reload SSL 检测https://myssl.com 更新证书定时任务会自动更新 强制续签证书：acme.sh --renew -d mydomain.com --force]]></content>
+      <categories>
+        <category>工具</category>
+      </categories>
+      <tags>
+        <tag>SSL</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Git 撤销修改（转）]]></title>
+    <url>%2F2019%2F02%2F11%2FGit-%E6%92%A4%E9%94%80%E4%BF%AE%E6%94%B9%2F</url>
+    <content type="text"><![CDATA[Git 撤销修改原文：https://gb.yekai.net/questions/revert本文对原文格式稍微调整，并补充部分细节。 注：git 命令行代码，行内注释中标注对应的 zsh alias。 git clean新建的文件和目录，且从未提交至版本库。 此类文件的状态为 Untracked files ，撤销方法如下： 12git clean -fd . # gclean .git clean test.txt # gclean text.txt 撤销指定文件 其中，. 表示当前目录及所有子目录中的文件，也可以直接指定对应的文件路径，以下其他情况类似。 -f 所有没有 track 过的文件 -d 所有没有 track 过的文件夹 git checkout提交过版本库，但未提交至暂存区的文件（未执行 git add）。 此类文件的状态为 Changes not staged for commit，撤销方法： 12git checkout . # gco .git checkout test.txt # gco text.txt 撤销指定文件 git reset已提交至暂存区的文件 此类文件的状态为 Changes to be committed，撤销方法： 12git reset . # grh .git reset test.txt # grh text.txt 撤销指定文件 执行之后文件将会回到以上的 1 或者 2 状态，可继续按以上步骤执行撤销，若 git reset 同时加上 --hard 参数（alias 为 grhh），将会把修改过的文件也还原成版本库中的版本。 12345--hard : 回退版本库、暂存区、工作区（因此我们修改过的代码就没了，需要谨慎使用）--mixed: 回退版本库、暂存区(默认)--soft: 回退版本库 git reset &lt;commit_hash&gt;已提交至版本库（执行了 git commit） 每次提交都会生成一个 commit hash，通过以下命令可查阅 hash id 并将其回滚： 12git log # glolgit reset &lt;commit_hash&gt; # grh 如果需要「回滚至上一次提交」，可直接使用以下命令： 1git reset head~1 # grh head~1 执行之后，再按照 1 或者 2 状态进行处理即可，如果回滚之后的代码同时需要提交至 origin 仓库（即回滚 origin 线上仓库的代码），需要使用 -f 强制提交参数，且当前用户需要具备「强制提交的权限」。 git reset 与 revert 的区别二者都是做回滚操作，不同之处在于： reset 直接将 head 指向了回滚的记录，丢弃了这条记录之后所有的提交时间线； revert 更类似 cherry-pick 的反向操作，它不会改变历史时间线。在选中某次特定的历史提交后，它在时间上新增一条提交记录，还原了那次特定提交的所有变更。 其他如果回滚了之后又不想回滚了怎么办？ 如果是以上的情况 1 或者 2，因为修改没入过版本库，无法回滚。 如果是情况 4，回滚之后通过 git log 将看不到回滚之前的 commit hash，但可通过 git reflog 命令（所有记录过的 commit hash）找到回滚之前的 commit hash，然后 git reset &lt;commit_hash&gt; 。]]></content>
+      <categories>
+        <category>工具</category>
+      </categories>
+      <tags>
+        <tag>git</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[多 SSH 密钥]]></title>
+    <url>%2F2019%2F01%2F30%2F%E5%A4%9A-SSH-%E5%AF%86%E9%92%A5%2F</url>
+    <content type="text"><![CDATA[如果已经有了一套名为 id_rsa 的公秘钥，还要生成另外一个公钥，比如 sky 生成新公钥：ssh-keygen -t rsa -C &quot;sky&quot; -f ~/.ssh/sky-C “email” -f 公钥名执行完成后，会在 ~/.ssh/目录下生成一个 sky 和 sky.pub 文件。 添加私钥ssh-add ~/.ssh/sky 在 SSH 用户配置文件 ~/.ssh/config 中指定对应服务所使用的公秘钥名称，如果没有 config 文件的话就新建一个，并输入以下内容： 以 git 为例： 1234567891011# 默认(可不添加，仅做对比说明)Host github.com IdentityFile ~/.ssh/id_rsa# skyHost github.com IdentityFile ~/.ssh/sky# gitlabHost gitlab.com IdentityFile ~/.ssh/gitlab 添加 sky.pub 到 git 服务器网站上 测试配置文件是否正常工作：ssh -T git@github.com 成功则返回：You&#39;ve successfully authenticated, but GitHub does not provide shell access. 自定义 host1234Host github-sky # 别名HostName github.com # 域名User gitIdentityFile ~/.ssh/sky git remote add test git@github-sky:liz-x/test.git ssh-agent 代理转发ssh-agent：ssh 代理，临时性的 session 服务ssh-add 将私钥交给 ssh-agent 保管说明：http://wiki.jikexueyuan.com/project/github-developer-guides/using-ssh-agent.html 查看代理： ssh-add -l添加私钥： ssh-add ~/.ssh/sky删除私钥： ssh-add -d ~/.ssh/sky清空私钥： ssh-add -D添加私钥： ssh-add ~/.ssh/id_rsa ~/.ssh/sky 备注：使用 ssh-add ~/.ssh/id_rsa 如果报异常：Could not open a connection to your authentication agent.，则需要先运行一下 ssh-agent bash，再执行 ssh-add …等命令。]]></content>
+      <categories>
+        <category>Linux</category>
+      </categories>
+      <tags>
+        <tag>git</tag>
+        <tag>Linux</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Restful API 规范]]></title>
+    <url>%2F2019%2F01%2F27%2FRestful-API-%E8%A7%84%E8%8C%83%2F</url>
+    <content type="text"><![CDATA[基本规范协议：https通信数据格式：JSON 命名规范： 接口命名：统一使用小写字母加“-”，如add-service 接口参数命名：统一使用小写字母 + &#39;_&#39;下划线分隔，如：user_id 返回格式：{“code” : 200, “message” : “success”, “data” : {}} 返回状态码： 协议级（如：200、301、302、401、403、502） 系统级（如：10001、10002） 业务级（如：20001、30001、50001） 异常级（如：40001） 标准请求： GET（SELECT）：从服务器取出资源（一项或多项） POST（CREATE）：在服务器新建一个资源 PUT（UPDATE）：在服务器更新资源（客户端提供完整资源数据） PATCH（UPDATE）：在服务器更新资源（客户端提供需要修改的资源数据） DELETE（DELETE）：从服务器删除资源 RESTful API 中的 url 是指向资源的，而不是描述行为的，因此设计API时，应使用名词而非动词来描述语义。 备注：不强制要求 代码实现： GET 请求​ 公开的查询接口（无需鉴权） POST 请求​ 增删改接口​ 私密的查询接口（需要鉴权） 备注：通过修改路由规则实现 Restful 标准规范 API URL 示例api/名词/动词/api/名词/名词-动词/ 12345/api/wordbook/list // 词库列表/api/wordbook/get // 词库获取/api/wordbook/keywords-list // 词库关键字列表/api/wordbook/keywords-update // 词库关键字更新 API 动词示例参考阿里开放平台 api 接口文档 1234567891011121314151617181920212223242526272829303132333435363738394041create // 数据添加（创建）delete // 数据删除update // 数据更新get // 数据信息list // 数据列表count // 数据统计batch // 批量search // 数据搜索query // 数据查询apply // 申请confirm // 确认check // 检查verify // 验证change // 数据更改（某个字段更改或转换）fetch // 获取（拉数据）push // 推送send // 发送notify // 通知sync // 同步bind // 绑定unbind // 解绑open // 开启close // 关闭cancel // 取消status // 状态done // 结束success // 成功log // 日志history // 历史upload // 文件上传accept // 同意reply // 回复refresh // 刷新（例如：token） API 参数小写加下划线 1/api/wordbook/list?page=1&amp;page_size=20 API 返回 Json 串正确： 123456789101112131415161718&#123;&quot;code&quot; : 200, &quot;message&quot; : &quot;success&quot;, &quot;data&quot; : &#123;&#125;&#125;&#123; &quot;code&quot;:200, &quot;message&quot;:&quot;success&quot;, &quot;data&quot;:&#123; &quot;items&quot;:[ &#123; &quot;id&quot;:1, &quot;name&quot;:&quot;xxx&quot; &#125;, &#123; &quot;id&quot;:2, &quot;name&quot;:&quot;xxx&quot; &#125; ] &#125;&#125; 错误： 12345&#123;&quot;code&quot; : 404, &quot;message&quot; : &quot;Page not found&quot;, &quot;data&quot; : &#123;&#125;&#125;&#123;&quot;code&quot; : 500, &quot;message&quot; : &quot;Sth. worng&quot;, &quot;data&quot; : &#123;&#125;&#125;&#123;&quot;status&quot; : 10001, &quot;message&quot; : &quot;Id is empty&quot;, &quot;data&quot; : &#123;&#125;&#125; 错误码： 1234540x：HTTP 请求错误50x：服务器错误1000x：系统错误4000x：异常错误(2|3|[5-9])000x：业务错误 HTTP 状态码： 12345678910111213141516171819200 SUCCESS - GET 获取资源201 CREATED - POST 创建数据成功时204 No Content - 对不会返回响应体的成功请求进行响应（比如DELETE请求）301 Moved Permanently - 请求的资源已永久移动到新位置302 Move temporarily - 临时重定向304 Not Modified - 文档的内容并未改变，禁止包含消息体400 Bad Request - 请求异常，比如请求中的 body 无法解析401 Unauthorized - 没有进行认证或者认证非法403 Forbidden - 当认证成功，但是认证过的用户没有访问资源的权限404 Not Found - 当一个不存在的资源被请求405 Method Not Allowed - 所请求的HTTP方法不允许当前认证用户访问410 Gone - 表示当前请求的资源不再可用，当调用老版本API的时候很有用415 Unsupported Media Type - 如果请求中的内容类型是错误的422 Unprocessable Entity - 用来表示校验错误429 Too Many Requests - 由于请求频次达到上限而被拒绝访问500 Internal Server Error - 服务器遇到了一个未曾预料的状况502 Bad Gateway - 网关或者代理出错503 Service Unavailable - 服务器临时维护或者过载，服务器当前无法处理请求504 Gateway Timeout - 请求超时]]></content>
+      <categories>
+        <category>编程</category>
+        <category>规范</category>
+      </categories>
+      <tags>
+        <tag>规范</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[数据删改规范]]></title>
+    <url>%2F2019%2F01%2F26%2F%E6%95%B0%E6%8D%AE%E5%88%A0%E6%94%B9%E8%A7%84%E8%8C%83%2F</url>
+    <content type="text"><![CDATA[删除铁律禁止程序物理删除数据 软删除 根据删除条件，查询数据 ID，通过 ID 批量软删除； 禁止通过子查询、联表查询来更新数据（会存在性能问题，且数据不好批量还原）； 所有删除数据的操作，必须有 jira 留痕； 同批数据涉及多个 jira 时，必须在当前 jira 备注历史 jira 地址。 12-- modified_by 例如：Jira008-20180808-01UPDATE `table` SET `is_deleted` = 1, `modified_by` = &apos;jira 编号 + 版本号&apos;, `modified_on` = NOW() WHERE `is_deleted` = 0 AND `id` IN (&apos;xxxxxxxxxxxx&apos;); 硬删除（物理删除）避免数据库无效数据不断增长，定期清理软删除的历史数据。 提前通知交付、区域、客户； jira 留痕，备注执行流程； 提前发起停服公告（凌晨停服）； 区分需要保留的历史数据； 凌晨执行删除操作： nginx 跳转停服公告页面； 备份数据库； 物理删除1年前被软删除的无用数据； 区域及时验证数据。 修改数据 必须通过 jira 留痕； 根据修改条件，备份原始数据（修改出错可马上还原）； modified_by = ‘jira 编号 + 版本号’； 禁止通过子查询、联表查询来更新数据； 通过自定义脚本，生成更新 SQL； 如果需要还原，根据备份数据，生成还原 SQL。]]></content>
+      <categories>
+        <category>编程</category>
+        <category>规范</category>
+      </categories>
+      <tags>
+        <tag>规范</tag>
+        <tag>SQL</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[PHP 编程规范]]></title>
+    <url>%2F2019%2F01%2F25%2FPHP-%E7%BC%96%E7%A8%8B%E8%A7%84%E8%8C%83%2F</url>
+    <content type="text"><![CDATA[代码要求 代码分层 —— 整洁、面向对象 module-controller-service-repository-model module：模块 —— 业务分层 controller：控制器 —— 输入处理，调用 service service：服务 —— 业务逻辑处理，调用 repository repository：仓库 —— 数据持久化封装、聚合根（切割实体的相依性），调用 model model：数据访问层（entity/实体） 代码格式 —— 基于语言规范格式化PHP FIG PSR-1 PSR-2 代码规范 —— sonar 监控 关键目录（非框架内目录） config：项目配置 bootstrap：框架启动（可选） commands：控制台命令、脚本运行 utils：工具类（静态），与业务无关 components：业务组件 events：事件处理 sdk：第三方工具包 tests：单元测试 增量数据禁止联表查询 —— 水平扩展（分表） 命名方式：驼峰式：Camel case蛇式：Snake Case烤肉串式：Kebab Case1、 类名命名：大驼峰，如：class RoomService {}；2、 方法命名：小驼峰，如：public function getRoomById($id = ‘’) {}；3、 对象命名：小驼峰，如：$this-&gt;baseService = new BaseService()；4、 常量命名：大蛇式，如：const MAX_NUM = 100、define(‘MAX_NUM’, 100)；5、 变量命名：小驼峰，如：$roomId；6、 函数命名：小蛇式，如：function random_str($length = 10) {}7、 URL 命名：烤肉串，如：https://xxx.com/user/get-info-by-id]]></content>
+      <categories>
+        <category>编程</category>
+        <category>规范</category>
+      </categories>
+      <tags>
+        <tag>PHP</tag>
+        <tag>后端</tag>
+        <tag>规范</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[实践版 Git-Flow]]></title>
+    <url>%2F2019%2F01%2F22%2F%E5%AE%9E%E8%B7%B5%E7%89%88-Git-Flow%2F</url>
+    <content type="text"><![CDATA[迭代评审需求分类： 小需求：多个小需求归为一个 feature 分支； 大需求：单个大需求使用独立 feature 分支。 备注：前后端配合，必须沟通好所使用的 feature；新建的 feature 分支需要在相关的 jira 或迭代任务上标注；SQL 语句需备注对应的 feature 分支；缺陷修复、问题处理，也需要标注对应的分支名。 迭代开发 feature-xxxx 分支通过 master 拉取； feature-xxxx 可含一个或多个小需求； 在 jira 或迭代任务上标注对应的分支名。 开发完成后合并到 sp-dev 上测试环境自测； 代码提交 comment 必须清晰说明更新信息； 标准：jira：8866 支付开发 - 优化回调、fix xxx、修改 xxx； 禁止模糊、不明确和重复的 comment ，例如：debug、测试等。 本地测试通过后再提交，不建议零零碎碎的提交代码。 自测完成后，提测，且通过准入测试（自动化），由 QA 验证； 测试通过后，QA 对待发布的 feature 归类，（QA）决定哪天上线哪些 feature； QA 每天晨会同步上线安排； 确定上线的 feature 后，由 QA 指定人员新建 release 分支，合并 feature； 开发人员不能直接合并到 release。 上预发布前，master 先合并到 feature ，避免上线冲突； 从 master 拉取 release-xxxx ，例如：release-20180808-01； 单个或多个 feature合并到 release-20180808-01，打 release tag，上预发布测试； 预发布 bug 直接在 release 修复； 预发布通过后，release 合并到 master，打 master tag 上生产验证； 上线通过，master 合并到 sp-dev； 删除 release-xxxx。 备注：release 分支是唯一的，即使它有版本号，其他 feature 上线需要排队等待下一个 release。如果存在 hotfix 上线，先验证 hotfix，合并 hotfix，再发布 release。 tag 命名：release 分支：R20880808-01master 分支：M20880808-01 Bug 修复 hotfix-xxxx 分支通过 master 拉取； 开发完成后在预发布验证； 验证通过，hotfix-xxxx 合并到 master； master 打 tag，上线验证； 上线通过后，hotfix-xxxx 合并到 sp-dev； 删除 hotfix-xxxx。 命名规则feature-xxxx： 单个大需求，以 “主责人-jira 编号”命名，例如：feature-superman-8888； 多个小需求，以“主责人-当前时间”命名，例如：feature-superman-20180808； 跨迭代需求，以“主责人-专项代号”命名，例如：feature-superman-bankdeduction。 hotfix-xxxx： 小 bug，“主责人-时间”，例如：hotfix-superman-20180808； 大 bug，“主责人-模块”，例如：hotfix-superman-bankdeduction。 release-xxxx： “时间+版本”，例如：release-20180808-01。 备注：命名规则加上“主责人”，方便上线后各自清理分支。]]></content>
+      <categories>
+        <category>工具</category>
+      </categories>
+      <tags>
+        <tag>git</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[PHPStorm PSR-2 使用指南]]></title>
+    <url>%2F2019%2F01%2F13%2FPHPStorm-PSR-2-%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97%2F</url>
+    <content type="text"><![CDATA[PHPCSPHP Code Sniffer 简称 PHPCS，用来检查你写的 PHP 是否符合 PSR-2 ，若完全符合则没有任何结果，若有任何错误将显示错误报告。 这适合帮我们检查 Legacy PHP 是否符合 PSR-2。 安装 composer global require’squizlabs/php_codesniffer=* 或 pear install PHP_CodeSniffer 测试 123root@ykj-sp-test:~# phpcs --versionPHP_CodeSniffer version 3.0.2 (stable) by Squiz(http://www.squiz.net)root@ykj-sp-test:~# 如果 MacOS 报错： 12345PHP Warning: include_once(PHP/CodeSniffer/autoload.php): failed to open stream: No such file or directory in /usr/local/bin/phpcs on line 14PHP Warning: include_once(): Failed opening &apos;PHP/CodeSniffer/autoload.php&apos; for inclusion (include_path=&apos;.:/usr/share/pear&apos;) in /usr/local/bin/phpcs on line 14PHP Fatal error: Uncaught Error: Class &apos;PHP_CodeSniffer\Runner&apos; not found in /usr/local/bin/phpcs:17 php.ini 引入 pear： 1echo &apos;include_path = &quot;.:&apos;`pear config-get php_dir`&apos;&quot;&apos; | sudo tee -a /etc/php.ini 检查 PSR-2 phpcs --standard=PSR2 XXX/app XXX 为你的项目名称，一般我们写的 code 都在 app 目录下，所以直接指定 PHP Code Sniffer 帮我们检查 app 目录下所有的 .php 文件。 PHP Code Sniffer 预设的 coding style 为 PEAR，因为我们用的是 PSR-2，所以要特别使用加上 –standard=PSR2。 PHP-CS-FixerPHP Coding Standards Fixer 简称 PHP-CS-Fixer。 虽然 PHP Code Sniffer 可以帮我们找出哪些 code 不符合 PSR-2，若只有几个文件，我们手动改就可以，若文件太多，就得依赖 PHP-CS-Fixer 帮我们修正。 安装 composer global require fabpot/php-cs-fixer 测试 123root@ykj-sp-test:~# php-cs-fixer --versionPHP CS Fixer 2.5.0 Ancient Lizard by Fabien Potencier and Dariusz Ruminski (63aad57)root@ykj-sp-test:~# 修正PSR-2 php-cs-fixer fix Laravel/app/ --rule=@PSR2 --verbose rule=@PSR2 指定使用 PSR-2 标准来修正我们的 code。 verbose 表示 PHP-CS-Fixer 在执行时，会显示出详细的结果。 PHPStorm 配置PhpStorm 对于 PSR-2 有以下支持 : 原生支持 PSR-2 可外挂 PHP Code Sniffer，让我在写 code 的同时就可提醒我们是否符合 PSR-2 可外挂 PHP Coding Standards Fixer，将 code 修正为 PSR-2 1、设置使用PSR-2规范 Preferences -&gt; Editor -&gt; Code Style -&gt; PHP : Set from… -&gt; Predefined Style : PSR1/PSR2 还可以在 PSR-2 的基础上继续设置自己的规则。 2、设置phpcs A. Preferences -&gt; Languages &amp; Frameworks -&gt; PHP -&gt; Code Sniffer PS：这里以我的 phpcs 路径为例：/usr/local/bin/phpcs B. Preferences -&gt; Editor -&gt; Inspections 将 PHP Code Sniffer validation 打勾。 将 Coding standard 选 PSR2。 3、PHP-CS-Fixer Tools -&gt; External Tools 添加 PHP-CS-Fixer Program: /usr/local/bin/php-cs-fixer Arguments: fix $FileDir$/$FileName$ --rules=@Symfony,@PSR1,@PSR2 Working Directory: $ProjectFileDir$ 不实用缓存 –using-cache no 排除自己不想应用的规则，在规则前加上”-“即可]]></content>
+      <categories>
+        <category>工具</category>
+      </categories>
+      <tags>
+        <tag>PHP</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[PHPStorm PHP-Unit 配置（Docker 运行环境）]]></title>
+    <url>%2F2019%2F01%2F05%2FPHPStorm-PHP-Unit-%E9%85%8D%E7%BD%AE%EF%BC%88Docker-%E8%BF%90%E8%A1%8C%E7%8E%AF%E5%A2%83%EF%BC%89%2F</url>
+    <content type="text"><![CDATA[准备工作 下载 PHPStorm 2018 下载 phpunit.phar (根据 PHP 版本选择下载) Docker 镜像要安装好 Xdebug docker-compose 新建一个用于 debug 的容器，避免与原 Web 容器冲突 配置【1】确认 PHPStorm 已安装 Docker 插件 【2】添加 Docker 配置Build, Execution, Deployment -&gt; Docker 【3】添加解释器Languages &amp; Frameworks -&gt; PHP 【4】添加 phpunit 配置 运行]]></content>
+      <categories>
+        <category>工具</category>
+      </categories>
+      <tags>
+        <tag>PHP</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Hello World]]></title>
+    <url>%2F2019%2F01%2F01%2Fhello-world%2F</url>
+    <content type="text"><![CDATA[Hello word]]></content>
+  </entry>
+</search>

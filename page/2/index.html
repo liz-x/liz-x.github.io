@@ -1,0 +1,2845 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<html class="theme-next muse" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
+
+<link rel="stylesheet" href="/css/main.css?v=7.1.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="https://ws2.sinaimg.cn/large/006tNc79gy1fzc2280i3hj301s01s3ya.jpg?v=7.1.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="https://ws2.sinaimg.cn/large/006tNc79gy1fzc21ho1d9j300w00w741.jpg?v=7.1.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="https://ws2.sinaimg.cn/large/006tNc79gy1fzc1yv48nwj300g00g0ox.jpg?v=7.1.0">
+
+
+  <link rel="mask-icon" href="https://ws2.sinaimg.cn/large/006tNc79gy1fzc2280i3hj301s01s3ya.jpg?v=7.1.0" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '7.1.0',
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false,"dimmer":false},
+    back2top: true,
+    back2top_sidebar: false,
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="keywords" content="技术分享|Docker|Mac|Mac 工具使用|LNMP|Go|CI|DevOps">
+<meta property="og:type" content="website">
+<meta property="og:title" content="不负">
+<meta property="og:url" content="https://blog.liz-x.com/page/2/index.html">
+<meta property="og:site_name" content="不负">
+<meta property="og:locale" content="zh-CN">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="不负">
+
+
+
+
+
+  
+  
+  <link rel="canonical" href="https://blog.liz-x.com/page/2/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>不负</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left 
+  page-home">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">不负</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+
+      
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>搜索</a>
+        </li>
+      
+    </ul>
+  
+
+  
+    
+
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+  <section id="posts" class="posts-expand">
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://blog.liz-x.com/2019/02/11/Git-撤销修改/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="liz">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://ws4.sinaimg.cn/large/006tNc79ly1fzc1i18qexj30wz0u0gr3.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="不负">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/02/11/Git-撤销修改/" class="post-title-link" itemprop="url">Git 撤销修改（转）</a>
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-02-11 12:05:00" itemprop="dateCreated datePublished" datetime="2019-02-11T12:05:00+08:00">2019-02-11</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-04-02 16:03:20" itemprop="dateModified" datetime="2019-04-02T16:03:20+08:00">2019-04-02</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/工具/" itemprop="url" rel="index"><span itemprop="name">工具</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="Git-撤销修改"><a href="#Git-撤销修改" class="headerlink" title="Git 撤销修改"></a>Git 撤销修改</h1><p>原文：<a href="https://gb.yekai.net/questions/revert" target="_blank" rel="noopener">https://gb.yekai.net/questions/revert</a><br>本文对原文格式稍微调整，并补充部分细节。</p>
+<p><strong>注：git 命令行代码，行内注释中标注对应的 zsh alias。</strong></p>
+<hr>
+<h2 id="git-clean"><a href="#git-clean" class="headerlink" title="git clean"></a>git clean</h2><p><strong>新建的文件和目录，且从未提交至版本库。</strong></p>
+<p>此类文件的状态为 <code>Untracked files</code> ，撤销方法如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git clean -fd . # gclean .</span><br><span class="line">git clean test.txt # gclean text.txt 撤销指定文件</span><br></pre></td></tr></table></figure>
+<p>其中，<code>.</code> 表示当前目录及所有子目录中的文件，也可以直接指定对应的文件路径，以下其他情况类似。</p>
+<p>-f 所有没有 track 过的文件</p>
+<p>-d 所有没有 track 过的文件夹</p>
+<h2 id="git-checkout"><a href="#git-checkout" class="headerlink" title="git checkout"></a>git checkout</h2><p><strong>提交过版本库，但未提交至暂存区的文件（未执行 git add）。</strong></p>
+<p>此类文件的状态为 <code>Changes not staged for commit</code>，撤销方法：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git checkout . # gco .</span><br><span class="line">git checkout test.txt # gco text.txt 撤销指定文件</span><br></pre></td></tr></table></figure>
+<h2 id="git-reset"><a href="#git-reset" class="headerlink" title="git reset"></a>git reset</h2><p><strong>已提交至暂存区的文件</strong></p>
+<p>此类文件的状态为 <code>Changes to be committed</code>，撤销方法：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git reset . # grh .</span><br><span class="line">git reset test.txt # grh text.txt 撤销指定文件</span><br></pre></td></tr></table></figure>
+<p>执行之后文件将会回到以上的 1 或者 2 状态，可继续按以上步骤执行撤销，若 git reset 同时加上 <code>--hard</code> 参数（alias 为 <code>grhh</code>），将会把修改过的文件也还原成版本库中的版本。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">--hard : 回退版本库、暂存区、工作区（因此我们修改过的代码就没了，需要谨慎使用）</span><br><span class="line"></span><br><span class="line">--mixed: 回退版本库、暂存区(默认)</span><br><span class="line"></span><br><span class="line">--soft: 回退版本库</span><br></pre></td></tr></table></figure>
+<h2 id="git-reset-lt-commit-hash-gt"><a href="#git-reset-lt-commit-hash-gt" class="headerlink" title="git reset &lt;commit_hash&gt;"></a>git reset &lt;commit_hash&gt;</h2><p><strong>已提交至版本库（执行了 git commit）</strong></p>
+<p>每次提交都会生成一个 commit hash，通过以下命令可查阅 hash id 并将其回滚：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git log # glol</span><br><span class="line">git reset &lt;commit_hash&gt; # grh</span><br></pre></td></tr></table></figure>
+<p>如果需要「回滚至上一次提交」，可直接使用以下命令：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git reset head~1 # grh head~1</span><br></pre></td></tr></table></figure>
+<p>执行之后，再按照 1 或者 2 状态进行处理即可，如果回滚之后的代码同时需要提交至 origin 仓库（即回滚 origin 线上仓库的代码），需要使用 <code>-f</code> 强制提交参数，且当前用户需要具备「强制提交的权限」。</p>
+<h2 id="git-reset-与-revert-的区别"><a href="#git-reset-与-revert-的区别" class="headerlink" title="git reset 与 revert 的区别"></a>git reset 与 revert 的区别</h2><p>二者都是做回滚操作，不同之处在于：</p>
+<p><code>reset</code> 直接将 head 指向了回滚的记录，丢弃了这条记录之后所有的提交时间线；</p>
+<p><code>revert</code> 更类似 <code>cherry-pick</code> 的反向操作，它不会改变历史时间线。在选中某次特定的历史提交后，它在时间上新增一条提交记录，还原了那次特定提交的所有变更。</p>
+<h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><p><strong>如果回滚了之后又不想回滚了怎么办？</strong></p>
+<p>如果是以上的情况 1 或者 2，因为修改没入过版本库，无法回滚。</p>
+<p>如果是情况 4，回滚之后通过 git log 将看不到回滚之前的 commit hash，但可通过 <code>git reflog</code> 命令（所有记录过的 commit hash）找到回滚之前的 commit hash，然后 <code>git reset &lt;commit_hash&gt;</code> 。</p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://blog.liz-x.com/2019/01/30/多-SSH-密钥/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="liz">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://ws4.sinaimg.cn/large/006tNc79ly1fzc1i18qexj30wz0u0gr3.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="不负">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/01/30/多-SSH-密钥/" class="post-title-link" itemprop="url">多 SSH 密钥</a>
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-01-30 23:57:58" itemprop="dateCreated datePublished" datetime="2019-01-30T23:57:58+08:00">2019-01-30</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-04-02 16:03:20" itemprop="dateModified" datetime="2019-04-02T16:03:20+08:00">2019-04-02</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/Linux/" itemprop="url" rel="index"><span itemprop="name">Linux</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>如果已经有了一套名为 <code>id_rsa</code> 的公秘钥，还要生成另外一个公钥，比如 sky</p>
+<ol>
+<li>生成新公钥：<br><code>ssh-keygen -t rsa -C &quot;sky&quot; -f ~/.ssh/sky</code><br>-C “email” -f 公钥名<br>执行完成后，会在 ~/.ssh/目录下生成一个 sky 和 sky.pub 文件。</li>
+<li>添加私钥<br><code>ssh-add ~/.ssh/sky</code></li>
+<li>在 SSH 用户配置文件 ~/.ssh/config 中指定对应服务所使用的公秘钥名称，如果没有 config 文件的话就新建一个，并输入以下内容：</li>
+</ol>
+<p>以 git 为例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"># 默认(可不添加，仅做对比说明)</span><br><span class="line">Host github.com</span><br><span class="line">    IdentityFile ~/.ssh/id_rsa</span><br><span class="line"></span><br><span class="line"># sky</span><br><span class="line">Host github.com</span><br><span class="line">    IdentityFile ~/.ssh/sky</span><br><span class="line"></span><br><span class="line"># gitlab</span><br><span class="line">Host gitlab.com</span><br><span class="line">    IdentityFile ~/.ssh/gitlab</span><br></pre></td></tr></table></figure>
+<ol>
+<li>添加 sky.pub 到 git 服务器网站上</li>
+<li>测试配置文件是否正常工作：ssh -T <a href="mailto:git@github.com" target="_blank" rel="noopener">git@github.com</a></li>
+</ol>
+<p>成功则返回：<code>You&#39;ve successfully authenticated, but GitHub does not provide shell access.</code></p>
+<h2 id="自定义-host"><a href="#自定义-host" class="headerlink" title="自定义 host"></a>自定义 host</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Host github-sky # 别名</span><br><span class="line">HostName github.com # 域名</span><br><span class="line">User git</span><br><span class="line">IdentityFile ~/.ssh/sky</span><br></pre></td></tr></table></figure>
+<p>git remote add test git@github-sky:liz-x/test.git</p>
+<h2 id="ssh-agent-代理转发"><a href="#ssh-agent-代理转发" class="headerlink" title="ssh-agent 代理转发"></a>ssh-agent 代理转发</h2><p>ssh-agent：ssh 代理，临时性的 session 服务<br>ssh-add 将私钥交给 ssh-agent 保管<br>说明：<a href="http://wiki.jikexueyuan.com/project/github-developer-guides/using-ssh-agent.html" target="_blank" rel="noopener">http://wiki.jikexueyuan.com/project/github-developer-guides/using-ssh-agent.html</a></p>
+<p>查看代理： <code>ssh-add -l</code><br>添加私钥： <code>ssh-add ~/.ssh/sky</code><br>删除私钥： <code>ssh-add -d ~/.ssh/sky</code><br>清空私钥： <code>ssh-add -D</code><br>添加私钥： <code>ssh-add ~/.ssh/id_rsa ~/.ssh/sky</code></p>
+<p><strong>备注：</strong>使用 ssh-add ~/.ssh/id_rsa 如果报异常：<code>Could not open a connection to your authentication agent.</code>，则需要先运行一下 ssh-agent bash，再执行 ssh-add …等命令。</p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://blog.liz-x.com/2019/01/27/Restful-API-规范/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="liz">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://ws4.sinaimg.cn/large/006tNc79ly1fzc1i18qexj30wz0u0gr3.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="不负">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/01/27/Restful-API-规范/" class="post-title-link" itemprop="url">Restful API 规范</a>
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-01-27 19:20:50" itemprop="dateCreated datePublished" datetime="2019-01-27T19:20:50+08:00">2019-01-27</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-04-02 16:03:20" itemprop="dateModified" datetime="2019-04-02T16:03:20+08:00">2019-04-02</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/编程/" itemprop="url" rel="index"><span itemprop="name">编程</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/编程/规范/" itemprop="url" rel="index"><span itemprop="name">规范</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="基本规范"><a href="#基本规范" class="headerlink" title="基本规范"></a>基本规范</h2><p>协议：https<br>通信数据格式：JSON</p>
+<p>命名规范：</p>
+<ol>
+<li>接口命名：统一使用<code>小写字母加“-”</code>，如<code>add-service</code></li>
+<li>接口参数命名：统一使用<code>小写字母 + &#39;_&#39;下划线分隔</code>，如：<code>user_id</code></li>
+</ol>
+<p>返回格式：{“code” : 200, “message” : “success”, “data” : {}}</p>
+<p>返回状态码：</p>
+<ol>
+<li>协议级（如：200、301、302、401、403、502）</li>
+<li>系统级（如：10001、10002）</li>
+<li>业务级（如：20001、30001、50001）</li>
+<li>异常级（如：40001）</li>
+</ol>
+<p>标准请求：</p>
+<ul>
+<li>GET（SELECT）：从服务器取出资源（一项或多项）</li>
+<li>POST（CREATE）：在服务器新建一个资源</li>
+<li>PUT（UPDATE）：在服务器更新资源（客户端提供完整资源数据）</li>
+<li>PATCH（UPDATE）：在服务器更新资源（客户端提供需要修改的资源数据）</li>
+<li>DELETE（DELETE）：从服务器删除资源</li>
+</ul>
+<p>RESTful API 中的 url 是指向资源的，而不是描述行为的，因此设计API时，应使用名词而非动词来描述语义。</p>
+<p><strong>备注：</strong>不强制要求</p>
+<p>代码实现：</p>
+<ul>
+<li>GET 请求<br>​   公开的查询接口（无需鉴权）</li>
+<li>POST 请求<br>​   增删改接口<br>​   私密的查询接口（需要鉴权）</li>
+</ul>
+<p><strong>备注：</strong>通过修改路由规则实现 Restful 标准规范</p>
+<h2 id="API-URL-示例"><a href="#API-URL-示例" class="headerlink" title="API URL 示例"></a>API URL 示例</h2><p>api/名词/动词/<br>api/名词/名词-动词/</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">/api/wordbook/list // 词库列表</span><br><span class="line">/api/wordbook/get // 词库获取</span><br><span class="line"></span><br><span class="line">/api/wordbook/keywords-list // 词库关键字列表</span><br><span class="line">/api/wordbook/keywords-update // 词库关键字更新</span><br></pre></td></tr></table></figure>
+<h2 id="API-动词示例"><a href="#API-动词示例" class="headerlink" title="API 动词示例"></a>API 动词示例</h2><p>参考阿里开放平台 api 接口文档</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line">create     // 数据添加（创建）</span><br><span class="line">delete     // 数据删除</span><br><span class="line">update     // 数据更新</span><br><span class="line">get        // 数据信息</span><br><span class="line">list       // 数据列表</span><br><span class="line">count      // 数据统计</span><br><span class="line">batch      // 批量</span><br><span class="line"></span><br><span class="line">search     // 数据搜索</span><br><span class="line">query      // 数据查询</span><br><span class="line"></span><br><span class="line">apply      // 申请</span><br><span class="line">confirm    // 确认</span><br><span class="line">check      // 检查</span><br><span class="line">verify     // 验证</span><br><span class="line">change     // 数据更改（某个字段更改或转换）</span><br><span class="line"></span><br><span class="line">fetch      // 获取（拉数据）</span><br><span class="line">push       // 推送</span><br><span class="line">send       // 发送</span><br><span class="line">notify     // 通知</span><br><span class="line">sync       // 同步</span><br><span class="line"></span><br><span class="line">bind       // 绑定</span><br><span class="line">unbind     // 解绑</span><br><span class="line"></span><br><span class="line">open       // 开启</span><br><span class="line">close      // 关闭</span><br><span class="line">cancel     // 取消</span><br><span class="line"></span><br><span class="line">status     // 状态</span><br><span class="line">done       // 结束</span><br><span class="line">success    // 成功</span><br><span class="line"></span><br><span class="line">log        // 日志</span><br><span class="line">history    // 历史</span><br><span class="line">upload     // 文件上传</span><br><span class="line"></span><br><span class="line">accept     // 同意</span><br><span class="line">reply      // 回复</span><br><span class="line">refresh    // 刷新（例如：token）</span><br></pre></td></tr></table></figure>
+<h2 id="API-参数"><a href="#API-参数" class="headerlink" title="API 参数"></a>API 参数</h2><p>小写加下划线</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/api/wordbook/list?page=1&amp;page_size=20</span><br></pre></td></tr></table></figure>
+<h2 id="API-返回-Json-串"><a href="#API-返回-Json-串" class="headerlink" title="API 返回 Json 串"></a>API 返回 Json 串</h2><p>正确：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">&#123;&quot;code&quot; : 200, &quot;message&quot; : &quot;success&quot;, &quot;data&quot; : &#123;&#125;&#125;</span><br><span class="line"></span><br><span class="line">&#123;</span><br><span class="line">    &quot;code&quot;:200,</span><br><span class="line">    &quot;message&quot;:&quot;success&quot;,</span><br><span class="line">    &quot;data&quot;:&#123;</span><br><span class="line">        &quot;items&quot;:[</span><br><span class="line">            &#123;</span><br><span class="line">                &quot;id&quot;:1,</span><br><span class="line">                &quot;name&quot;:&quot;xxx&quot;</span><br><span class="line">            &#125;,</span><br><span class="line">            &#123;</span><br><span class="line">                &quot;id&quot;:2,</span><br><span class="line">                &quot;name&quot;:&quot;xxx&quot;</span><br><span class="line">            &#125;</span><br><span class="line">        ]</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>错误：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#123;&quot;code&quot; : 404, &quot;message&quot; : &quot;Page not found&quot;, &quot;data&quot; : &#123;&#125;&#125;</span><br><span class="line"></span><br><span class="line">&#123;&quot;code&quot; : 500, &quot;message&quot; : &quot;Sth. worng&quot;, &quot;data&quot; : &#123;&#125;&#125;</span><br><span class="line"></span><br><span class="line">&#123;&quot;status&quot; : 10001, &quot;message&quot; : &quot;Id is empty&quot;, &quot;data&quot; : &#123;&#125;&#125;</span><br></pre></td></tr></table></figure>
+<p>错误码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">40x：HTTP 请求错误</span><br><span class="line">50x：服务器错误</span><br><span class="line">1000x：系统错误</span><br><span class="line">4000x：异常错误</span><br><span class="line">(2|3|[5-9])000x：业务错误</span><br></pre></td></tr></table></figure>
+<p>HTTP 状态码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">200 SUCCESS - GET 获取资源</span><br><span class="line">201 CREATED - POST 创建数据成功时</span><br><span class="line">204 No Content - 对不会返回响应体的成功请求进行响应（比如DELETE请求）</span><br><span class="line">301 Moved Permanently - 请求的资源已永久移动到新位置</span><br><span class="line">302 Move temporarily - 临时重定向</span><br><span class="line">304 Not Modified - 文档的内容并未改变，禁止包含消息体</span><br><span class="line">400 Bad Request - 请求异常，比如请求中的 body 无法解析</span><br><span class="line">401 Unauthorized - 没有进行认证或者认证非法</span><br><span class="line">403 Forbidden - 当认证成功，但是认证过的用户没有访问资源的权限</span><br><span class="line">404 Not Found - 当一个不存在的资源被请求</span><br><span class="line">405 Method Not Allowed - 所请求的HTTP方法不允许当前认证用户访问</span><br><span class="line">410 Gone - 表示当前请求的资源不再可用，当调用老版本API的时候很有用</span><br><span class="line">415 Unsupported Media Type - 如果请求中的内容类型是错误的</span><br><span class="line">422 Unprocessable Entity - 用来表示校验错误</span><br><span class="line">429 Too Many Requests - 由于请求频次达到上限而被拒绝访问</span><br><span class="line">500 Internal Server Error - 服务器遇到了一个未曾预料的状况</span><br><span class="line">502 Bad Gateway - 网关或者代理出错</span><br><span class="line">503 Service Unavailable - 服务器临时维护或者过载，服务器当前无法处理请求</span><br><span class="line">504 Gateway Timeout - 请求超时</span><br></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://blog.liz-x.com/2019/01/26/数据删改规范/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="liz">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://ws4.sinaimg.cn/large/006tNc79ly1fzc1i18qexj30wz0u0gr3.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="不负">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/01/26/数据删改规范/" class="post-title-link" itemprop="url">数据删改规范</a>
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-01-26 20:01:50" itemprop="dateCreated datePublished" datetime="2019-01-26T20:01:50+08:00">2019-01-26</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-04-02 16:03:20" itemprop="dateModified" datetime="2019-04-02T16:03:20+08:00">2019-04-02</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/编程/" itemprop="url" rel="index"><span itemprop="name">编程</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/编程/规范/" itemprop="url" rel="index"><span itemprop="name">规范</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="删除铁律"><a href="#删除铁律" class="headerlink" title="删除铁律"></a>删除铁律</h2><p><strong>禁止程序物理删除数据</strong></p>
+<h3 id="软删除"><a href="#软删除" class="headerlink" title="软删除"></a>软删除</h3><ol>
+<li>根据删除条件，查询数据 ID，通过 ID 批量软删除；</li>
+<li>禁止通过子查询、联表查询来更新数据（会存在性能问题，且数据不好批量还原）；</li>
+<li>所有删除数据的操作，必须有 jira 留痕；</li>
+<li>同批数据涉及多个 jira 时，必须在当前 jira 备注历史 jira 地址。</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">-- modified_by 例如：Jira008-20180808-01</span><br><span class="line">UPDATE `table` SET `is_deleted` = 1, `modified_by` = &apos;jira 编号 + 版本号&apos;,  `modified_on` = NOW() WHERE `is_deleted` = 0 AND `id` IN (&apos;xxxxxxxxxxxx&apos;);</span><br></pre></td></tr></table></figure>
+<h3 id="硬删除（物理删除）"><a href="#硬删除（物理删除）" class="headerlink" title="硬删除（物理删除）"></a>硬删除（物理删除）</h3><p>避免数据库无效数据不断增长，定期清理软删除的历史数据。</p>
+<ol>
+<li>提前通知交付、区域、客户；</li>
+<li><strong>jira 留痕，备注执行流程；</strong></li>
+<li>提前发起停服公告（凌晨停服）；</li>
+<li>区分需要保留的历史数据；</li>
+<li>凌晨执行删除操作：<ol>
+<li>nginx 跳转停服公告页面；</li>
+<li>备份数据库；</li>
+<li>物理删除1年前<strong>被软删除</strong>的<strong>无用数据</strong>；</li>
+<li>区域及时验证数据。</li>
+</ol>
+</li>
+</ol>
+<h2 id="修改数据"><a href="#修改数据" class="headerlink" title="修改数据"></a>修改数据</h2><ol>
+<li><strong>必须通过 jira 留痕；</strong></li>
+<li>根据修改条件，<strong>备份原始数据</strong>（修改出错可马上还原）；</li>
+<li>modified_by = ‘jira 编号 + 版本号’；</li>
+<li>禁止通过子查询、联表查询来更新数据；</li>
+<li>通过自定义脚本，生成更新 SQL；</li>
+<li>如果需要还原，根据备份数据，生成还原 SQL。</li>
+</ol>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://blog.liz-x.com/2019/01/25/PHP-编程规范/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="liz">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://ws4.sinaimg.cn/large/006tNc79ly1fzc1i18qexj30wz0u0gr3.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="不负">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/01/25/PHP-编程规范/" class="post-title-link" itemprop="url">PHP 编程规范</a>
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-01-25 18:10:30" itemprop="dateCreated datePublished" datetime="2019-01-25T18:10:30+08:00">2019-01-25</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-04-02 16:03:20" itemprop="dateModified" datetime="2019-04-02T16:03:20+08:00">2019-04-02</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/编程/" itemprop="url" rel="index"><span itemprop="name">编程</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/编程/规范/" itemprop="url" rel="index"><span itemprop="name">规范</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="代码要求"><a href="#代码要求" class="headerlink" title="代码要求"></a>代码要求</h2><ol>
+<li>代码分层 —— 整洁、面向对象<ul>
+<li>module-controller-service-repository-model</li>
+<li>module：模块 —— 业务分层</li>
+<li>controller：控制器 —— 输入处理，调用 service</li>
+<li>service：服务 —— 业务逻辑处理，调用 repository</li>
+<li>repository：仓库 —— 数据持久化封装、聚合根（切割实体的相依性），调用 model</li>
+<li>model：数据访问层（entity/实体）</li>
+</ul>
+</li>
+<li>代码格式 —— 基于语言规范格式化<br><a href="https://psr.phphub.org/" target="_blank" rel="noopener"><strong>PHP FIG</strong></a><ul>
+<li><a href="https://laravel-china.org/topics/2078" target="_blank" rel="noopener">PSR-1</a></li>
+<li><a href="https://laravel-china.org/topics/2078" target="_blank" rel="noopener">PSR-2</a></li>
+</ul>
+</li>
+<li>代码规范 —— sonar 监控</li>
+<li>关键目录（非框架内目录）<ul>
+<li>config：项目配置</li>
+<li>bootstrap：框架启动（可选）</li>
+<li>commands：控制台命令、脚本运行</li>
+<li>utils：工具类（静态），与业务无关</li>
+<li>components：业务组件</li>
+<li>events：事件处理</li>
+<li>sdk：第三方工具包</li>
+<li>tests：单元测试</li>
+</ul>
+</li>
+<li>增量数据禁止联表查询 —— 水平扩展（分表）</li>
+<li>命名方式：<br>驼峰式：Camel case<br>蛇式：Snake Case<br>烤肉串式：Kebab Case<br>1、 类名命名：<strong>大</strong>驼峰，如：class RoomService {}；<br>2、 方法命名：小驼峰，如：public function getRoomById($id = ‘’) {}；<br>3、 对象命名：小驼峰，如：$this-&gt;baseService = new BaseService()；<br>4、 常量命名：<strong>大</strong>蛇式，如：const MAX_NUM = 100、define(‘MAX_NUM’, 100)；<br>5、 变量命名：小驼峰，如：$roomId；<br>6、 函数命名：小蛇式，如：function random_str($length = 10) {}<br>7、 URL 命名：烤肉串，如：<a href="https://xxx.com/user/get-info-by-id" target="_blank" rel="noopener">https://xxx.com/user/get-info-by-id</a></li>
+</ol>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://blog.liz-x.com/2019/01/22/实践版-Git-Flow/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="liz">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://ws4.sinaimg.cn/large/006tNc79ly1fzc1i18qexj30wz0u0gr3.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="不负">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/01/22/实践版-Git-Flow/" class="post-title-link" itemprop="url">实践版 Git-Flow</a>
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-01-22 11:30:30" itemprop="dateCreated datePublished" datetime="2019-01-22T11:30:30+08:00">2019-01-22</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-04-02 16:03:20" itemprop="dateModified" datetime="2019-04-02T16:03:20+08:00">2019-04-02</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/工具/" itemprop="url" rel="index"><span itemprop="name">工具</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="迭代评审"><a href="#迭代评审" class="headerlink" title="迭代评审"></a>迭代评审</h2><p>需求分类：</p>
+<ol>
+<li>小需求：多个小需求归为一个 <code>feature</code> 分支；</li>
+<li>大需求：单个大需求使用独立 <code>feature</code> 分支。</li>
+</ol>
+<p><strong>备注：</strong><br>前后端配合，必须沟通好所使用的 <code>feature</code>；<br>新建的 <code>feature</code> 分支需要在相关的 jira 或迭代任务上标注；<br>SQL 语句需备注对应的 <code>feature</code> 分支；<br>缺陷修复、问题处理，也需要标注对应的分支名。</p>
+<h2 id="迭代开发"><a href="#迭代开发" class="headerlink" title="迭代开发"></a>迭代开发</h2><ol>
+<li><code>feature-xxxx</code> 分支通过 <code>master</code> 拉取；<ol>
+<li><code>feature-xxxx</code> 可含一个或多个小需求；</li>
+<li>在 jira 或迭代任务上<strong>标注对应的分支名</strong>。</li>
+</ol>
+</li>
+<li>开发完成后合并到 <code>sp-dev</code> 上测试环境自测；<ol>
+<li>代码提交 comment 必须清晰说明更新信息；<ul>
+<li>标准：jira：8866 支付开发 - 优化回调、fix xxx、修改 xxx；</li>
+<li><strong>禁止模糊、不明确和重复的 comment</strong> ，例如：debug、测试等。</li>
+</ul>
+</li>
+<li>本地测试通过后再提交，不建议零零碎碎的提交代码。</li>
+</ol>
+</li>
+<li>自测完成后，提测，且通过准入测试（自动化），由 QA 验证；</li>
+<li>测试通过后，QA 对待发布的 <code>feature</code> 归类，<strong>（QA）决定哪天上线哪些 feature</strong>；<ol>
+<li><strong>QA 每天晨会同步</strong>上线安排；</li>
+<li>确定上线的 <code>feature</code> 后，<strong>由 QA 指定人员新建 release 分支</strong>，合并 <code>feature</code>；</li>
+<li><u>开发人员不能直接合并到 release</u>。</li>
+</ol>
+</li>
+<li>上预发布前，<code>master</code> 先合并到 <code>feature</code> ，避免上线冲突；</li>
+<li>从 <code>master</code> 拉取 <code>release-xxxx</code> ，例如：<code>release-20180808-01</code>；</li>
+<li><strong>单个或多个</strong> <u>feature</u>合并到 <code>release-20180808-01</code>，打 <code>release</code> tag，上预发布测试；</li>
+<li>预发布 bug 直接在 <code>release</code> 修复；</li>
+<li>预发布通过后，<code>release</code> 合并到 <code>master</code>，打 <code>master</code> tag 上生产验证；</li>
+<li>上线通过，<code>master</code> 合并到 <code>sp-dev</code>；</li>
+<li>删除 <code>release-xxxx</code>。</li>
+</ol>
+<p><strong>备注：</strong><br><code>release</code> 分支是唯一的，即使它有版本号，其他 <code>feature</code> 上线需要排队等待下一个 <code>release</code>。<br>如果存在 <code>hotfix</code> 上线，先验证 <code>hotfix</code>，合并 <code>hotfix</code>，再发布 <code>release</code>。</p>
+<p><strong>tag 命名：</strong><br>release 分支：<strong>R</strong>20880808-01<br>master 分支：<strong>M</strong>20880808-01</p>
+<h2 id="Bug-修复"><a href="#Bug-修复" class="headerlink" title="Bug 修复"></a>Bug 修复</h2><ol>
+<li><code>hotfix-xxxx</code> 分支通过 <code>master</code> 拉取；</li>
+<li>开发完成后在预发布验证；</li>
+<li>验证通过，<code>hotfix-xxxx</code> 合并到 <code>master</code>；</li>
+<li><code>master</code> 打 tag，上线验证；</li>
+<li>上线通过后，<code>hotfix-xxxx</code> 合并到 <code>sp-dev</code>；</li>
+<li>删除 <code>hotfix-xxxx</code>。</li>
+</ol>
+<h2 id="命名规则"><a href="#命名规则" class="headerlink" title="命名规则"></a>命名规则</h2><p>feature-xxxx：</p>
+<ol>
+<li>单个大需求，以 “主责人-jira 编号”命名，例如：<code>feature-superman-8888</code>；</li>
+<li>多个小需求，以“主责人-当前时间”命名，例如：<code>feature-superman-20180808</code>；</li>
+<li>跨迭代需求，以“主责人-专项代号”命名，例如：<code>feature-superman-bankdeduction</code>。</li>
+</ol>
+<p>hotfix-xxxx：</p>
+<ol>
+<li>小 bug，“主责人-时间”，例如：<code>hotfix-superman-20180808</code>；</li>
+<li>大 bug，“主责人-模块”，例如：<code>hotfix-superman-bankdeduction</code>。</li>
+</ol>
+<p>release-xxxx：</p>
+<ol>
+<li>“时间+版本”，例如：<code>release-20180808-01</code>。</li>
+</ol>
+<p><strong>备注：</strong>命名规则加上“主责人”，方便上线后各自清理分支。</p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://blog.liz-x.com/2019/01/13/PHPStorm-PSR-2-使用指南/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="liz">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://ws4.sinaimg.cn/large/006tNc79ly1fzc1i18qexj30wz0u0gr3.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="不负">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/01/13/PHPStorm-PSR-2-使用指南/" class="post-title-link" itemprop="url">PHPStorm PSR-2 使用指南</a>
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-01-13 21:22:08" itemprop="dateCreated datePublished" datetime="2019-01-13T21:22:08+08:00">2019-01-13</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-04-02 16:03:20" itemprop="dateModified" datetime="2019-04-02T16:03:20+08:00">2019-04-02</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/工具/" itemprop="url" rel="index"><span itemprop="name">工具</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="PHPCS"><a href="#PHPCS" class="headerlink" title="PHPCS"></a>PHPCS</h2><p>PHP Code Sniffer 简称 PHPCS，用来检查你写的 PHP 是否符合 PSR-2 ，若完全符合则没有任何结果，若有任何错误将显示错误报告。</p>
+<p>这适合帮我们检查 Legacy PHP 是否符合 PSR-2。</p>
+<ol>
+<li><p>安装</p>
+<p>composer global require’squizlabs/php_codesniffer=* 或 pear install PHP_CodeSniffer</p>
+</li>
+<li><p>测试</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">root@ykj-sp-test:~# phpcs --version</span><br><span class="line">PHP_CodeSniffer version 3.0.2 (stable) by Squiz(http://www.squiz.net)</span><br><span class="line">root@ykj-sp-test:~#</span><br></pre></td></tr></table></figure>
+<p>如果 MacOS 报错：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">PHP Warning: include_once(PHP/CodeSniffer/autoload.php): failed to open stream: No such file or directory in /usr/local/bin/phpcs on line 14</span><br><span class="line"></span><br><span class="line">PHP Warning: include_once(): Failed opening &apos;PHP/CodeSniffer/autoload.php&apos; for inclusion (include_path=&apos;.:/usr/share/pear&apos;) in /usr/local/bin/phpcs on line 14</span><br><span class="line"></span><br><span class="line">PHP Fatal error: Uncaught Error: Class &apos;PHP_CodeSniffer\Runner&apos; not found in /usr/local/bin/phpcs:17</span><br></pre></td></tr></table></figure>
+<p>php.ini 引入 pear：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">echo &apos;include_path = &quot;.:&apos;`pear config-get php_dir`&apos;&quot;&apos; | sudo tee -a /etc/php.ini</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>检查 PSR-2</p>
+<p><code>phpcs --standard=PSR2 XXX/app</code></p>
+<ol>
+<li>XXX 为你的项目名称，一般我们写的 code 都在 app 目录下，所以直接指定 PHP Code Sniffer 帮我们检查 app 目录下所有的 .php 文件。</li>
+<li>PHP Code Sniffer 预设的 coding style 为 PEAR，因为我们用的是 PSR-2，所以要特别使用加上 –standard=PSR2。</li>
+</ol>
+</li>
+</ol>
+<h3 id="PHP-CS-Fixer"><a href="#PHP-CS-Fixer" class="headerlink" title="PHP-CS-Fixer"></a>PHP-CS-Fixer</h3><p>PHP Coding Standards Fixer 简称 PHP-CS-Fixer。</p>
+<p>虽然 PHP Code Sniffer 可以帮我们找出哪些 code 不符合 PSR-2，若只有几个文件，我们手动改就可以，若文件太多，就得依赖 PHP-CS-Fixer 帮我们修正。</p>
+<ol>
+<li><p>安装</p>
+<p><code>composer global require fabpot/php-cs-fixer</code></p>
+</li>
+<li><p>测试</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">root@ykj-sp-test:~# php-cs-fixer --version</span><br><span class="line">PHP CS Fixer 2.5.0 Ancient Lizard by Fabien Potencier and Dariusz Ruminski (63aad57)</span><br><span class="line">root@ykj-sp-test:~#</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>修正PSR-2</p>
+<p><code>php-cs-fixer fix Laravel/app/ --rule=@PSR2 --verbose</code></p>
+<ol>
+<li>rule=@PSR2 指定使用 PSR-2 标准来修正我们的 code。</li>
+<li>verbose 表示 PHP-CS-Fixer 在执行时，会显示出详细的结果。</li>
+</ol>
+</li>
+</ol>
+<h3 id="PHPStorm-配置"><a href="#PHPStorm-配置" class="headerlink" title="PHPStorm 配置"></a>PHPStorm 配置</h3><p>PhpStorm 对于 PSR-2 有以下支持 :</p>
+<ul>
+<li>原生支持 PSR-2</li>
+<li>可外挂 PHP Code Sniffer，让我在写 code 的同时就可提醒我们是否符合 PSR-2</li>
+<li>可外挂 PHP Coding Standards Fixer，将 code 修正为 PSR-2</li>
+</ul>
+<p>1、设置使用PSR-2规范</p>
+<p>Preferences -&gt; Editor -&gt; Code Style -&gt; PHP : Set from… -&gt; Predefined Style : PSR1/PSR2</p>
+<p><img src="http://yunshequ00.oss-cn-hangzhou.aliyuncs.com/ipic/1544515133-1.png" alt="img"></p>
+<p>还可以在 PSR-2 的基础上继续设置自己的规则。</p>
+<p>2、设置phpcs</p>
+<p>A. Preferences -&gt; Languages &amp; Frameworks -&gt; PHP -&gt; Code Sniffer</p>
+<p><img src="http://yunshequ00.oss-cn-hangzhou.aliyuncs.com/ipic/1544515133-2.png" alt="img"></p>
+<p>PS：这里以我的 phpcs 路径为例：/usr/local/bin/phpcs</p>
+<p>B. Preferences -&gt; Editor -&gt; Inspections</p>
+<p>将 PHP Code Sniffer validation 打勾。</p>
+<p>将 Coding standard 选 PSR2。</p>
+<p><img src="http://yunshequ00.oss-cn-hangzhou.aliyuncs.com/ipic/1544515133-3.png" alt="img"></p>
+<p>3、PHP-CS-Fixer</p>
+<p>Tools -&gt; External Tools 添加 PHP-CS-Fixer</p>
+<p><img src="http://yunshequ00.oss-cn-hangzhou.aliyuncs.com/ipic/1544515133-4.png" alt="img"></p>
+<p>Program:</p>
+<p><code>/usr/local/bin/php-cs-fixer</code></p>
+<p>Arguments:</p>
+<p><code>fix $FileDir$/$FileName$ --rules=@Symfony,@PSR1,@PSR2</code></p>
+<p>Working Directory:</p>
+<p><code>$ProjectFileDir$</code></p>
+<p>不实用缓存 –using-cache no</p>
+<p>排除自己不想应用的规则，在规则前加上”-“即可</p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://blog.liz-x.com/2019/01/05/PHPStorm-PHP-Unit-配置（Docker-运行环境）/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="liz">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://ws4.sinaimg.cn/large/006tNc79ly1fzc1i18qexj30wz0u0gr3.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="不负">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/01/05/PHPStorm-PHP-Unit-配置（Docker-运行环境）/" class="post-title-link" itemprop="url">PHPStorm PHP-Unit 配置（Docker 运行环境）</a>
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-01-05 13:30:30" itemprop="dateCreated datePublished" datetime="2019-01-05T13:30:30+08:00">2019-01-05</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-04-02 16:03:20" itemprop="dateModified" datetime="2019-04-02T16:03:20+08:00">2019-04-02</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/工具/" itemprop="url" rel="index"><span itemprop="name">工具</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h2><ul>
+<li>下载 <a href="https://www.jetbrains.com/phpstorm/" target="_blank" rel="noopener">PHPStorm 2018</a></li>
+<li>下载 <a href="https://phar.phpunit.de/" target="_blank" rel="noopener">phpunit.phar</a> (根据 PHP 版本选择下载)</li>
+<li>Docker 镜像要安装好 Xdebug</li>
+<li>docker-compose 新建一个用于 debug 的容器，避免与原 Web 容器冲突</li>
+</ul>
+<h2 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h2><h3 id="【1】确认-PHPStorm-已安装-Docker-插件"><a href="#【1】确认-PHPStorm-已安装-Docker-插件" class="headerlink" title="【1】确认 PHPStorm 已安装 Docker 插件"></a>【1】确认 PHPStorm 已安装 Docker 插件</h3><p><img src="http://yunshequ00.oss-cn-hangzhou.aliyuncs.com/ipic/phpunit/WX20180517-150125@2x.png" alt="docker 插件"></p>
+<hr>
+<h3 id="【2】添加-Docker-配置"><a href="#【2】添加-Docker-配置" class="headerlink" title="【2】添加 Docker 配置"></a>【2】添加 Docker 配置</h3><p>Build, Execution, Deployment -&gt; Docker</p>
+<p><img src="http://yunshequ00.oss-cn-hangzhou.aliyuncs.com/ipic/phpunit/WX20180517-151748@2x.png" alt="docker 配置"></p>
+<hr>
+<h3 id="【3】添加解释器"><a href="#【3】添加解释器" class="headerlink" title="【3】添加解释器"></a>【3】添加解释器</h3><p>Languages &amp; Frameworks -&gt; PHP</p>
+<p><img src="http://yunshequ00.oss-cn-hangzhou.aliyuncs.com/ipic/phpunit/WX20180517-152329@2x.png" alt="cli 配置"></p>
+<p><img src="http://yunshequ00.oss-cn-hangzhou.aliyuncs.com/ipic/phpunit/WX20180517-152720@2x.png" alt="cli 添加"></p>
+<hr>
+<h3 id="【4】添加-phpunit-配置"><a href="#【4】添加-phpunit-配置" class="headerlink" title="【4】添加 phpunit 配置"></a>【4】添加 phpunit 配置</h3><p><img src="http://yunshequ00.oss-cn-hangzhou.aliyuncs.com/ipic/phpunit/WX20180517-150456@2x.png" alt="phpunit 配置1"></p>
+<p><img src="http://yunshequ00.oss-cn-hangzhou.aliyuncs.com/ipic/phpunit/WX20180517-151513@2x.png" alt="phpunit 配置2"></p>
+<p><img src="http://yunshequ00.oss-cn-hangzhou.aliyuncs.com/ipic/phpunit/WX20180517-151553@2x.png" alt="phpunit 配置3"></p>
+<p><img src="http://yunshequ00.oss-cn-hangzhou.aliyuncs.com/ipic/phpunit/WX20180517-151314@2x.png" alt="phpunit 配置4"></p>
+<p><img src="http://yunshequ00.oss-cn-hangzhou.aliyuncs.com/ipic/phpunit/WX20180517-154947@2x.png" alt="phpunit 配置5"></p>
+<h2 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h2><p><img src="http://yunshequ00.oss-cn-hangzhou.aliyuncs.com/ipic/phpunit/WX20180517-160254@2x.png" alt="phpunit 运行1"></p>
+<p><img src="http://yunshequ00.oss-cn-hangzhou.aliyuncs.com/ipic/phpunit/WX20180517-160402@2x.png" alt="phpunit 运行2"></p>
+<p><img src="http://yunshequ00.oss-cn-hangzhou.aliyuncs.com/ipic/phpunit/WX20180517-160821@2x.png" alt="phpunit 运行3"></p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://blog.liz-x.com/2019/01/01/hello-world/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="liz">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://ws4.sinaimg.cn/large/006tNc79ly1fzc1i18qexj30wz0u0gr3.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="不负">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/01/01/hello-world/" class="post-title-link" itemprop="url">Hello World</a>
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-01-01 00:00:00" itemprop="dateCreated datePublished" datetime="2019-01-01T00:00:00+08:00">2019-01-01</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-04-02 16:03:20" itemprop="dateModified" datetime="2019-04-02T16:03:20+08:00">2019-04-02</time>
+              
+            
+          </span>
+
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="Hello-word"><a href="#Hello-word" class="headerlink" title="Hello word"></a>Hello word</h1>
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+  </section>
+
+  
+  <nav class="pagination">
+    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span>
+  </nav>
+
+
+
+          </div>
+          
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <div class="site-overview-wrap sidebar-panel sidebar-panel-active">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="https://ws4.sinaimg.cn/large/006tNc79ly1fzc1i18qexj30wz0u0gr3.jpg" alt="liz">
+            
+              <p class="site-author-name" itemprop="name">liz</p>
+              <div class="site-description motion-element" itemprop="description"></div>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">19</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                      <a href="/categories/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">6</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                      <a href="/tags/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">10</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://github.com/liz-x" title="GitHub &rarr; https://github.com/liz-x" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+
+      
+
+    </div>
+  </aside>
+  
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-snowflake-o"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">liz</span>
+
+  
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a></div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/utils.js?v=7.1.0"></script>
+
+  <script src="/js/motion.js?v=7.1.0"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/schemes/muse.js?v=7.1.0"></script>
+
+
+
+  
+
+  
+
+
+  <script src="/js/next-boot.js?v=7.1.0"></script>
+
+
+  
+
+  
+
+  
+
+  
+
+
+
+  
+  <script>
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url).replace(/\/{2,}/g, '/');
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x"></i></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x"></i></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
