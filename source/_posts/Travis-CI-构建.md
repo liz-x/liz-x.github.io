@@ -83,11 +83,12 @@ travis login --auto
 
 ```yaml
 # 说明
-# TRAVIS_BUILD_DIR：默认，Travis 的全局变量
-# DEPLOY_HOST：改成你的域名或 IP
-# DEPLOY_PATH：改成你的构建路径，例如：/websvr/www/blog
-# $encrypted_xxx_key、$encrypted_xxx_iv：改为你 travis 的环境变量
-# 示例：https://github.com/liz-x/liz-x.github.io/blog/master/.travis.yml
+# $TRAVIS_BUILD_DIR：默认，Travis 的全局变量
+# $DEPLOY_HOST：改成你的域名或 IP
+# $DEPLOY_HOST：改成你的构建用户名，例如：www-data
+# $DEPLOY_PATH：改成你的构建路径，例如：/websvr/www/blog
+# $encrypted_xxx_key、$encrypted_xxx_iv：改成你 travis 的环境变量 key，例如：$encrypted_123_key、$encrypted_123_iv
+# 示例：https://github.com/liz-x/liz-x.github.io/blob/master/.travis.yml
 
 language: node_js # 语言
 node_js: stable # node 版本
@@ -108,6 +109,6 @@ deploy:
         branch: master
     provider: script
     skip_cleanup: true
-    script: rsync -r --delete-after --quiet $TRAVIS_BUILD_DIR www-data/$DEPLOY_HOST:$DEPLOY_PATH
+    script: rsync -r --delete-after --quiet $TRAVIS_BUILD_DIR/* $DEPLOY_USER@$DEPLOY_HOST:$DEPLOY_PATH
 ```
 
