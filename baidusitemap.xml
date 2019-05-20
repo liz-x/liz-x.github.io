@@ -1,6 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>https://blog.liz-x.com/2019/05/20/%E6%B8%85%E7%A9%BA%E5%AD%98%E9%87%8F%E6%80%9D%E7%BB%B4%EF%BC%8C%E7%8F%8D%E8%A7%86%E5%AD%98%E9%87%8F/</loc>
+    <lastmod>2019-05-20</lastmod>
+  </url>  <url>
+    <loc>https://blog.liz-x.com/2019/04/19/Git-%E4%BB%93%E5%BA%93%E5%AE%8C%E6%95%B4%E8%BF%81%E7%A7%BB/</loc>
+    <lastmod>2019-04-19</lastmod>
+  </url>  <url>
     <loc>https://blog.liz-x.com/2019/04/07/Travis-CI-%E6%9E%84%E5%BB%BA/</loc>
     <lastmod>2019-04-08</lastmod>
   </url>  <url>
