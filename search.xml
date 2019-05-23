@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[Yii2 表单验证 Rules]]></title>
+    <url>%2F2019%2F05%2F23%2FYii2-%E8%A1%A8%E5%8D%95%E9%AA%8C%E8%AF%81-Rules%2F</url>
+    <content type="text"><![CDATA[基础规则12345678910111213141516171819202122public function rules()&#123; return [ ['字段名', 'required', 'message' =&gt; '提示信息', 'on' =&gt; '场景名'], // 必填验证 ['字段名', 'email', 'message' =&gt; '提示信息', 'on' =&gt; '场景名'], // 邮箱格式验证 ['字段名', 'url', 'message' =&gt; '提示信息', 'on' =&gt; '场景名'], // 网址格式验证 ['字段名', 'match', 'pattern' =&gt; '正则表达式'], // 正则验证 ['字段名', 'captcha'], // Yii 验证码验证 ['字段名', 'safe'], // 安全不验证 ['repassword', 'compare', 'compareAttribue' =&gt; 'password'], // 跟某个属性相等 ['字段名', 'string', 'length' =&gt; [6, 18]], // 字符串长度验证，必须在6至18长度以内的 ['字段名', 'unique'], // 值在本字段中的唯一性验证 ['字段名', 'integer', 'max' =&gt; '上限', 'min' =&gt; '下限'], // 整数验证 ['字段名', 'number', 'max' =&gt; '上限', 'min' =&gt; '下限'], // 数字验证 ['字段名', 'double'], // 双精度浮点数验证 ['字段名', 'in', 'range' =&gt; [1, 2, 3]], // 范围验证，必须在1,2,3以内的 ['字段名', 'filter', 'filter' =&gt; 'trim'], // 过滤,删除字段两边的空格 ['字段名', 'exist', 'targetClass' =&gt; '模型名'], // 字段名必须在模型名中存在 ['字段名', 'file', 'extension' =&gt; 'jpg,png', 'maxSize' =&gt; 1024 * 1024 * 1024], // 允许上传以jpg，png为后缀，文件最大1024*1024*1024 Byte的文件 ['字段名', 'validateType'], // 自定义函数验证 ];&#125; 备注：on 参数指定验证规则的场景，用逗号分开不同的场景，如果这个选项未设置，验证规则将应用到任何场景。例：’on’ =&gt; ‘search’，[‘mobile’, ‘required’, ‘message’ =&gt; ‘手机号不得为空’, ‘on’=&gt;’search’]，意思是在搜索场景中手机号必填。 自定义规则12345678910111213141516// 校验类型// rule：['type', 'validateType']/** * @param string $attribute，当前正在被验证的属性 * @param mixed $params，在规则中给定的名为“params”的参数值 */public function validateType($attribute, $params)&#123; if (!empty($this-&gt;attribute)) &#123; return true; &#125; else &#123; $this-&gt;addError($attribute, '类型不存在'); return false; &#125;&#125; 规则校验123456$model = new Model();if ($model-&gt;load(Yii::$app-&gt;request-&gt;post(), '') &amp;&amp; $model-&gt;validate()) &#123; return true;else &#123; return $model-&gt;errors;&#125; getErrors()：返回所有属性或单个属性的错误即返回所有验证中发生的错误 getFirstError()：返回指定属性的第一个错误 getFirstErrors()：返回所有错误属性的第一条 引用 https://www.kancloud.cn/manual/yii2-guide/69725 网络资料]]></content>
+      <categories>
+        <category>PHP</category>
+      </categories>
+      <tags>
+        <tag>PHP</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[清空存量思维，珍视存量]]></title>
     <url>%2F2019%2F05%2F20%2F%E6%B8%85%E7%A9%BA%E5%AD%98%E9%87%8F%E6%80%9D%E7%BB%B4%EF%BC%8C%E7%8F%8D%E8%A7%86%E5%AD%98%E9%87%8F%2F</url>
     <content type="text"><![CDATA[清空存量思维，珍视存量 随着认知的改变，思维也需要随之升级； 珍视活跃的存量，盘活重要的存量，复盘历史的存量； 存量也是变量，变量促进增量； 对于历史存量，反思、总结，做到断舍离； 成为伙伴们活的存量，为彼此带来增量。 举个栗子 — AI 与人类下棋：AI 的每一步棋都是新的决策，依据棋盘（存量），做最优的判断，不受思维束缚。而人类，下一步棋只是过去的一个延续，也就是棋手的棋风、下棋的战术（固化的存量思维）。]]></content>
@@ -11,6 +22,17 @@
         <tag>思维</tag>
         <tag>感悟</tag>
         <tag>记录</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Yii 数据库操作]]></title>
+    <url>%2F2019%2F05%2F13%2FYii%20%E6%95%B0%E6%8D%AE%E5%BA%93%E6%93%8D%E4%BD%9C%2F</url>
+    <content type="text"><![CDATA[转自团队 wiki，适当调整格式。 Yii2官方文档，这里补充常用的数据操作说明，提高代码可读性。 处理类生成查询实例 123use yii\db\Query$query = (new Query()); select字段名： 123# 文本（函数需要用双引号“”）-&gt;select('d.id')-&gt;select("IFNULL(i.sum_count,d.sum_count) as sum_count") 123456789101112131415# 数组（文本组成数组）-&gt;select([ 'd.id', 'd.channel_id', 'd.batch_number', // 单个字段单引号即可 "IFNULL(i.sum_count,d.sum_count) as sum_count", // 用函数的要用双引号 "IFNULL(i.total_amount,d.total_amount) as total_amount", 'd.begin_period', 'd.end_period', 'i.success_count', 'i.fail_count', 'd.created_on', 'd.modified_on', 'c.name channel_name',]) from-&gt;from(表名[别名]) 1-&gt;from($this-&gt;getTableName() . ' d') joinleftjoin(表名[别名], ON) 123# ON 必须为文本，复杂的用双引号-&gt;leftJoin(ChannelRepository::instance()-&gt;getTableName() . ' c', 'c.id = d.channel_id')-&gt;innerJoin($this-&gt;tableName . ' b', 'b.id = d.deduction_batch_id') where-&gt;where(mix) 123# 文本-&gt;where('oa.project_id = :project_id') // 这种方式需要 -&gt;params([':project_id' =&gt; '111']) 配合，通过 PDO 预处理，避免 SQL 注入。-&gt;where('oa.project_id =' . $project_id) // 这种方式需要对文本的引号进行处理，比较麻烦，而且容易被注入。 12345678910# 数组(建议)# 数组的组合很自由，且可以满足任何 where 条件-&gt;where([ 'oa.project_id' =&gt; $queryParams['project_id'], 'oa.channel_id' =&gt; $queryParams['channel_id'], 'oa.is_deleted' =&gt; 0, 'r.is_deleted' =&gt; 0, 'r.bank_deduction' =&gt; null, // r.bank_deduction is null 'r.item_id' =&gt; $item_ids, // 可以是=也可以是 in ('', ...)]) andWhere这个方法主要用在多维数组的时候，可以跟其他where自由组合 1234567891011121314151617# 不等于的情况-&gt;andWhere([ 'and', ['&gt;=', 'r.period', $queryParams['begin_period']], ['&lt;=', 'r.period', $queryParams['end_period']]])# not in 子查询-&gt;andWhere(['not in', 'r.id', $sub1])# 子查询$sub1 = (new Query()) -&gt;select(['receivable_id']) -&gt;from(WorkflowDerateBusinessRepositories::instance()-&gt;getTableName() . ' wdb') -&gt;innerJoin(WorkflowBusinessEntity::tableName() . ' wb', 'wb.business_id = wdb.business_id') -&gt;innerJoin(WorkflowInstanceEntity::tableName() . ' wi', 'wi.id = wb.workflow_instance_id') -&gt;where(['wi.status' =&gt; WorkflowInstanceEntity::STATUS_PENDING]); filterWhere同 where ,但是会过滤空值。 当一个值为 null、空数组、空字符串或者一个只包含空格的字符串时，那么它将被判定为空值。不用写一堆 if (!empty()) { … -&gt;where … }冗余代码示例，说明没有真正理解这个方法 1234567891011121314151617181920212223242526272829303132public function condition($params)&#123; $filterWhere = ['and', ['=', 'b.is_deleted', 0]]; if (!empty($params['project_id'])) &#123; $filterWhere[] = ['=', 'b.project_id', $params['project_id']]; &#125; if (!empty($params['room_id'])) &#123; $filterWhere[] = ['=', 'b.room_id', $params['room_id']]; &#125; if (!empty($params['mobile'])) &#123; $filterWhere[] = ['=', 'b.mobile', $params['mobile']]; &#125; if (!empty($params['user_id'])) &#123; $filterWhere[] = ['=', 'b.user_id', $params['user_id']]; &#125; if (!empty($params['mid'])) &#123; $filterWhere[] = ['=', 'b.mid', $params['mid']]; &#125; if (isset($params['current_binded'])) &#123; $filterWhere[] = ['=', 'b.current_binded', $params['current_binded']]; &#125; if(isset($params['tenant_code']))&#123; $filterWhere[] = ['=', 'b.tenant_code', $params['tenant_code']]; &#125; if (!empty($params['parent_project_id'])) &#123; $filterWhere[] = ['=', 'b.parent_project_id', $params['parent_project_id']]; &#125; return $filterWhere;&#125; andFilterWhere 同 andWhere，用来组合 会过滤空值 orderBy123456789101112# 数组-&gt;orderBy([ 'id' =&gt; SORT_ASC, 'name' =&gt; SORT_DESC,])# 文本-&gt;orderBy('id ASC, name DESC')# 组合-&gt;orderBy('id ASC')-&gt;addOrderBy('name DESC') groupBy12345# 数组-&gt;groupBy(['id', 'status'])# 文本-&gt;groupBy('id, status') having同 where，可以理解为 group by 后的 where offsetlimit 起点 limitlimit 多少条记录 createCommand 生成命令 传db连接 1-&gt;createCommand($this-&gt;getDbHandler()) queryAll 查询所有记录，返回二维数组 update1234$this-&gt;getDbHandler() -&gt;createCommand() -&gt;update(ReceivableRepository::instance()-&gt;getTableName(), ['bank_deduction' =&gt; 0], ['id' =&gt; $sub]) -&gt;execute();]]></content>
+      <categories>
+        <category>PHP</category>
+      </categories>
+      <tags>
+        <tag>PHP</tag>
       </tags>
   </entry>
   <entry>
