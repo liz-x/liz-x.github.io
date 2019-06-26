@@ -1,6 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[gdb 调试 core dump]]></title>
+    <url>%2F2019%2F06%2F26%2Fgdb-%E8%B0%83%E8%AF%95-core-dump%2F</url>
+    <content type="text"><![CDATA[何为 core dumpcore dump 中文翻译为“核心转储”，它是进程运行时突然崩溃的那一刻的内存快照。 操作系统在程序发生异常而异常在进程内部又没有被捕获的情况下，会把进程此刻内存、寄存器状态、运行堆栈等信息转储保存在一个文件里，可使用 gdb 工具来分析。 core dump 生产环境一般处于禁用状态，对于内存消耗性的进程，core dump 时会占用很多系统资源，磁盘空间也可能被写满。 查看核心转储文件大小的最大值：ulimit -c，如果是 0，则表示禁止核心转储。 开启 core dump临时开启 开启 core dump： ulimit -c 1024（限制文件大小为 1024k） ulimit -c unlimited（不限制文件大小） 关闭 core dump：ulimit -c 0 自动开启 打开 /etc/profile，尾部追加 ulimit -S -c unlimited &gt; /dev/null 2&gt;&amp;1； 执行 source /etc/profile 使配置生效； 通过 ulimit -c 查看下是否已经打开。 备注：由于核心转储文件比较大，因此建议不要限制 core 文件的大小，当调试完毕之后关闭 core dump 即可。 打开 core 后，如果进程发生 crash，默认情况下，会在应用所在位置，产生一个【core.pid】文件。 查看正在使用的 core 文件路径和格式 more /proc/sys/kernel/core_pattern，后面自动添加 pid 的配置是在 more /proc/sys/kernel/core_uses_pid 里面配置的，如果为 1 就是自动添加。 修改 core 文件的保存路径和文件名格式： 修改 /etc/sysctl.conf 文件，添加需要保存的路径 kernel.core_pattern = /tmp/corefile/core.%e.%t（要有写的权限），再执行命令 sysctl -p 即可生效。 core 文件支持的格式列表： 1234567%p – insert pid into filename%u – insert current uid into filename%g – insert current gid into filename%s – insert signal that caused the coredump into the filename%t – insert UNIX time that the coredump occurred into filename%h – insert hostname where the coredump happened into filename%e – insert coredumping executable name into filename 以 PHP 为例，开启 core dump 一段时间的运行之后，调试生成的 core 文件： 进入存放 core 文件的目录，假设 php 安装在 /usr/local/php/ 下面，core 文件为 core.666： gdb /usr/local/php/bin/php -c core.666 调试 core dumpgdb 的 3 种使用方式： 跟踪正在运行的 PHP 程序，使用 gdb -p 进程 ID 使用 gdb 运行并调试 PHP 程序，使用 gdb php -&gt; run server.php 进行调试 PHP 程序发生 core dump 后使用 gdb 加载 core 内存镜像进行调试 gdb php corefile 执行 gdb 后，进程会变成 T 的状态，表示正在 Trace，这个是独占的，所以不能再使用 strace/gdb 或者其他 ptrace 工具对此进程进行调试。另外此进程会中断执行，gdb 输入 c 后，程序继续向下运行，按下 ctrl + c 则会中断程序，通过 bt 命令查看进程的调用栈。 常用指令 p：print，打印 C 变量的值 c：continue，继续运行被中止的程序 b：breakpoint，设置断点，可以按照函数名设置，如 b zif_php_function，也可以按照源代码的行数指定断点，如 b src/networker/Server.c:1000 t：thread，切换线程，如果进程拥有多个线程，可以使用 t 指令，切换到不同的线程 ctrl + c：中断当前正在运行的程序，和 c 指令配合使用 n：next，执行下一行，单步调试 info threads：查看运行的所有线程 l：list，查看源码，可以使用 l 函数名 或者 l 行号 bt：backtrace，查看运行时的函数调用栈 finish：完成当前函数 f：frame，与 bt 配合使用，可以切换到函数调用栈的某一层 r：run，运行程序 zbacktracezbacktrace 是 PHP 源码包提供的一个 gdb 自定义指令，功能与 bt 指令类似，与 bt 不同的是 zbacktrace 看到的调用栈是 PHP 函数调用栈，而不是 C 函数。 下载 php-src，解压后从根目录中找到一个 .gdbinit 文件，在 gdb shell 中输入 12source .gdbinitzbacktrace .gdbinit 还提供了其他更多指令，可以查看源码了解详细的信息。 使用 gdb + zbacktrace 跟踪死循环问题1gdb -p 进程ID 使用 ps aux 工具找出需要调试的进程 ID gdb -p 跟踪指定的进程 反复调用 ctrl + c 、zbacktrace、c 查看程序在哪段 PHP 代码发生异常 找到对应的 PHP 代码进行解决 参考： http://imhuchao.com/1018.html https://wiki.swoole.com/wiki/page/442.html https://www.cnblogs.com/paul8339/p/8967689.html]]></content>
+      <categories>
+        <category>工具</category>
+        <category>Linux</category>
+        <category>PHP</category>
+      </categories>
+      <tags>
+        <tag>PHP</tag>
+        <tag>Linux</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[Yii2 表单验证 Rules]]></title>
     <url>%2F2019%2F05%2F23%2FYii2-%E8%A1%A8%E5%8D%95%E9%AA%8C%E8%AF%81-Rules%2F</url>
     <content type="text"><![CDATA[基础规则12345678910111213141516171819202122public function rules()&#123; return [ ['字段名', 'required', 'message' =&gt; '提示信息', 'on' =&gt; '场景名'], // 必填验证 ['字段名', 'email', 'message' =&gt; '提示信息', 'on' =&gt; '场景名'], // 邮箱格式验证 ['字段名', 'url', 'message' =&gt; '提示信息', 'on' =&gt; '场景名'], // 网址格式验证 ['字段名', 'match', 'pattern' =&gt; '正则表达式'], // 正则验证 ['字段名', 'captcha'], // Yii 验证码验证 ['字段名', 'safe'], // 安全不验证 ['repassword', 'compare', 'compareAttribue' =&gt; 'password'], // 跟某个属性相等 ['字段名', 'string', 'length' =&gt; [6, 18]], // 字符串长度验证，必须在6至18长度以内的 ['字段名', 'unique'], // 值在本字段中的唯一性验证 ['字段名', 'integer', 'max' =&gt; '上限', 'min' =&gt; '下限'], // 整数验证 ['字段名', 'number', 'max' =&gt; '上限', 'min' =&gt; '下限'], // 数字验证 ['字段名', 'double'], // 双精度浮点数验证 ['字段名', 'in', 'range' =&gt; [1, 2, 3]], // 范围验证，必须在1,2,3以内的 ['字段名', 'filter', 'filter' =&gt; 'trim'], // 过滤,删除字段两边的空格 ['字段名', 'exist', 'targetClass' =&gt; '模型名'], // 字段名必须在模型名中存在 ['字段名', 'file', 'extension' =&gt; 'jpg,png', 'maxSize' =&gt; 1024 * 1024 * 1024], // 允许上传以jpg，png为后缀，文件最大1024*1024*1024 Byte的文件 ['字段名', 'validateType'], // 自定义函数验证 ];&#125; 备注：on 参数指定验证规则的场景，用逗号分开不同的场景，如果这个选项未设置，验证规则将应用到任何场景。例：’on’ =&gt; ‘search’，[‘mobile’, ‘required’, ‘message’ =&gt; ‘手机号不得为空’, ‘on’=&gt;’search’]，意思是在搜索场景中手机号必填。 自定义规则12345678910111213141516// 校验类型// rule：['type', 'validateType']/** * @param string $attribute，当前正在被验证的属性 * @param mixed $params，在规则中给定的名为“params”的参数值 */public function validateType($attribute, $params)&#123; if (!empty($this-&gt;attribute)) &#123; return true; &#125; else &#123; $this-&gt;addError($attribute, '类型不存在'); return false; &#125;&#125; 规则校验123456$model = new Model();if ($model-&gt;load(Yii::$app-&gt;request-&gt;post(), '') &amp;&amp; $model-&gt;validate()) &#123; return true;else &#123; return $model-&gt;errors;&#125; getErrors()：返回所有属性或单个属性的错误即返回所有验证中发生的错误 getFirstError()：返回指定属性的第一个错误 getFirstErrors()：返回所有错误属性的第一条 引用 https://www.kancloud.cn/manual/yii2-guide/69725 网络资料]]></content>
@@ -38,7 +52,7 @@
   <entry>
     <title><![CDATA[Git 仓库完整迁移]]></title>
     <url>%2F2019%2F04%2F19%2FGit-%E4%BB%93%E5%BA%93%E5%AE%8C%E6%95%B4%E8%BF%81%E7%A7%BB%2F</url>
-    <content type="text"><![CDATA[包括分支、标签、日志 12345678# 克隆仓库镜像(--mirror 裸版本库)git clone --mirror https://github.com/xxx/oldProject.gitcd oldProject.git# 设置 origingit remote set-url origin https://github.com/xxx/newProject.git# 推送镜像git push –-mirror 裸版本库—— 不包含工作区 git clone –bare git clone –mirror –mirror 可以在裸版本库中使用 git fetch 命令进行同步]]></content>
+    <content type="text"><![CDATA[包括分支、标签、日志 12345678910111213141516171819cd /tmp# 克隆仓库镜像(--mirror 裸版本库)git clone --mirror https://github.com/xxx/oldProject.gitcd oldProject.git# 设置 origingit remote set-url origin https://github.com/xxx/newProject.git# 推送镜像git push --mirror# 修改原仓库远程地址cd /www/oldProjectgit remote set-url origin https://github.com/xxx/newProject.gitgit fetch origin# 更新项目名（如有改动）cd ..mv oldProject newProject 裸版本库—— 不包含工作区 git clone –bare git clone –mirror –mirror 可以在裸版本库中使用 git fetch 命令进行同步]]></content>
       <categories>
         <category>工具</category>
       </categories>
@@ -64,8 +78,8 @@
       <tags>
         <tag>Docker</tag>
         <tag>Mac</tag>
-        <tag>Linux</tag>
         <tag>工具</tag>
+        <tag>Linux</tag>
       </tags>
   </entry>
   <entry>

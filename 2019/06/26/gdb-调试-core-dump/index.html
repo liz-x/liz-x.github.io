@@ -94,18 +94,18 @@
 
 
 
-  <meta name="description" content="删除铁律禁止程序物理删除数据 软删除 根据删除条件，查询数据 ID，通过 ID 批量软删除； 禁止通过子查询、联表查询来更新数据（会存在性能问题，且数据不好批量还原）； 所有删除数据的操作，必须有 jira 留痕； 同批数据涉及多个 jira 时，必须在当前 jira 备注历史 jira 地址。  12-- modified_by 例如：Jira008-20180808-01UPDATE `tab">
-<meta name="keywords" content="规范,SQL">
+  <meta name="description" content="何为 core dumpcore dump 中文翻译为“核心转储”，它是进程运行时突然崩溃的那一刻的内存快照。  操作系统在程序发生异常而异常在进程内部又没有被捕获的情况下，会把进程此刻内存、寄存器状态、运行堆栈等信息转储保存在一个文件里，可使用 gdb 工具来分析。 core dump 生产环境一般处于禁用状态，对于内存消耗性的进程，core dump 时会占用很多系统资源，磁盘空间也可能被写满">
+<meta name="keywords" content="PHP,Linux">
 <meta property="og:type" content="article">
-<meta property="og:title" content="数据删改规范">
-<meta property="og:url" content="https://blog.liz-x.com/2019/01/26/数据删改规范/index.html">
+<meta property="og:title" content="gdb 调试 core dump">
+<meta property="og:url" content="https://blog.liz-x.com/2019/06/26/gdb-调试-core-dump/index.html">
 <meta property="og:site_name" content="不负">
-<meta property="og:description" content="删除铁律禁止程序物理删除数据 软删除 根据删除条件，查询数据 ID，通过 ID 批量软删除； 禁止通过子查询、联表查询来更新数据（会存在性能问题，且数据不好批量还原）； 所有删除数据的操作，必须有 jira 留痕； 同批数据涉及多个 jira 时，必须在当前 jira 备注历史 jira 地址。  12-- modified_by 例如：Jira008-20180808-01UPDATE `tab">
+<meta property="og:description" content="何为 core dumpcore dump 中文翻译为“核心转储”，它是进程运行时突然崩溃的那一刻的内存快照。  操作系统在程序发生异常而异常在进程内部又没有被捕获的情况下，会把进程此刻内存、寄存器状态、运行堆栈等信息转储保存在一个文件里，可使用 gdb 工具来分析。 core dump 生产环境一般处于禁用状态，对于内存消耗性的进程，core dump 时会占用很多系统资源，磁盘空间也可能被写满">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-04-02T08:03:20.739Z">
+<meta property="og:updated_time" content="2019-06-26T12:22:39.414Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="数据删改规范">
-<meta name="twitter:description" content="删除铁律禁止程序物理删除数据 软删除 根据删除条件，查询数据 ID，通过 ID 批量软删除； 禁止通过子查询、联表查询来更新数据（会存在性能问题，且数据不好批量还原）； 所有删除数据的操作，必须有 jira 留痕； 同批数据涉及多个 jira 时，必须在当前 jira 备注历史 jira 地址。  12-- modified_by 例如：Jira008-20180808-01UPDATE `tab">
+<meta name="twitter:title" content="gdb 调试 core dump">
+<meta name="twitter:description" content="何为 core dumpcore dump 中文翻译为“核心转储”，它是进程运行时突然崩溃的那一刻的内存快照。  操作系统在程序发生异常而异常在进程内部又没有被捕获的情况下，会把进程此刻内存、寄存器状态、运行堆栈等信息转储保存在一个文件里，可使用 gdb 工具来分析。 core dump 生产环境一般处于禁用状态，对于内存消耗性的进程，core dump 时会占用很多系统资源，磁盘空间也可能被写满">
 
 
 
@@ -113,7 +113,7 @@
 
   
   
-  <link rel="canonical" href="https://blog.liz-x.com/2019/01/26/数据删改规范/">
+  <link rel="canonical" href="https://blog.liz-x.com/2019/06/26/gdb-调试-core-dump/">
 
 
 
@@ -123,7 +123,7 @@
   };
 </script>
 
-  <title>数据删改规范 | 不负</title>
+  <title>gdb 调试 core dump | 不负</title>
   
 
 
@@ -351,7 +351,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://blog.liz-x.com/2019/01/26/数据删改规范/">
+    <link itemprop="mainEntityOfPage" href="https://blog.liz-x.com/2019/06/26/gdb-调试-core-dump/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="liz">
@@ -368,7 +368,7 @@
 
         
         
-          <h2 class="post-title" itemprop="name headline">数据删改规范
+          <h2 class="post-title" itemprop="name headline">gdb 调试 core dump
 
               
             
@@ -394,7 +394,7 @@
                 
               
 
-              <time title="创建时间：2019-01-26 20:01:50" itemprop="dateCreated datePublished" datetime="2019-01-26T20:01:50+08:00">2019-01-26</time>
+              <time title="创建时间：2019-06-26 20:15:41" itemprop="dateCreated datePublished" datetime="2019-06-26T20:15:41+08:00">2019-06-26</time>
             
 
             
@@ -412,14 +412,21 @@
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/编程/" itemprop="url" rel="index"><span itemprop="name">编程</span></a></span>
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/工具/" itemprop="url" rel="index"><span itemprop="name">工具</span></a></span>
 
                 
                 
                   ，
                 
               
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/编程/规范/" itemprop="url" rel="index"><span itemprop="name">规范</span></a></span>
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/工具/Linux/" itemprop="url" rel="index"><span itemprop="name">Linux</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/工具/Linux/PHP/" itemprop="url" rel="index"><span itemprop="name">PHP</span></a></span>
 
                 
                 
@@ -454,36 +461,73 @@
       
 
       
-        <h2 id="删除铁律"><a href="#删除铁律" class="headerlink" title="删除铁律"></a>删除铁律</h2><p><strong>禁止程序物理删除数据</strong></p>
-<h3 id="软删除"><a href="#软删除" class="headerlink" title="软删除"></a>软删除</h3><ol>
-<li>根据删除条件，查询数据 ID，通过 ID 批量软删除；</li>
-<li>禁止通过子查询、联表查询来更新数据（会存在性能问题，且数据不好批量还原）；</li>
-<li>所有删除数据的操作，必须有 jira 留痕；</li>
-<li>同批数据涉及多个 jira 时，必须在当前 jira 备注历史 jira 地址。</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">-- modified_by 例如：Jira008-20180808-01</span><br><span class="line">UPDATE `table` SET `is_deleted` = 1, `modified_by` = &apos;jira 编号 + 版本号&apos;,  `modified_on` = NOW() WHERE `is_deleted` = 0 AND `id` IN (&apos;xxxxxxxxxxxx&apos;);</span><br></pre></td></tr></table></figure>
-<h3 id="硬删除（物理删除）"><a href="#硬删除（物理删除）" class="headerlink" title="硬删除（物理删除）"></a>硬删除（物理删除）</h3><p>避免数据库无效数据不断增长，定期清理软删除的历史数据。</p>
-<ol>
-<li>提前通知交付、区域、客户；</li>
-<li><strong>jira 留痕，备注执行流程；</strong></li>
-<li>提前发起停服公告（凌晨停服）；</li>
-<li>区分需要保留的历史数据；</li>
-<li>凌晨执行删除操作：<ol>
-<li>nginx 跳转停服公告页面；</li>
-<li>备份数据库；</li>
-<li>物理删除1年前<strong>被软删除</strong>的<strong>无用数据</strong>；</li>
-<li>区域及时验证数据。</li>
-</ol>
+        <h2 id="何为-core-dump"><a href="#何为-core-dump" class="headerlink" title="何为 core dump"></a>何为 core dump</h2><p><strong>core dump</strong> 中文翻译为“核心转储”，它是进程运行时突然崩溃的那一刻的内存快照。</p>
+<blockquote>
+<p>操作系统在程序发生异常而异常在进程内部又没有被捕获的情况下，会把进程此刻内存、寄存器状态、运行堆栈等信息转储保存在一个文件里，可使用 gdb 工具来分析。</p>
+<p>core dump 生产环境一般处于禁用状态，对于内存消耗性的进程，core dump 时会占用很多系统资源，磁盘空间也可能被写满。</p>
+</blockquote>
+<p>查看核心转储文件大小的最大值：<code>ulimit -c</code>，如果是 0，则表示禁止核心转储。</p>
+<h2 id="开启-core-dump"><a href="#开启-core-dump" class="headerlink" title="开启 core dump"></a>开启 core dump</h2><h4 id="临时开启"><a href="#临时开启" class="headerlink" title="临时开启"></a>临时开启</h4><ul>
+<li><strong>开启 core dump</strong>：<ul>
+<li><code>ulimit -c 1024</code>（限制文件大小为 1024k）</li>
+<li><code>ulimit -c unlimited</code>（不限制文件大小）</li>
+</ul>
 </li>
+<li><strong>关闭 core dump</strong>：<code>ulimit -c 0</code></li>
+</ul>
+<h4 id="自动开启"><a href="#自动开启" class="headerlink" title="自动开启"></a>自动开启</h4><ol>
+<li>打开 <code>/etc/profile</code>，尾部追加 <code>ulimit -S -c unlimited &gt; /dev/null 2&gt;&amp;1</code>；</li>
+<li>执行 <code>source /etc/profile</code> 使配置生效；</li>
+<li>通过 <code>ulimit -c</code> 查看下是否已经打开。</li>
 </ol>
-<h2 id="修改数据"><a href="#修改数据" class="headerlink" title="修改数据"></a>修改数据</h2><ol>
-<li><strong>必须通过 jira 留痕；</strong></li>
-<li>根据修改条件，<strong>备份原始数据</strong>（修改出错可马上还原）；</li>
-<li>modified_by = ‘jira 编号 + 版本号’；</li>
-<li>禁止通过子查询、联表查询来更新数据；</li>
-<li>通过自定义脚本，生成更新 SQL；</li>
-<li>如果需要还原，根据备份数据，生成还原 SQL。</li>
-</ol>
+<p><strong>备注：</strong>由于核心转储文件比较大，因此建议不要限制 core 文件的大小，当调试完毕之后关闭 core dump 即可。</p>
+<p>打开 core 后，如果进程发生 crash，默认情况下，会在应用所在位置，产生一个【core.pid】文件。</p>
+<p>查看正在使用的 core 文件路径和格式 <code>more /proc/sys/kernel/core_pattern</code>，后面自动添加 pid 的配置是在 <code>more /proc/sys/kernel/core_uses_pid</code> 里面配置的，如果为 1 就是自动添加。</p>
+<p><strong>修改 core 文件的保存路径和文件名格式：</strong></p>
+<p>修改 /etc/sysctl.conf 文件，添加需要保存的路径 <code>kernel.core_pattern = /tmp/corefile/core.%e.%t</code>（要有写的权限），再执行命令 <code>sysctl -p</code> 即可生效。</p>
+<p>core 文件支持的格式列表：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">%</span>p – insert pid into filename</span><br><span class="line"><span class="meta">%</span>u – insert current uid into filename</span><br><span class="line"><span class="meta">%</span>g – insert current gid into filename</span><br><span class="line"><span class="meta">%</span>s – insert signal that caused the coredump into the filename</span><br><span class="line"><span class="meta">%</span>t – insert UNIX time that the coredump occurred into filename</span><br><span class="line"><span class="meta">%</span>h – insert hostname where the coredump happened into filename</span><br><span class="line"><span class="meta">%</span>e – insert coredumping executable name into filename</span><br></pre></td></tr></table></figure>
+<p>以 PHP 为例，开启 core dump 一段时间的运行之后，调试生成的 core 文件：</p>
+<blockquote>
+<p>进入存放 core 文件的目录，假设 php 安装在 /usr/local/php/ 下面，core 文件为 core.666：</p>
+<p>gdb /usr/local/php/bin/php -c core.666</p>
+</blockquote>
+<h2 id="调试-core-dump"><a href="#调试-core-dump" class="headerlink" title="调试 core dump"></a>调试 core dump</h2><p>gdb 的 3 种使用方式：</p>
+<ul>
+<li>跟踪正在运行的 PHP 程序，使用 gdb -p 进程 ID</li>
+<li>使用 gdb 运行并调试 PHP 程序，使用 <code>gdb php -&gt; run server.php</code> 进行调试</li>
+<li>PHP 程序发生 core dump 后使用 gdb 加载 core 内存镜像进行调试 <code>gdb php corefile</code></li>
+</ul>
+<p>执行 gdb 后，进程会变成 T 的状态，表示正在 Trace，这个是独占的，所以不能再使用 strace/gdb 或者其他 ptrace 工具对此进程进行调试。另外此进程会中断执行，gdb 输入 c 后，程序继续向下运行，按下 ctrl + c 则会中断程序，通过 bt 命令查看进程的调用栈。</p>
+<h3 id="常用指令"><a href="#常用指令" class="headerlink" title="常用指令"></a>常用指令</h3><ul>
+<li><code>p</code>：print，打印 C 变量的值</li>
+<li><code>c</code>：continue，继续运行被中止的程序</li>
+<li><code>b</code>：breakpoint，设置断点，可以按照函数名设置，如 <code>b zif_php_function</code>，也可以按照源代码的行数指定断点，如 <code>b src/networker/Server.c:1000</code></li>
+<li><code>t</code>：thread，切换线程，如果进程拥有多个线程，可以使用 t 指令，切换到不同的线程</li>
+<li><code>ctrl + c</code>：中断当前正在运行的程序，和 c 指令配合使用</li>
+<li><code>n</code>：next，执行下一行，单步调试</li>
+<li><code>info threads</code>：查看运行的所有线程</li>
+<li><code>l</code>：list，查看源码，可以使用 <code>l 函数名</code> 或者  <code>l 行号</code></li>
+<li><code>bt</code>：backtrace，查看运行时的函数调用栈</li>
+<li><code>finish</code>：完成当前函数</li>
+<li><code>f</code>：frame，与 bt 配合使用，可以切换到函数调用栈的某一层</li>
+<li><code>r</code>：run，运行程序</li>
+</ul>
+<h2 id="zbacktrace"><a href="#zbacktrace" class="headerlink" title="zbacktrace"></a>zbacktrace</h2><p>zbacktrace 是 PHP 源码包提供的一个 gdb 自定义指令，功能与 bt 指令类似，与 bt 不同的是 zbacktrace 看到的调用栈是 PHP 函数调用栈，而不是 C 函数。</p>
+<p>下载 php-src，解压后从根目录中找到一个 <code>.gdbinit</code> 文件，在 gdb shell 中输入</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">source .gdbinit</span><br><span class="line">zbacktrace</span><br></pre></td></tr></table></figure>
+<p>.gdbinit 还提供了其他更多指令，可以查看源码了解详细的信息。</p>
+<h3 id="使用-gdb-zbacktrace-跟踪死循环问题"><a href="#使用-gdb-zbacktrace-跟踪死循环问题" class="headerlink" title="使用 gdb + zbacktrace 跟踪死循环问题"></a>使用 gdb + zbacktrace 跟踪死循环问题</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gdb -p 进程ID</span><br></pre></td></tr></table></figure>
+<ul>
+<li>使用 <code>ps aux</code> 工具找出需要调试的进程 ID</li>
+<li><code>gdb -p</code> 跟踪指定的进程</li>
+<li>反复调用 <code>ctrl + c</code> 、<code>zbacktrace</code>、<code>c</code> 查看程序在哪段 PHP 代码发生异常</li>
+<li>找到对应的 PHP 代码进行解决</li>
+</ul>
+<p><strong>参考：</strong></p>
+<p><a href="http://imhuchao.com/1018.html" target="_blank" rel="noopener">http://imhuchao.com/1018.html</a></p>
+<p><a href="https://wiki.swoole.com/wiki/page/442.html" target="_blank" rel="noopener">https://wiki.swoole.com/wiki/page/442.html</a></p>
+<p><a href="https://www.cnblogs.com/paul8339/p/8967689.html" target="_blank" rel="noopener">https://www.cnblogs.com/paul8339/p/8967689.html</a></p>
 
       
     </div>
@@ -507,9 +551,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/规范/" rel="tag"># 规范</a>
+            <a href="/tags/PHP/" rel="tag"># PHP</a>
           
-            <a href="/tags/SQL/" rel="tag"># SQL</a>
+            <a href="/tags/Linux/" rel="tag"># Linux</a>
           
         </div>
       
@@ -522,8 +566,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/01/25/PHP-编程规范/" rel="next" title="PHP 编程规范">
-                <i class="fa fa-chevron-left"></i> PHP 编程规范
+              <a href="/2019/05/23/Yii2-表单验证-Rules/" rel="next" title="Yii2 表单验证 Rules">
+                <i class="fa fa-chevron-left"></i> Yii2 表单验证 Rules
               </a>
             
           </div>
@@ -531,10 +575,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/01/27/Restful-API-规范/" rel="prev" title="Restful API 规范">
-                Restful API 规范 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -738,7 +778,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#删除铁律"><span class="nav-number">1.</span> <span class="nav-text">删除铁律</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#软删除"><span class="nav-number">1.1.</span> <span class="nav-text">软删除</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#硬删除（物理删除）"><span class="nav-number">1.2.</span> <span class="nav-text">硬删除（物理删除）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#修改数据"><span class="nav-number">2.</span> <span class="nav-text">修改数据</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#何为-core-dump"><span class="nav-number">1.</span> <span class="nav-text">何为 core dump</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#开启-core-dump"><span class="nav-number">2.</span> <span class="nav-text">开启 core dump</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#临时开启"><span class="nav-number">2.0.1.</span> <span class="nav-text">临时开启</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#自动开启"><span class="nav-number">2.0.2.</span> <span class="nav-text">自动开启</span></a></li></ol></li></ol><li class="nav-item nav-level-2"><a class="nav-link" href="#调试-core-dump"><span class="nav-number">3.</span> <span class="nav-text">调试 core dump</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#常用指令"><span class="nav-number">3.1.</span> <span class="nav-text">常用指令</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#zbacktrace"><span class="nav-number">4.</span> <span class="nav-text">zbacktrace</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#使用-gdb-zbacktrace-跟踪死循环问题"><span class="nav-number">4.1.</span> <span class="nav-text">使用 gdb + zbacktrace 跟踪死循环问题</span></a></li></ol></li></div>
             
 
           </div>

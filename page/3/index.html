@@ -348,6 +348,224 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://blog.liz-x.com/2019/01/22/实践版-Git-Flow/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="liz">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://ws4.sinaimg.cn/large/006tNc79ly1fzc1i18qexj30wz0u0gr3.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="不负">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/01/22/实践版-Git-Flow/" class="post-title-link" itemprop="url">实践版 Git-Flow</a>
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-01-22 11:30:30" itemprop="dateCreated datePublished" datetime="2019-01-22T11:30:30+08:00">2019-01-22</time>
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/工具/" itemprop="url" rel="index"><span itemprop="name">工具</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="迭代评审"><a href="#迭代评审" class="headerlink" title="迭代评审"></a>迭代评审</h2><p>需求分类：</p>
+<ol>
+<li>小需求：多个小需求归为一个 <code>feature</code> 分支；</li>
+<li>大需求：单个大需求使用独立 <code>feature</code> 分支。</li>
+</ol>
+<p><strong>备注：</strong><br>前后端配合，必须沟通好所使用的 <code>feature</code>；<br>新建的 <code>feature</code> 分支需要在相关的 jira 或迭代任务上标注；<br>SQL 语句需备注对应的 <code>feature</code> 分支；<br>缺陷修复、问题处理，也需要标注对应的分支名。</p>
+<h2 id="迭代开发"><a href="#迭代开发" class="headerlink" title="迭代开发"></a>迭代开发</h2><ol>
+<li><code>feature-xxxx</code> 分支通过 <code>master</code> 拉取；<ol>
+<li><code>feature-xxxx</code> 可含一个或多个小需求；</li>
+<li>在 jira 或迭代任务上<strong>标注对应的分支名</strong>。</li>
+</ol>
+</li>
+<li>开发完成后合并到 <code>sp-dev</code> 上测试环境自测；<ol>
+<li>代码提交 comment 必须清晰说明更新信息；<ul>
+<li>标准：jira：8866 支付开发 - 优化回调、fix xxx、修改 xxx；</li>
+<li><strong>禁止模糊、不明确和重复的 comment</strong> ，例如：debug、测试等。</li>
+</ul>
+</li>
+<li>本地测试通过后再提交，不建议零零碎碎的提交代码。</li>
+</ol>
+</li>
+<li>自测完成后，提测，且通过准入测试（自动化），由 QA 验证；</li>
+<li>测试通过后，QA 对待发布的 <code>feature</code> 归类，<strong>（QA）决定哪天上线哪些 feature</strong>；<ol>
+<li><strong>QA 每天晨会同步</strong>上线安排；</li>
+<li>确定上线的 <code>feature</code> 后，<strong>由 QA 指定人员新建 release 分支</strong>，合并 <code>feature</code>；</li>
+<li><u>开发人员不能直接合并到 release</u>。</li>
+</ol>
+</li>
+<li>上预发布前，<code>master</code> 先合并到 <code>feature</code> ，避免上线冲突；</li>
+<li>从 <code>master</code> 拉取 <code>release-xxxx</code> ，例如：<code>release-20180808-01</code>；</li>
+<li><strong>单个或多个</strong> <u>feature</u>合并到 <code>release-20180808-01</code>，打 <code>release</code> tag，上预发布测试；</li>
+<li>预发布 bug 直接在 <code>release</code> 修复；</li>
+<li>预发布通过后，<code>release</code> 合并到 <code>master</code>，打 <code>master</code> tag 上生产验证；</li>
+<li>上线通过，<code>master</code> 合并到 <code>sp-dev</code>；</li>
+<li>删除 <code>release-xxxx</code>。</li>
+</ol>
+<p><strong>备注：</strong><br><code>release</code> 分支是唯一的，即使它有版本号，其他 <code>feature</code> 上线需要排队等待下一个 <code>release</code>。<br>如果存在 <code>hotfix</code> 上线，先验证 <code>hotfix</code>，合并 <code>hotfix</code>，再发布 <code>release</code>。</p>
+<p><strong>tag 命名：</strong><br>release 分支：<strong>R</strong>20880808-01<br>master 分支：<strong>M</strong>20880808-01</p>
+<h2 id="Bug-修复"><a href="#Bug-修复" class="headerlink" title="Bug 修复"></a>Bug 修复</h2><ol>
+<li><code>hotfix-xxxx</code> 分支通过 <code>master</code> 拉取；</li>
+<li>开发完成后在预发布验证；</li>
+<li>验证通过，<code>hotfix-xxxx</code> 合并到 <code>master</code>；</li>
+<li><code>master</code> 打 tag，上线验证；</li>
+<li>上线通过后，<code>hotfix-xxxx</code> 合并到 <code>sp-dev</code>；</li>
+<li>删除 <code>hotfix-xxxx</code>。</li>
+</ol>
+<h2 id="命名规则"><a href="#命名规则" class="headerlink" title="命名规则"></a>命名规则</h2><p>feature-xxxx：</p>
+<ol>
+<li>单个大需求，以 “主责人-jira 编号”命名，例如：<code>feature-superman-8888</code>；</li>
+<li>多个小需求，以“主责人-当前时间”命名，例如：<code>feature-superman-20180808</code>；</li>
+<li>跨迭代需求，以“主责人-专项代号”命名，例如：<code>feature-superman-bankdeduction</code>。</li>
+</ol>
+<p>hotfix-xxxx：</p>
+<ol>
+<li>小 bug，“主责人-时间”，例如：<code>hotfix-superman-20180808</code>；</li>
+<li>大 bug，“主责人-模块”，例如：<code>hotfix-superman-bankdeduction</code>。</li>
+</ol>
+<p>release-xxxx：</p>
+<ol>
+<li>“时间+版本”，例如：<code>release-20180808-01</code>。</li>
+</ol>
+<p><strong>备注：</strong>命名规则加上“主责人”，方便上线后各自清理分支。</p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://blog.liz-x.com/2019/01/13/PHPStorm-PSR-2-使用指南/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
@@ -921,7 +1139,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">23</span>
+                    <span class="site-state-item-count">24</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -954,7 +1172,11 @@
                     
                       
                     
-                    <span class="site-state-item-count">8</span>
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">10</span>
                     <span class="site-state-item-name">分类</span>
                   </a>
                 </div>

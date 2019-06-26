@@ -348,6 +348,243 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://blog.liz-x.com/2019/06/26/gdb-调试-core-dump/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="liz">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://ws4.sinaimg.cn/large/006tNc79ly1fzc1i18qexj30wz0u0gr3.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="不负">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/06/26/gdb-调试-core-dump/" class="post-title-link" itemprop="url">gdb 调试 core dump</a>
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-06-26 20:15:41" itemprop="dateCreated datePublished" datetime="2019-06-26T20:15:41+08:00">2019-06-26</time>
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/工具/" itemprop="url" rel="index"><span itemprop="name">工具</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/工具/Linux/" itemprop="url" rel="index"><span itemprop="name">Linux</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/工具/Linux/PHP/" itemprop="url" rel="index"><span itemprop="name">PHP</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="何为-core-dump"><a href="#何为-core-dump" class="headerlink" title="何为 core dump"></a>何为 core dump</h2><p><strong>core dump</strong> 中文翻译为“核心转储”，它是进程运行时突然崩溃的那一刻的内存快照。</p>
+<blockquote>
+<p>操作系统在程序发生异常而异常在进程内部又没有被捕获的情况下，会把进程此刻内存、寄存器状态、运行堆栈等信息转储保存在一个文件里，可使用 gdb 工具来分析。</p>
+<p>core dump 生产环境一般处于禁用状态，对于内存消耗性的进程，core dump 时会占用很多系统资源，磁盘空间也可能被写满。</p>
+</blockquote>
+<p>查看核心转储文件大小的最大值：<code>ulimit -c</code>，如果是 0，则表示禁止核心转储。</p>
+<h2 id="开启-core-dump"><a href="#开启-core-dump" class="headerlink" title="开启 core dump"></a>开启 core dump</h2><h4 id="临时开启"><a href="#临时开启" class="headerlink" title="临时开启"></a>临时开启</h4><ul>
+<li><strong>开启 core dump</strong>：<ul>
+<li><code>ulimit -c 1024</code>（限制文件大小为 1024k）</li>
+<li><code>ulimit -c unlimited</code>（不限制文件大小）</li>
+</ul>
+</li>
+<li><strong>关闭 core dump</strong>：<code>ulimit -c 0</code></li>
+</ul>
+<h4 id="自动开启"><a href="#自动开启" class="headerlink" title="自动开启"></a>自动开启</h4><ol>
+<li>打开 <code>/etc/profile</code>，尾部追加 <code>ulimit -S -c unlimited &gt; /dev/null 2&gt;&amp;1</code>；</li>
+<li>执行 <code>source /etc/profile</code> 使配置生效；</li>
+<li>通过 <code>ulimit -c</code> 查看下是否已经打开。</li>
+</ol>
+<p><strong>备注：</strong>由于核心转储文件比较大，因此建议不要限制 core 文件的大小，当调试完毕之后关闭 core dump 即可。</p>
+<p>打开 core 后，如果进程发生 crash，默认情况下，会在应用所在位置，产生一个【core.pid】文件。</p>
+<p>查看正在使用的 core 文件路径和格式 <code>more /proc/sys/kernel/core_pattern</code>，后面自动添加 pid 的配置是在 <code>more /proc/sys/kernel/core_uses_pid</code> 里面配置的，如果为 1 就是自动添加。</p>
+<p><strong>修改 core 文件的保存路径和文件名格式：</strong></p>
+<p>修改 /etc/sysctl.conf 文件，添加需要保存的路径 <code>kernel.core_pattern = /tmp/corefile/core.%e.%t</code>（要有写的权限），再执行命令 <code>sysctl -p</code> 即可生效。</p>
+<p>core 文件支持的格式列表：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">%</span>p – insert pid into filename</span><br><span class="line"><span class="meta">%</span>u – insert current uid into filename</span><br><span class="line"><span class="meta">%</span>g – insert current gid into filename</span><br><span class="line"><span class="meta">%</span>s – insert signal that caused the coredump into the filename</span><br><span class="line"><span class="meta">%</span>t – insert UNIX time that the coredump occurred into filename</span><br><span class="line"><span class="meta">%</span>h – insert hostname where the coredump happened into filename</span><br><span class="line"><span class="meta">%</span>e – insert coredumping executable name into filename</span><br></pre></td></tr></table></figure>
+<p>以 PHP 为例，开启 core dump 一段时间的运行之后，调试生成的 core 文件：</p>
+<blockquote>
+<p>进入存放 core 文件的目录，假设 php 安装在 /usr/local/php/ 下面，core 文件为 core.666：</p>
+<p>gdb /usr/local/php/bin/php -c core.666</p>
+</blockquote>
+<h2 id="调试-core-dump"><a href="#调试-core-dump" class="headerlink" title="调试 core dump"></a>调试 core dump</h2><p>gdb 的 3 种使用方式：</p>
+<ul>
+<li>跟踪正在运行的 PHP 程序，使用 gdb -p 进程 ID</li>
+<li>使用 gdb 运行并调试 PHP 程序，使用 <code>gdb php -&gt; run server.php</code> 进行调试</li>
+<li>PHP 程序发生 core dump 后使用 gdb 加载 core 内存镜像进行调试 <code>gdb php corefile</code></li>
+</ul>
+<p>执行 gdb 后，进程会变成 T 的状态，表示正在 Trace，这个是独占的，所以不能再使用 strace/gdb 或者其他 ptrace 工具对此进程进行调试。另外此进程会中断执行，gdb 输入 c 后，程序继续向下运行，按下 ctrl + c 则会中断程序，通过 bt 命令查看进程的调用栈。</p>
+<h3 id="常用指令"><a href="#常用指令" class="headerlink" title="常用指令"></a>常用指令</h3><ul>
+<li><code>p</code>：print，打印 C 变量的值</li>
+<li><code>c</code>：continue，继续运行被中止的程序</li>
+<li><code>b</code>：breakpoint，设置断点，可以按照函数名设置，如 <code>b zif_php_function</code>，也可以按照源代码的行数指定断点，如 <code>b src/networker/Server.c:1000</code></li>
+<li><code>t</code>：thread，切换线程，如果进程拥有多个线程，可以使用 t 指令，切换到不同的线程</li>
+<li><code>ctrl + c</code>：中断当前正在运行的程序，和 c 指令配合使用</li>
+<li><code>n</code>：next，执行下一行，单步调试</li>
+<li><code>info threads</code>：查看运行的所有线程</li>
+<li><code>l</code>：list，查看源码，可以使用 <code>l 函数名</code> 或者  <code>l 行号</code></li>
+<li><code>bt</code>：backtrace，查看运行时的函数调用栈</li>
+<li><code>finish</code>：完成当前函数</li>
+<li><code>f</code>：frame，与 bt 配合使用，可以切换到函数调用栈的某一层</li>
+<li><code>r</code>：run，运行程序</li>
+</ul>
+<h2 id="zbacktrace"><a href="#zbacktrace" class="headerlink" title="zbacktrace"></a>zbacktrace</h2><p>zbacktrace 是 PHP 源码包提供的一个 gdb 自定义指令，功能与 bt 指令类似，与 bt 不同的是 zbacktrace 看到的调用栈是 PHP 函数调用栈，而不是 C 函数。</p>
+<p>下载 php-src，解压后从根目录中找到一个 <code>.gdbinit</code> 文件，在 gdb shell 中输入</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">source .gdbinit</span><br><span class="line">zbacktrace</span><br></pre></td></tr></table></figure>
+<p>.gdbinit 还提供了其他更多指令，可以查看源码了解详细的信息。</p>
+<h3 id="使用-gdb-zbacktrace-跟踪死循环问题"><a href="#使用-gdb-zbacktrace-跟踪死循环问题" class="headerlink" title="使用 gdb + zbacktrace 跟踪死循环问题"></a>使用 gdb + zbacktrace 跟踪死循环问题</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gdb -p 进程ID</span><br></pre></td></tr></table></figure>
+<ul>
+<li>使用 <code>ps aux</code> 工具找出需要调试的进程 ID</li>
+<li><code>gdb -p</code> 跟踪指定的进程</li>
+<li>反复调用 <code>ctrl + c</code> 、<code>zbacktrace</code>、<code>c</code> 查看程序在哪段 PHP 代码发生异常</li>
+<li>找到对应的 PHP 代码进行解决</li>
+</ul>
+<p><strong>参考：</strong></p>
+<p><a href="http://imhuchao.com/1018.html" target="_blank" rel="noopener">http://imhuchao.com/1018.html</a></p>
+<p><a href="https://wiki.swoole.com/wiki/page/442.html" target="_blank" rel="noopener">https://wiki.swoole.com/wiki/page/442.html</a></p>
+<p><a href="https://www.cnblogs.com/paul8339/p/8967689.html" target="_blank" rel="noopener">https://www.cnblogs.com/paul8339/p/8967689.html</a></p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://blog.liz-x.com/2019/05/23/Yii2-表单验证-Rules/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
@@ -977,7 +1214,7 @@
         
           
             <p><strong>包括分支、标签、日志</strong></p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span> 克隆仓库镜像(--mirror 裸版本库)</span><br><span class="line">git clone --mirror https://github.com/xxx/oldProject.git</span><br><span class="line">cd oldProject.git</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span> 设置 origin</span><br><span class="line">git remote set-url origin https://github.com/xxx/newProject.git</span><br><span class="line"><span class="meta">#</span> 推送镜像</span><br><span class="line">git push –-mirror</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">cd /tmp</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 克隆仓库镜像(--mirror 裸版本库)</span></span><br><span class="line">git clone --mirror https://github.com/xxx/oldProject.git</span><br><span class="line">cd oldProject.git</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 设置 origin</span></span><br><span class="line">git remote set-url origin https://github.com/xxx/newProject.git</span><br><span class="line"><span class="meta">#</span><span class="bash"> 推送镜像</span></span><br><span class="line">git push --mirror</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 修改原仓库远程地址</span></span><br><span class="line">cd /www/oldProject</span><br><span class="line">git remote set-url origin https://github.com/xxx/newProject.git</span><br><span class="line">git fetch origin</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 更新项目名（如有改动）</span></span><br><span class="line">cd ..</span><br><span class="line">mv oldProject newProject</span><br></pre></td></tr></table></figure>
 <h3 id="裸版本库"><a href="#裸版本库" class="headerlink" title="裸版本库"></a>裸版本库</h3><p>—— 不包含工作区</p>
 <ol>
 <li>git clone –bare <url></url></li>
@@ -2052,208 +2289,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://blog.liz-x.com/2019/02/23/编程修养/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="liz">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="https://ws4.sinaimg.cn/large/006tNc79ly1fzc1i18qexj30wz0u0gr3.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="不负">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2019/02/23/编程修养/" class="post-title-link" itemprop="url">编程修养</a>
-              
-            
-          </h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2019-02-23 11:02:11" itemprop="dateCreated datePublished" datetime="2019-02-23T11:02:11+08:00">2019-02-23</time>
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/编程/" itemprop="url" rel="index"><span itemprop="name">编程</span></a></span>
-
-                
-                
-                  ，
-                
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/编程/规范/" itemprop="url" rel="index"><span itemprop="name">规范</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="开发禁忌"><a href="#开发禁忌" class="headerlink" title="开发禁忌"></a>开发禁忌</h2><ol>
-<li>禁止系统物理删除数据（可根据规范定期清理历史无效数据）；</li>
-<li>禁止在控制器写业务逻辑；</li>
-<li>禁止在事务中调用接口；</li>
-<li>禁止嵌套事务，嵌套事务不易掌控；</li>
-<li>禁止提交本地日志、测试文件、测试数据到仓库；</li>
-<li>禁止硬编码，使用 .env 配置文件（如：接口地址、环境参数）；</li>
-<li>大表禁止删除字段 —— 避免索引重建，通过备注说明字段“已失效”；</li>
-<li>大表禁止更新字段名称、类型、减少长度 —— 避免索引重建；</li>
-<li>项目内文件存储，非 OSS 存储对象，只存相对路径。</li>
-</ol>
-<h2 id="安全准测"><a href="#安全准测" class="headerlink" title="安全准测"></a>安全准测</h2><ol>
-<li>服务启用 SSL，敏感信息必须使用 POST 请求；</li>
-<li>接口一律使用 Oauth2 鉴权；</li>
-<li>必须使用 PDO 库执行 SQL（避免 SQL 注入）；</li>
-<li>前端安全防范：XSS、CSRF；</li>
-<li>文件上传必须校验格式并且重命名，文件目录关闭执行权限；</li>
-<li>日志文件敏感数据过滤（登陆密码、交易密码、银行卡号、身份证号等）；</li>
-<li>敏感数据操作必须记录日志。</li>
-</ol>
-<h2 id="编码规范"><a href="#编码规范" class="headerlink" title="编码规范"></a>编码规范</h2><ol>
-<li>业务配置流水化，历史数据关联配置快照；</li>
-<li>涉及文件上传（如：图片、附件），使用 OSS 服务；</li>
-<li>前端防止重复点击，接口防止重复提交；</li>
-<li>并发控制使用 Redis 原子锁；</li>
-<li>记录所有调用第三方接口的请求日志；</li>
-<li>导入数据上传的文件需备份且记录关联的操作（可定期归档）；</li>
-<li>回调接口、消费端处理必须保证幂等性。</li>
-</ol>
-<h2 id="数据操作"><a href="#数据操作" class="headerlink" title="数据操作"></a>数据操作</h2><ol>
-<li>SQL 查询、删改条件必须使用索引；</li>
-<li>数据导入导出异步处理；</li>
-<li>尽量不做联表查询，杜绝两个业务领域的联表查询；</li>
-<li>迭代 SQL 发布，支持提前执行（增量、幂等）。</li>
-</ol>
-<h2 id="心中秩序"><a href="#心中秩序" class="headerlink" title="心中秩序"></a>心中秩序</h2><ol>
-<li>注释、注释、注释，一定要写注释；</li>
-<li>修改被人引用的代码、别人写的代码，通知相关人并加入注释。</li>
-</ol>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2302,7 +2337,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">23</span>
+                    <span class="site-state-item-count">24</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -2335,7 +2370,11 @@
                     
                       
                     
-                    <span class="site-state-item-count">8</span>
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">10</span>
                     <span class="site-state-item-name">分类</span>
                   </a>
                 </div>
