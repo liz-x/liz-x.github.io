@@ -1,3 +1,4 @@
 {#
 Custom head.
 #}
+<meta name="referrer" content="no-referrer" />
