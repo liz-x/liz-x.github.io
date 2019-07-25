@@ -96,14 +96,14 @@
 
 
   <meta name="description" content="何为 core dumpcore dump 中文翻译为“核心转储”，它是进程运行时突然崩溃的那一刻的内存快照。  操作系统在程序发生异常而异常在进程内部又没有被捕获的情况下，会把进程此刻内存、寄存器状态、运行堆栈等信息转储保存在一个文件里，可使用 gdb 工具来分析。 core dump 生产环境一般处于禁用状态，对于内存消耗性的进程，core dump 时会占用很多系统资源，磁盘空间也可能被写满">
-<meta name="keywords" content="PHP,Linux">
+<meta name="keywords" content="Linux,PHP">
 <meta property="og:type" content="article">
 <meta property="og:title" content="gdb 调试 core dump">
 <meta property="og:url" content="https://blog.liz-x.com/2019/06/26/gdb-调试-core-dump/index.html">
 <meta property="og:site_name" content="不负">
 <meta property="og:description" content="何为 core dumpcore dump 中文翻译为“核心转储”，它是进程运行时突然崩溃的那一刻的内存快照。  操作系统在程序发生异常而异常在进程内部又没有被捕获的情况下，会把进程此刻内存、寄存器状态、运行堆栈等信息转储保存在一个文件里，可使用 gdb 工具来分析。 core dump 生产环境一般处于禁用状态，对于内存消耗性的进程，core dump 时会占用很多系统资源，磁盘空间也可能被写满">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-06-26T12:22:39.414Z">
+<meta property="og:updated_time" content="2019-07-25T10:11:55.062Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="gdb 调试 core dump">
 <meta name="twitter:description" content="何为 core dumpcore dump 中文翻译为“核心转储”，它是进程运行时突然崩溃的那一刻的内存快照。  操作系统在程序发生异常而异常在进程内部又没有被捕获的情况下，会把进程此刻内存、寄存器状态、运行堆栈等信息转储保存在一个文件里，可使用 gdb 工具来分析。 core dump 生产环境一般处于禁用状态，对于内存消耗性的进程，core dump 时会占用很多系统资源，磁盘空间也可能被写满">
@@ -487,7 +487,7 @@
 <p><strong>修改 core 文件的保存路径和文件名格式：</strong></p>
 <p>修改 /etc/sysctl.conf 文件，添加需要保存的路径 <code>kernel.core_pattern = /tmp/corefile/core.%e.%t</code>（要有写的权限），再执行命令 <code>sysctl -p</code> 即可生效。</p>
 <p>core 文件支持的格式列表：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">%</span>p – insert pid into filename</span><br><span class="line"><span class="meta">%</span>u – insert current uid into filename</span><br><span class="line"><span class="meta">%</span>g – insert current gid into filename</span><br><span class="line"><span class="meta">%</span>s – insert signal that caused the coredump into the filename</span><br><span class="line"><span class="meta">%</span>t – insert UNIX time that the coredump occurred into filename</span><br><span class="line"><span class="meta">%</span>h – insert hostname where the coredump happened into filename</span><br><span class="line"><span class="meta">%</span>e – insert coredumping executable name into filename</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">%</span><span class="bash">p – insert pid into filename</span></span><br><span class="line"><span class="meta">%</span><span class="bash">u – insert current uid into filename</span></span><br><span class="line"><span class="meta">%</span><span class="bash">g – insert current gid into filename</span></span><br><span class="line"><span class="meta">%</span><span class="bash">s – insert signal that caused the coredump into the filename</span></span><br><span class="line"><span class="meta">%</span><span class="bash">t – insert UNIX time that the coredump occurred into filename</span></span><br><span class="line"><span class="meta">%</span><span class="bash">h – insert hostname <span class="built_in">where</span> the coredump happened into filename</span></span><br><span class="line"><span class="meta">%</span><span class="bash">e – insert coredumping executable name into filename</span></span><br></pre></td></tr></table></figure>
 <p>以 PHP 为例，开启 core dump 一段时间的运行之后，调试生成的 core 文件：</p>
 <blockquote>
 <p>进入存放 core 文件的目录，假设 php 安装在 /usr/local/php/ 下面，core 文件为 core.666：</p>
@@ -552,9 +552,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/PHP/" rel="tag"># PHP</a>
-          
             <a href="/tags/Linux/" rel="tag"># Linux</a>
+          
+            <a href="/tags/PHP/" rel="tag"># PHP</a>
           
         </div>
       
