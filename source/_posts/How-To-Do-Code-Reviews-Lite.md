@@ -26,19 +26,19 @@ Completing the following points:
 
 ## Principles 
 
-- Does reviewer understand what the code does easily
-- Does the code follow coding standards
+- Does reviewer understand what the code does easily?
+- Does the code follow our coding standards?
 - Review fewer than 30 minutes
 - Check no more than 400 lines at a time
-- Make sure the code is correct, security, simple and readable (not your way of doing it)
+- Make sure the code is correct, security, simple and readable (Not your way of doing it)
 - Give feedback that helps face to face (No hurts or personal preference)
 
-Note: There’s no such thing as perfect code
+Note: There's no such thing as perfect code
 
 ## Checklist
 
-- Development Coding Standards
-- Code Design Patterns
+- Coding Standards
+- Design Patterns
 - Architectural Design
     - Reliability
     - Maintainability
