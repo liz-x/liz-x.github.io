@@ -9,6 +9,3 @@ master：发布网站（修改 _config.yml 中的 deploy 参数）
     - hexo g -d 文件生成后立即部署网站
 4. hexo d 部署到网站（deploy）
 5. hexo clean 清除缓存文件 (db.json) 和已生成的静态文件 (public)
-
-## 参考
-https://www.jianshu.com/p/21c94eb7bcd1
