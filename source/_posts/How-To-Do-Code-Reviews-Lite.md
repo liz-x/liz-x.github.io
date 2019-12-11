@@ -25,17 +25,18 @@ Note: Lookers-on see more than players
 Ready to merge and complete the following points:
 
 - Self-Review
-- Code Linting / Formatting (IDE)
-- SonarQube Scan
-- Automated Testing
+- Code [Linting](https://en.wikipedia.org/wiki/Lint_(software)) / Formatting (IDE)
+- [SonarQube](https://www.sonarqube.org) Scan 
+- [Automated Testing](https://en.wikipedia.org/wiki/Test_automation) 
 
 ## Principles 
 
-- Does reviewer understand what the code does easily?
+- Does the reviewer understand what the code does easily?
 - Does the code follow our coding standards?
-- Review fewer than 30 minutes
-- Check no more than 400 lines at a time
+- Time is recommended to be less than 30 minutes and no more than 60 minutes (Review in batches)
+- Check is recommended to be less than 400 lines and no more than 1000 lines (Review in batches)
 - Make sure the code is correct, security, simple and readable (Not your way of doing it)
+- Do not discuss requirements in Review
 - Give feedback that helps face to face (No hurts or personal preference)
 
 Note: There's no such thing as perfect code
@@ -58,7 +59,7 @@ Note: There's no such thing as perfect code
 
 # 中文版
 
-**—— 将 Code Review 培养成文化，而非设立制度。**
+**—— Code Review 是一种文化，而非制度。**
 
 ## 目标
 
@@ -73,18 +74,19 @@ Note: There's no such thing as perfect code
 代码待合并且完成以下步骤：
 
 - 代码自检 / 项目自测
-- 代码分析与格式化（IDE）
-- Sonar 扫描
-- 自动化测试
+- [Linter ](https://www.zhihu.com/question/28421865)检查与代码格式化（IDE） 
+- [Sonar](https://www.sonarqube.org) 扫描 
+- [自动化测试](https://www.w3cschool.cn/position/pdk20m.html) 
 
 ## 原则
 
 - 代码逻辑是否简单明了？
 - 代码是否符合公司规范？
-- Review 时间建议少于 30 分
-- 单次查阅建议少于 400 行
+- 单次 Review 时间建议少于 30 分，不超过 60 分（可分批 Review）
+- 单次查阅建议少于 400 行，不超过 1000 行（可分批 Review）
 - 确保代码逻辑正确，安全可靠、可读性强（而非个人偏好）
-- 面对面给予正向反馈（文明用语，尊重彼此，保持互相学习的心态）
+- 不要在 Review 中讨论需求（Review 是 Review，Planning 是 Planning）
+- 面对面给予正向反馈（**对事不对人**，文明用语，尊重彼此，保持互相学习的心态）
 
 注：没有完美的代码，不要纠结。
 

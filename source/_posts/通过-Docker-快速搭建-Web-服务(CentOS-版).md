@@ -7,7 +7,7 @@ tags:
     - Docker
 ---
 
-[git 仓库](https://github.com/liz-x/docker-server)
+[git 仓库](https://github.com/liz-x/docker-lnmp-server)
 
 ## 文件说明
 
@@ -64,7 +64,7 @@ dockerfile/php72/Dockerfile
 cd /
 
 # 拉取项目
-git clone https://github.com/liz-x/docker-server.git websvr
+git clone https://github.com/liz-x/docker-lnmp-server.git websvr
 cd websvr
 
 # 删除 git 信息
