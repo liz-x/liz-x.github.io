@@ -9,15 +9,25 @@ tags:
 ## 基础概念
 
 Broker - 消息队列服务器的实体
+
 Connection - 建立一个 TCP 连接
+
 Channel - 虚拟连接，消息通道，数据流动都是在Channel中进行的，每个 Channel 代表一个会话
+
 Exchange - 接收消息，转发消息到绑定的队列上，指定消息按什么规则，路由到哪个队列
+
 Queue - 消息队列载体，用来存储消息，有自己的 erlang 进程
+
 Binding - 绑定，它的作用就是把 Exchange 和 Queue 按照路由规则绑定起来
+
 Routing Key - 路由关键字，Exchange 根据这个关键字进行消息投递
+
 Vhost - 虚拟主机，一个broker里可以开设多个vhost，用作不同用户的权限分离
+
 Producter - 消息生产者，产生消息的程序
+
 Consumer - 消息消费者，接收消息的程序
+
 Prefetch  Count - 限制 Queue 每次发送给每个消费者的消息数（待消费处理完再重新发送）
 
 MessageQueue - 队列声明
@@ -115,5 +125,5 @@ Consumers：消费者的总数
 
 ### Overview -> Nodes
 
-启动一个broker都会产生一个node
+启动一个 broker 都会产生一个 node
 
