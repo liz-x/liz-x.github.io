@@ -1,5 +1,5 @@
 ---
-title: Restful API 规范
+title: API 规范
 date: 2019-01-27 19:20:50
 categories:
     - 编程
@@ -53,40 +53,42 @@ RESTful API 中的 url 是指向资源的，而不是描述行为的，因此设
 
 ## API URL 示例
 
+api/名词/
+
 api/名词/动词/
+
 api/名词/名词-动词/
 
 ```html
-/api/wordbook/list // 词库列表
-/api/wordbook/get // 词库获取
-
-/api/wordbook/keywords-list // 词库关键字列表
-/api/wordbook/keywords-update // 词库关键字更新
+/api/book
+/api/book/list
+/api/book/get
+/api/book/title-update
 ```
 
 ## API 动词示例
 
 参考阿里开放平台 api 接口文档
 
-```
-create     // 数据添加（创建）
-delete     // 数据删除
-update     // 数据更新
-get        // 数据信息
-list       // 数据列表
-count      // 数据统计
+```javascript
+create     // 添加
+delete     // 删除
+update     // 更新
+get        // 获取
+list       // 列表
+count      // 统计
 batch      // 批量
 
-search     // 数据搜索
-query      // 数据查询
+search     // 搜索
+query      // 查询
 
 apply      // 申请
 confirm    // 确认
 check      // 检查
 verify     // 验证
-change     // 数据更改（某个字段更改或转换）
+change     // 更改
 
-fetch      // 获取（拉数据）
+fetch      // 拉取
 push       // 推送
 send       // 发送
 notify     // 通知
@@ -99,13 +101,10 @@ open       // 开启
 close      // 关闭
 cancel     // 取消
 
-status     // 状态
-done       // 结束
-success    // 成功
 
-log        // 日志
-history    // 历史
-upload     // 文件上传
+done       // 结束
+
+upload     // 上传
 
 accept     // 同意
 reply      // 回复
