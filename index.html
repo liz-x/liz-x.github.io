@@ -349,6 +349,1152 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://blog.liz-x.com/2019/12/13/NodeClub-镜像/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="liz">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://ws4.sinaimg.cn/large/006tNc79ly1fzc1i18qexj30wz0u0gr3.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="不负">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/12/13/NodeClub-镜像/" class="post-title-link" itemprop="url">NodeClub 镜像</a>
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-12-13 23:20:31" itemprop="dateCreated datePublished" datetime="2019-12-13T23:20:31+08:00">2019-12-13</time>
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/工具/" itemprop="url" rel="index"><span itemprop="name">工具</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="DOCKER-NODECLUB"><a href="#DOCKER-NODECLUB" class="headerlink" title="DOCKER-NODECLUB"></a>DOCKER-NODECLUB</h1><p><a href="https://github.com/liz-x/docker-nodeclub.git" target="_blank" rel="noopener">Git Link</a></p>
+<h2 id="说明1"><a href="#说明1" class="headerlink" title="说明1"></a>说明1</h2><p><strong>docker-install.sh</strong></p>
+<ul>
+<li>安装 Docker</li>
+<li>安装 Docker-Compose</li>
+</ul>
+<p><strong>nodeclub-install.sh</strong></p>
+<ul>
+<li>生成 NodeClub 镜像</li>
+</ul>
+<p><strong>目录</strong></p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">conf                <span class="comment"># 配置</span></span><br><span class="line">re-nodeclub         <span class="comment"># 重写（个性化目录）</span></span><br><span class="line">data                <span class="comment"># 数据</span></span><br><span class="line">file                <span class="comment"># 文件</span></span><br><span class="line"><span class="built_in">log</span>                 <span class="comment"># 日志</span></span><br><span class="line">script              <span class="comment"># 脚本</span></span><br></pre></td></tr></table></figure>
+<h2 id="搭建"><a href="#搭建" class="headerlink" title="搭建"></a>搭建</h2><h3 id="初始化"><a href="#初始化" class="headerlink" title="初始化"></a>初始化</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 拉取项目</span></span><br><span class="line">git <span class="built_in">clone</span> https://github.com/liz-x/docker-nodeclub.git nodeclub</span><br><span class="line"></span><br><span class="line"><span class="built_in">cd</span> nodeclub</span><br><span class="line"></span><br><span class="line"><span class="comment"># 安装 Docker（如未安装）</span></span><br><span class="line">sudo sh docker-install.sh.sh</span><br><span class="line"></span><br><span class="line"><span class="comment"># 生成 NodeClub 镜像</span></span><br><span class="line">sudo sh nodeclub-init.sh</span><br><span class="line"></span><br><span class="line"><span class="comment"># 启动</span></span><br><span class="line">docker-compose up -d</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看容器状态</span></span><br><span class="line">docker-compose ps</span><br></pre></td></tr></table></figure>
+<h2 id="Mongo-设置-（可选）"><a href="#Mongo-设置-（可选）" class="headerlink" title="Mongo 设置 （可选）"></a>Mongo 设置 （可选）</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 创建 admin 账号和数据库</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Step 1</span></span><br><span class="line">docker <span class="built_in">exec</span> -it mongo mongo admin</span><br><span class="line"><span class="comment"># Step 2</span></span><br><span class="line">db.createUser(&#123; user: <span class="string">'admin'</span>, <span class="built_in">pwd</span>: <span class="string">'123456'</span>, roles: [ &#123; role: <span class="string">'userAdminAnyDatabase'</span>, db: <span class="string">'admin'</span> &#125; ] &#125;); <span class="comment"># 创建账号</span></span><br><span class="line"><span class="built_in">exit</span> <span class="comment"># 退出</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 创建 nodeclub 账号和数据库</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Step 1</span></span><br><span class="line">docker <span class="built_in">exec</span> -it mongo mongo admin</span><br><span class="line"><span class="comment"># Step 2</span></span><br><span class="line">db.auth(<span class="string">'admin'</span>, <span class="string">'123456'</span>);</span><br><span class="line"><span class="comment"># Step 3</span></span><br><span class="line">use nodeclub <span class="comment"># 不存在会自动创建</span></span><br><span class="line">db.createUser(&#123; user: <span class="string">'nodeclub'</span>, <span class="built_in">pwd</span>: <span class="string">'123456'</span>, roles: [ &#123; role: <span class="string">'readWrite'</span>, db: <span class="string">'nodeclub'</span> &#125; ] &#125;); <span class="comment"># 创建账号</span></span><br></pre></td></tr></table></figure>
+<h3 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">db.grantRolesToUser( <span class="string">'userName'</span> , [ &#123; role: <span class="string">'&lt;role&gt;'</span>, db: <span class="string">'&lt;database&gt;'</span> &#125; ])             <span class="comment"># 授予角色</span></span><br><span class="line">db.grantRolesToUser( <span class="string">'userName'</span> , [ &#123; role: <span class="string">'&lt;role&gt;'</span>, db: <span class="string">'&lt;database&gt;'</span> &#125; ])             <span class="comment"># 取消角色</span></span><br><span class="line">db.system.users.remove(&#123;user:<span class="string">'userName'</span>&#125;)                                               <span class="comment"># 删除用户</span></span><br><span class="line">db.changeUserPassword(<span class="string">'userName'</span>, <span class="string">'new password'</span>)                                       <span class="comment"># 修改密码</span></span><br></pre></td></tr></table></figure>
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://blog.liz-x.com/2019/11/02/Scrum-小册子-什么是站会（Daily-Scrum）/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="liz">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://ws4.sinaimg.cn/large/006tNc79ly1fzc1i18qexj30wz0u0gr3.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="不负">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/11/02/Scrum-小册子-什么是站会（Daily-Scrum）/" class="post-title-link" itemprop="url">Scrum 小册子 - 什么是站会（Daily Scrum）</a>
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-11-02 13:00:21" itemprop="dateCreated datePublished" datetime="2019-11-02T13:00:21+08:00">2019-11-02</time>
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/Agile/" itemprop="url" rel="index"><span itemprop="name">Agile</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="说明13"><a href="#说明13" class="headerlink" title="说明13"></a>说明13</h2><p>站会是 Scrum 开发框架的组成部分，团队每天在固定的时间，固定的地点开会，促进团队沟通：</p>
+<ul>
+<li>互相了解彼此的工作进展，发现并共同解决阻碍 Sprint 的问题</li>
+<li>配合 <a href="https://zh.wikipedia.org/wiki/%E7%9C%8B%E6%9D%BF_(%E8%BD%AF%E4%BB%B6%E5%BC%80%E5%8F%91" target="_blank" rel="noopener">Kanban</a>)，清晰明了的检视 Sprint 的进度，确保按时交付</li>
+</ul>
+<p><strong>注：</strong>站会时长建议在 15 分钟内</p>
+<h2 id="价值"><a href="#价值" class="headerlink" title="价值"></a>价值</h2><p><strong>对团队：</strong></p>
+<ul>
+<li>信息共享</li>
+<li>进度可视</li>
+<li>风险管控</li>
+<li>群策群力</li>
+</ul>
+<p><strong>对个人：</strong></p>
+<ul>
+<li>个人工作的概括</li>
+<li>表达能力的锻炼</li>
+<li>仪式感（明确当日目标）</li>
+</ul>
+<p>PO 能清晰的了解整体的进度，QA 能快速的规划待测的清单，TL 能及时的发现迭代的问题。<br>Team 一起完成目标。</p>
+<h2 id="Demo"><a href="#Demo" class="headerlink" title="Demo"></a>Demo</h2><p><strong>步骤：</strong></p>
+<ol>
+<li>昨天完成的内容</li>
+<li>今天的安排与计划（时间评估）</li>
+<li>遇到了哪些障碍或困难（可选）</li>
+</ol>
+<p><strong>例子：</strong></p>
+<ol>
+<li>昨天完成会员活动的前端页面</li>
+<li>今天计划能完成 API 对接，明天可以 push 到测试环境</li>
+<li><p>障碍：<strong>刚刚</strong> Designer 说 UX 有改动，我需要多半天时间修改，会影响活动上线时间<strong>（问题同步 / 风险评估）</strong></p>
+<p><code>简单沟通：</code></p>
+<ul>
+<li>【PO】我大概会在上午 11 点与 Designer、Marketing、Operation 沟通清楚，然后再同步最新的规划</li>
+</ul>
+</li>
+<li><p>困难：大量数据分析引起性能问题，计划引用 Cache 来解决<strong>（抛出问题与解决方案）</strong></p>
+<p><code>群策群力：</code></p>
+<ul>
+<li>【A 君】我有集成过一个 Redis 类库，巴拉巴拉！！！</li>
+<li>【B 君】类似的问题我们用队列解决过，巴拉巴拉~~~</li>
+<li>【C 君】…</li>
+<li>【TL】Nice，细节大家会后继续讨论。</li>
+</ul>
+</li>
+</ol>
+<p><strong>注：</strong>为什么是“刚刚”，因为有问题，一定要及时沟通，不能等到站会才同步。</p>
+<p><strong>反例：</strong></p>
+<ol>
+<li>昨天完成一个页面</li>
+<li>今天准备做这个（贴上便利贴），额…添加一个上传功能。</li>
+<li>… … …（懵圈）</li>
+</ol>
+<h2 id="锻炼"><a href="#锻炼" class="headerlink" title="锻炼"></a>锻炼</h2><p>站会每人平均会讲一分钟，<strong>一分钟能感受到什么：</strong></p>
+<ul>
+<li>表达能力 <code>—— 描述是否清晰</code></li>
+<li>逻辑能力、分析能力 <code>—— 任务拆解</code></li>
+<li>解决问题的能力、风险意识 <code>—— 风险评估与备用方案</code></li>
+<li>主动性、领导力 <code>—— 帮助伙伴们解决问题</code></li>
+<li>产品思维、追求、专研 <code>—— 方案选择（是否有助于产品体验 / 是否引入新技术或新思想）</code></li>
+</ul>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>站会不仅是用于同步信息的方式，还是锻炼和展示个人综合能力的平台。心态不一样，收获也不一样。<br>敏捷是一种思想指导，Kanban 和 Scrum 只是实现思想的方案，根据团队的特性，找到适合的敏捷流程。</p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://blog.liz-x.com/2019/10/20/Scrum-小册子-故事点估算（Story-Points）/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="liz">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://ws4.sinaimg.cn/large/006tNc79ly1fzc1i18qexj30wz0u0gr3.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="不负">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/10/20/Scrum-小册子-故事点估算（Story-Points）/" class="post-title-link" itemprop="url">Scrum 小册子 - 故事点估算（Story Points）</a>
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-10-20 12:12:33" itemprop="dateCreated datePublished" datetime="2019-10-20T12:12:33+08:00">2019-10-20</time>
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/Agile/" itemprop="url" rel="index"><span itemprop="name">Agile</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="说明"><a href="#说明" class="headerlink" title="说明"></a>说明</h2><p>Story Points（故事点）是团队用来衡量 Story（故事）的<strong>业务复杂度</strong>、<strong>技术难度</strong>、<strong>协作成本</strong>，由团队共同评估，共同完成。</p>
+<p>分数值使用斐波那契数，即 1、2、3、5、8、13、21… Why，感受下选择：5 与 8，7 与 8，没感觉？试试 13 与 21，19 与 21。</p>
+<h2 id="对比"><a href="#对比" class="headerlink" title="对比"></a>对比</h2><p>传统的人天估算，由个人评估，是一个精确值，例如：2h，1d…</p>
+<blockquote>
+<p>实践证明，人类并不善于做精确的估算：</p>
+<ul>
+<li>1评估的人天往往与预期不符合（例如，估算：5d，实际：10d，每天的变化太多了）</li>
+<li>估算结果与评估者的能力、经验相关（例如，新人：2d，导师：1d）</li>
+</ul>
+</blockquote>
+<p>敏捷的 Story Points，由团队评估，是一个相对值，例如：3，5，8…<br>以苹果作为参照物，例如：苹果重量为 100g，能估算出西瓜的重量（精确值）么？那如果问西瓜的大小（相对值）是苹果的多少倍呢？</p>
+<blockquote>
+<p>Sprint 1，尝试 50 点，感觉游刃有余。<br>Sprint 2，挑战 70 点，觉得尚有余力。<br>Sprint 3，挑战 90 点，发现有点吃力。<br>Sprint 4，改为 80 点，不多不少，刚刚好。<br>Sprint 5，80 点。<br>……</p>
+<p>场景一：<br>Sprint 20，80 点，发现轻松（团队：能力的提升 / 业务的熟悉）<br>Sprint 21，挑战 90 点。</p>
+<p>场景二：<br>Sprint 20，80 点，发现困难（团队：人员调整 / 新增业务）<br>Sprint 21，改为 70 点。</p>
+<p>…….<br>Sprint xxx，xxx 点<br>Sprint xxx，xxx 点<br>Sprint xxx，xxx 点</p>
+</blockquote>
+<h2 id="条件"><a href="#条件" class="headerlink" title="条件"></a>条件</h2><ol>
+<li>估算法</li>
+<li>参照物</li>
+</ol>
+<h2 id="估算"><a href="#估算" class="headerlink" title="估算"></a><strong>估算</strong></h2><p>T恤尺码分类法（比数字更形象，<strong>入门推荐</strong>，快速评估）</p>
+<table>
+<thead>
+<tr>
+<th>XS</th>
+<th>S（参照物）</th>
+<th>M</th>
+<th>L</th>
+<th>XL</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1/2</td>
+<td>3</td>
+<td>5</td>
+<td>8</td>
+<td>13</td>
+</tr>
+</tbody>
+</table>
+<p>备注：超过 XL，需要拆解，不建议使用 XXL，该减肥了:）</p>
+<p>计划扑克法（<strong>进阶</strong>，适合 5 ~ 8 人的小团队，评估复杂业务）<br>使用带编号的扑克牌估算，估算时匿名出牌，如果出现较大分歧，展开讨论（各自说明原因），然后再次投票，直到团队对估计值达成共识，一般不超过 3 轮，同样，超过 13 都建议再拆分。</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/5486077-9f36177353074cb5.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image"> </p>
+<h2 id="参照物"><a href="#参照物" class="headerlink" title="参照物"></a>参照物</h2><p>举个栗子</p>
+<ul>
+<li>修改文本、链接、SEO、简单的 bug<strong>（XS 码）</strong></li>
+<li>复杂的查询页面<strong>（M 码）</strong><ul>
+<li>多条件查询</li>
+<li>跨表查询</li>
+<li>模糊查询</li>
+<li>全栈开发</li>
+</ul>
+</li>
+</ul>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://blog.liz-x.com/2019/09/21/Scrum-小册子-需求模板（User-Story-Template）/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="liz">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://ws4.sinaimg.cn/large/006tNc79ly1fzc1i18qexj30wz0u0gr3.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="不负">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/09/21/Scrum-小册子-需求模板（User-Story-Template）/" class="post-title-link" itemprop="url">Scrum 小册子 - 需求模板（User Story Template）</a>
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-09-21 18:20:08" itemprop="dateCreated datePublished" datetime="2019-09-21T18:20:08+08:00">2019-09-21</time>
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/Agile/" itemprop="url" rel="index"><span itemprop="name">Agile</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <ol>
+<li>需求说明<ul>
+<li>业务背景</li>
+<li>业务逻辑</li>
+<li>业务流程</li>
+</ul>
+</li>
+<li>验收标准<ul>
+<li><a href="https://baike.baidu.com/item/行为驱动开发" target="_blank" rel="noopener">行为驱动开发</a>：业务场景（GWT: 条件 / 行为 / 结果）<ul>
+<li><em>Given</em>：前提条件是 xxx</li>
+<li><em>When</em>：做了某件事</li>
+<li><em>Then</em>：预期的结果为 xxx</li>
+</ul>
+</li>
+<li>业务规则（检查清单）</li>
+</ul>
+</li>
+<li>原型图（Axure RP / Mockplus）/ 高保真模型（UI / UX）</li>
+<li>选择：史诗、分类、优先级、标签、关联</li>
+</ol>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://blog.liz-x.com/2019/09/18/Scrum 小册子 - 如何做代码审查（Code Review - Lite）/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="liz">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://ws4.sinaimg.cn/large/006tNc79ly1fzc1i18qexj30wz0u0gr3.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="不负">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/09/18/Scrum 小册子 - 如何做代码审查（Code Review - Lite）/" class="post-title-link" itemprop="url">Scrum 小册子 - 如何做代码审查（Code Review - Lite）</a>
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-09-18 16:26:56" itemprop="dateCreated datePublished" datetime="2019-09-18T16:26:56+08:00">2019-09-18</time>
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/Agile/" itemprop="url" rel="index"><span itemprop="name">Agile</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/Agile/编程/" itemprop="url" rel="index"><span itemprop="name">编程</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p><strong>—— 将 Code Review 培养成文化，而非设立制度。</strong></p>
+<h2 id="目标"><a href="#目标" class="headerlink" title="目标"></a>目标</h2><ul>
+<li>提高代码质量和可读性</li>
+<li>共享知识与编程技巧</li>
+<li>给予有意义的反馈帮助小伙伴们成长</li>
+</ul>
+<p>注：因为“旁观者清，当局者迷”，所以需要伙伴的帮助来发现个人的不足。</p>
+<h2 id="时机"><a href="#时机" class="headerlink" title="时机"></a>时机</h2><p>代码待合并且完成以下步骤：</p>
+<ul>
+<li>代码自检 / 项目自测</li>
+<li><a href="https://www.zhihu.com/question/28421865" target="_blank" rel="noopener">Linter</a> 检查与代码格式化（IDE）</li>
+<li><a href="https://www.sonarqube.org" target="_blank" rel="noopener">Sonar</a> 扫描</li>
+<li><a href="https://www.w3cschool.cn/position/pdk20m.html" target="_blank" rel="noopener">自动化测试</a></li>
+</ul>
+<h2 id="原则"><a href="#原则" class="headerlink" title="原则"></a>原则</h2><ul>
+<li>代码逻辑是否简单明了？</li>
+<li>代码是否符合公司规范？</li>
+<li>单次 Review 时间建议少于 30 分，不超过 60 分（可分批 Review）</li>
+<li>单次查阅建议少于 400 行，不超过 1000 行</li>
+<li>确保代码逻辑正确，安全可靠、可读性强（而非个人偏好）</li>
+<li>不要在 Review 中讨论需求（Review 是 Review，Planning 是 Planning）</li>
+<li>面对面给予正向反馈（文明用语，尊重彼此，保持互相学习的心态）</li>
+</ul>
+<p>注：没有完美的代码，不要纠结。</p>
+<h2 id="清单"><a href="#清单" class="headerlink" title="清单"></a>清单</h2><ul>
+<li>代码规范</li>
+<li><a href="https://github.com/sohamkamani/javascript-design-patterns-for-humans" target="_blank" rel="noopener">设计模式</a> (JavaScript)</li>
+<li><a href="https://syndicode.com/2018/05/03/12-software-architecture-quality-attributes/" target="_blank" rel="noopener">质量属性</a><ul>
+<li>可靠性</li>
+<li>可维护性</li>
+<li>可扩展性</li>
+<li>可伸缩性</li>
+<li>可读性</li>
+<li>安全</li>
+<li>性能</li>
+<li>…</li>
+</ul>
+</li>
+</ul>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://blog.liz-x.com/2019/07/13/Blog-从零搭建涉及的技术点/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="liz">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://ws4.sinaimg.cn/large/006tNc79ly1fzc1i18qexj30wz0u0gr3.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="不负">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/07/13/Blog-从零搭建涉及的技术点/" class="post-title-link" itemprop="url">Blog 从零搭建涉及的技术点</a>
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-07-13 16:26:33" itemprop="dateCreated datePublished" datetime="2019-07-13T16:26:33+08:00">2019-07-13</time>
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/记录/" itemprop="url" rel="index"><span itemprop="name">记录</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>本站是基于 Hexo + Github，同时也通过 CI 同步到云服务器上，虽然只是一个小博客，但如果是自己一步步搭建，对 IT 初学者来说，不仅能学到蛮多的基础知识，还能锻炼动手能力。如果你的好奇心比较强，那会驱动你学得更多。</p>
+<h2 id="程序"><a href="#程序" class="headerlink" title="程序"></a>程序</h2><p>Node.js、Npm、Webpack（打包的原理、前端优化军规）</p>
+<h2 id="域名"><a href="#域名" class="headerlink" title="域名"></a>域名</h2><p>Domain、DNS、IP、HTTP/TCP、SSL（加解密原理、证书申请）、网络链路（ISP、IDC、节点、路由、交换机）</p>
+<h2 id="主机"><a href="#主机" class="headerlink" title="主机"></a>主机</h2><p>IDC、云计算（何为 IaaS、PaaS）、VPS、梯子、OpenSSH、Linux 基础语法</p>
+<h2 id="Web-Server"><a href="#Web-Server" class="headerlink" title="Web Server"></a>Web Server</h2><p>Docker、Nginx、正向/反向代理、负载均衡（DNS、LVS、Haproxy、Nginx）</p>
+<h2 id="部署"><a href="#部署" class="headerlink" title="部署"></a>部署</h2><ul>
+<li>GitHub：git、git-flow</li>
+<li>CI/CD：Travis CI/Jenkins、Pipeline</li>
+</ul>
+<h2 id="运营"><a href="#运营" class="headerlink" title="运营"></a>运营</h2><p>CDN、SEO（关键字、HTML + CSS、页面布局）、网站收录（百度+谷歌）</p>
+<h2 id="编写"><a href="#编写" class="headerlink" title="编写"></a>编写</h2><p>Markdown</p>
+<h2 id="延展"><a href="#延展" class="headerlink" title="延展"></a>延展</h2><p>集群、分布式、异步、队列等</p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://blog.liz-x.com/2019/06/26/gdb-调试-core-dump/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
@@ -818,7 +1964,7 @@
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/感悟/" itemprop="url" rel="index"><span itemprop="name">感悟</span></a></span>
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/记录/" itemprop="url" rel="index"><span itemprop="name">记录</span></a></span>
 
                 
                 
@@ -1099,1197 +2245,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://blog.liz-x.com/2019/04/19/Git-仓库完整迁移/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="liz">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="https://ws4.sinaimg.cn/large/006tNc79ly1fzc1i18qexj30wz0u0gr3.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="不负">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2019/04/19/Git-仓库完整迁移/" class="post-title-link" itemprop="url">Git 仓库完整迁移</a>
-              
-            
-          </h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2019-04-19 16:16:45" itemprop="dateCreated datePublished" datetime="2019-04-19T16:16:45+08:00">2019-04-19</time>
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/工具/" itemprop="url" rel="index"><span itemprop="name">工具</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p><strong>包括分支、标签、日志</strong></p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">cd /tmp</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 克隆仓库镜像(--mirror 裸版本库)</span></span><br><span class="line">git clone --mirror https://github.com/xxx/oldProject.git</span><br><span class="line">cd oldProject.git</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 设置 origin</span></span><br><span class="line">git remote set-url origin https://github.com/xxx/newProject.git</span><br><span class="line"><span class="meta">#</span><span class="bash"> 推送镜像</span></span><br><span class="line">git push --mirror</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 修改原仓库远程地址</span></span><br><span class="line">cd /www/oldProject</span><br><span class="line">git remote set-url origin https://github.com/xxx/newProject.git</span><br><span class="line">git fetch origin</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 更新项目名（如有改动）</span></span><br><span class="line">cd ..</span><br><span class="line">mv oldProject newProject</span><br></pre></td></tr></table></figure>
-<h3 id="裸版本库"><a href="#裸版本库" class="headerlink" title="裸版本库"></a>裸版本库</h3><p>—— 不包含工作区</p>
-<ol>
-<li>git clone –bare <url></url></li>
-<li>git clone –mirror  <url></url></li>
-</ol>
-<p>–mirror 可以在裸版本库中使用 git fetch 命令进行同步</p>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://blog.liz-x.com/2019/04/07/Travis-CI-构建/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="liz">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="https://ws4.sinaimg.cn/large/006tNc79ly1fzc1i18qexj30wz0u0gr3.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="不负">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2019/04/07/Travis-CI-构建/" class="post-title-link" itemprop="url">Travis CI 构建</a>
-              
-            
-          </h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2019-04-07 22:51:50" itemprop="dateCreated datePublished" datetime="2019-04-07T22:51:50+08:00">2019-04-07</time>
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/工具/" itemprop="url" rel="index"><span itemprop="name">工具</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="环境准备"><a href="#环境准备" class="headerlink" title="环境准备"></a>环境准备</h2><h3 id="GitHub-Token"><a href="#GitHub-Token" class="headerlink" title="GitHub Token"></a>GitHub Token</h3><p>登陆 <code>GitHub</code>–<code>Settings</code> 选项，找到 <code>Personal access tokens</code>页面：</p>
-<ol>
-<li><a href="https://github.com/settings/tokens" target="_blank" rel="noopener">https://github.com/settings/tokens</a></li>
-<li><a href="https://developer.github.com/apps/building-oauth-apps/understanding-scopes-for-oauth-apps/" target="_blank" rel="noopener">Oauth 权限说明</a></li>
-</ol>
-<p>Token 只显示一次，需要记录好，如果丢失只能重新生成。</p>
-<p><img src="https://ws3.sinaimg.cn/large/006tNc79gy1g02lydhjsjj31hm0u0jug.jpg" alt=""></p>
-<h3 id="Travis-CI-添加-Token"><a href="#Travis-CI-添加-Token" class="headerlink" title="Travis CI 添加 Token"></a>Travis CI 添加 Token</h3><p>添加 <code>Environment Variables</code>：<br>Name：变量名，建议与 GitHub 保持一致<br>Token：GitHub personal access token</p>
-<p><strong>不勾选</strong> <code>Display value in build log</code>，否则会在日志文件中暴露 <code>token</code> 信息，且日志文件是公开可见。</p>
-<p><img src="https://ws4.sinaimg.cn/large/006tNc79gy1g02lz55e9bj31y00eugmc.jpg" alt=""></p>
-<p><img src="https://ws2.sinaimg.cn/large/006tNc79gy1g02lyosx7zj31xo0g0aal.jpg" alt=""></p>
-<h3 id="Travis-SSH-Key"><a href="#Travis-SSH-Key" class="headerlink" title="Travis SSH Key"></a>Travis SSH Key</h3><p><strong>本地安装 Travis</strong></p>
-<p>先安装 <code>ruby</code>，<a href="./install-ruby.md">安装教程</a>。</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 安装 travis</span></span><br><span class="line">gem install travis</span><br><span class="line"></span><br><span class="line"><span class="comment"># travis 登录，使用 GitHub 用户名及密码</span></span><br><span class="line"><span class="comment"># --auto 自动登录</span></span><br><span class="line">travis login --auto</span><br></pre></td></tr></table></figure>
-<p><strong>生成 ssh key</strong></p>
-<ol>
-<li><p>生成 <code>travis</code>，<code>travis.pub</code></p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> ~/.ssh</span><br><span class="line">ssh-keygen -t rsa -C <span class="string">"travis"</span> -f travis</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>拷贝公钥 <code>travis.pub</code> 的内容到服务器 <code>/home/www-data/.ssh/authorized_keys</code>（使用非 root 账户）</p>
-</li>
-<li><p>通过 <code>travis</code> 加密私钥</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># -r：仓库</span></span><br><span class="line">travis encrypt-file /home/www-data/.ssh/travis -r username/repository</span><br><span class="line"></span><br><span class="line"><span class="comment"># 输出配置：openssl aes-256-cbc -K $encrypted_xxx_key -iv $encrypted_xxx_iv -in travis.enc -out ~\/.ssh/travis -d</span></span><br><span class="line"><span class="comment"># 去掉“\”，复制到 .travis.yml</span></span><br></pre></td></tr></table></figure>
-<p><strong>Travis</strong> <code>Environment Variables</code> 会生成两个参数：</p>
-<ul>
-<li>encrypted_xxx_key</li>
-<li>encrypted_xxx_iv</li>
-</ul>
-</li>
-<li><p>将 <code>travis.enc</code>，添加到 <code>master</code> 分支的根目录下</p>
-</li>
-</ol>
-<h2 id="travis-yml-配置"><a href="#travis-yml-配置" class="headerlink" title="travis.yml 配置"></a>travis.yml 配置</h2><p><a href="https://docs.travis-ci.com/" target="_blank" rel="noopener">官方文档</a></p>
-<p><code>master</code> 分支根目录下，创建 <strong>.travis.yml</strong>：</p>
-<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 说明</span></span><br><span class="line"><span class="comment"># $TRAVIS_BUILD_DIR：默认，Travis 的全局变量</span></span><br><span class="line"><span class="comment"># $DEPLOY_HOST：改成你的域名或 IP</span></span><br><span class="line"><span class="comment"># $DEPLOY_HOST：改成你的构建用户名，例如：www-data</span></span><br><span class="line"><span class="comment"># $DEPLOY_PATH：改成你的构建路径，例如：/websvr/www/blog</span></span><br><span class="line"><span class="comment"># $encrypted_xxx_key、$encrypted_xxx_iv：改成你 travis 的环境变量 key，例如：$encrypted_123_key、$encrypted_123_iv</span></span><br><span class="line"><span class="comment"># 示例：https://github.com/liz-x/liz-x.github.io/blob/master/.travis.yml</span></span><br><span class="line"></span><br><span class="line"><span class="attr">language:</span> <span class="string">node_js</span> <span class="comment"># 语言</span></span><br><span class="line"><span class="attr">node_js:</span> <span class="string">stable</span> <span class="comment"># node 版本</span></span><br><span class="line"><span class="attr">branches:</span></span><br><span class="line"><span class="attr">    only:</span></span><br><span class="line"><span class="bullet">        -</span> <span class="string">master</span> <span class="comment"># 监测 master 分支</span></span><br><span class="line"><span class="attr">install:</span></span><br><span class="line"><span class="bullet">    -</span> <span class="literal">true</span> <span class="comment"># 跳过 install 阶段</span></span><br><span class="line"><span class="attr">script:</span></span><br><span class="line"><span class="bullet">    -</span> <span class="literal">true</span> <span class="comment"># 跳过 script 阶段</span></span><br><span class="line"><span class="attr">before_deploy:</span></span><br><span class="line"><span class="bullet">    -</span> <span class="string">openssl</span> <span class="string">aes-256-cbc</span> <span class="bullet">-K</span> <span class="string">$encrypted_xxx_key</span> <span class="bullet">-iv</span> <span class="string">$encrypted_xxx_iv</span> <span class="bullet">-in</span> <span class="string">travis.enc</span> <span class="bullet">-out</span> <span class="string">~/.ssh/id_rsa</span> <span class="bullet">-d</span></span><br><span class="line"><span class="bullet">    -</span> <span class="string">chmod</span> <span class="number">600</span> <span class="string">~/.ssh/id_rsa</span></span><br><span class="line"><span class="attr">addons:</span></span><br><span class="line"><span class="attr">    ssh_known_hosts:</span> <span class="string">$DEPLOY_HOST</span></span><br><span class="line"><span class="attr">deploy:</span></span><br><span class="line"><span class="attr">    on:</span></span><br><span class="line"><span class="attr">        branch:</span> <span class="string">master</span></span><br><span class="line"><span class="attr">    provider:</span> <span class="string">script</span></span><br><span class="line"><span class="attr">    skip_cleanup:</span> <span class="literal">true</span></span><br><span class="line"><span class="attr">    script:</span> <span class="string">rsync</span> <span class="bullet">-r</span> <span class="bullet">--delete-after</span> <span class="bullet">--quiet</span> <span class="string">$TRAVIS_BUILD_DIR/*</span> <span class="string">$DEPLOY_USER@$DEPLOY_HOST:$DEPLOY_PATH</span></span><br></pre></td></tr></table></figure>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://blog.liz-x.com/2019/03/20/Mac-+-Vagrant-+-Docker---LNMP/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="liz">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="https://ws4.sinaimg.cn/large/006tNc79ly1fzc1i18qexj30wz0u0gr3.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="不负">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2019/03/20/Mac-+-Vagrant-+-Docker---LNMP/" class="post-title-link" itemprop="url">Mac + Vagrant + Docker - LNMP</a>
-              
-            
-          </h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2019-03-20 19:53:50" itemprop="dateCreated datePublished" datetime="2019-03-20T19:53:50+08:00">2019-03-20</time>
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/Mac/" itemprop="url" rel="index"><span itemprop="name">Mac</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h2><ol>
-<li>VirtualBox</li>
-<li>Vagrant</li>
-<li>CentOS 镜像</li>
-</ol>
-<p><a href="https://www.virtualbox.org/wiki/Downloads" target="_blank" rel="noopener">VirtualBox 下载地址</a></p>
-<p><img src="https://ws4.sinaimg.cn/large/006tKfTcgy1g17wq1rcvaj30jy04o0sm.jpg" alt=""></p>
-<p><a href="https://www.vagrantup.com/downloads.html" target="_blank" rel="noopener">Vagrant 下载地址</a></p>
-<p>安装完成后，终端输入：<code>vagrant -v</code></p>
-<p><img src="https://ws1.sinaimg.cn/large/006tKfTcgy1g17wstjxb2j30d404a0sk.jpg" alt=""></p>
-<p><a href="https://app.vagrantup.com/boxes/search" target="_blank" rel="noopener">官方镜像</a></p>
-<p><img src="https://ws2.sinaimg.cn/large/006tKfTcgy1g17y0nk47lj31kq0u0tjv.jpg" alt="image-20190319112851082"></p>
-<h2 id="Vagrant"><a href="#Vagrant" class="headerlink" title="Vagrant"></a>Vagrant</h2><h3 id="安装-CentOS"><a href="#安装-CentOS" class="headerlink" title="安装 CentOS"></a>安装 CentOS</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 新建 vagrant 目录</span></span><br><span class="line">mkdir ~/vagrant</span><br><span class="line">cd ~/vagrant</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 官方镜像：在线安装</span></span><br><span class="line">vagrant init centos/7</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 下载镜像：自定义镜像名、指定镜像路径(推荐)</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 官方：https://vagrantcloud.com/centos/boxes/7/versions/1902.01/providers/virtualbox.box</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> vagrant box add &lt;boxName&gt; &lt;boxFilePath&gt;</span></span><br><span class="line">vagrant box add centos7 ~/Downloads/centos-7.0-x86_64.box</span><br></pre></td></tr></table></figure>
-<p><strong>备注：</strong>目录下会生成配置文件 —— Vagrantfile</p>
-<h3 id="安装插件"><a href="#安装插件" class="headerlink" title="安装插件"></a>安装插件</h3><ol>
-<li>vagrant-hostmanage —— 用主机名访问（虚拟机之间访问、宿主机访问虚机）</li>
-<li>vagrant-vbguest —— 自定义共享目录（必须，解决异常：mount: unknown filesystem type ‘vboxsf’）</li>
-</ol>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">vagrant plugin install vagrant-hostmanage</span><br><span class="line">vagrant plugin install vagrant-vbguest</span><br></pre></td></tr></table></figure>
-<h3 id="自定义配置"><a href="#自定义配置" class="headerlink" title="自定义配置"></a>自定义配置</h3><p>修改 Vagrantfile(在 end 之前)</p>
-<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">config.vm.network</span> <span class="string">"private_network"</span><span class="string">,</span> <span class="attr">ip:</span> <span class="string">"192.168.33.10"</span>    <span class="comment"># 虚拟机 IP</span></span><br><span class="line"><span class="string">config.vm.synced_folder</span> <span class="string">"~/websvr"</span><span class="string">,</span> <span class="string">"/websvr"</span>               <span class="comment"># 共享目录</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 可选</span></span><br><span class="line"><span class="string">config.vm.provision</span> <span class="string">"shell"</span><span class="string">,</span> <span class="attr">path:</span> <span class="string">"bootstrap.sh"</span>           <span class="comment"># 启动时运行脚本</span></span><br></pre></td></tr></table></figure>
-<h3 id="Vagrantfile-参数说明"><a href="#Vagrantfile-参数说明" class="headerlink" title="Vagrantfile 参数说明"></a>Vagrantfile 参数说明</h3><p><strong>config.vm.define 多台主机</strong></p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">config.vm.define "node1" do |node1|</span><br><span class="line">end</span><br><span class="line">config.vm.define "node1" do |node2|</span><br><span class="line">end</span><br><span class="line">config.vm.define "node1" do |node3|</span><br><span class="line">end</span><br></pre></td></tr></table></figure>
-<p><strong>*.vm.network 虚拟机网络</strong></p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">nat             # 默认方式</span><br><span class="line">forwarded_port  # 端口转发</span><br><span class="line">private network # 私有网络（仅主机模式）</span><br><span class="line">public network  # 公有网络（桥接模式）</span><br><span class="line"></span><br><span class="line">config.vm.network "forwarded_port", guest: 80, host: 8080</span><br><span class="line">config.vm.network "private_network", ip: "192.168.33.10"</span><br><span class="line">config.vm.network "public_network"</span><br></pre></td></tr></table></figure>
-<p><strong>*.vm.hostname 定义虚机主机名</strong></p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">config.vm.define "node1" do |node1|</span><br><span class="line">    node1.vm.network "private_network", ip: "192.168.33.11"</span><br><span class="line">    node1.vm.network "public_network"</span><br><span class="line">    node1.vm.hostname = "node1"</span><br><span class="line">end</span><br></pre></td></tr></table></figure>
-<h3 id="访问-CentOS"><a href="#访问-CentOS" class="headerlink" title="访问 CentOS"></a>访问 CentOS</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 新建共享目录</span></span><br><span class="line">mkdir ~/websvr</span><br></pre></td></tr></table></figure>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">vagrant up      # 启动虚拟机(默认用户：vagrant)</span><br><span class="line">vagrant ssh     # 访问虚拟机</span><br></pre></td></tr></table></figure>
-<p>宿主机：ping 192.168.33.10</p>
-<p><strong>备注：</strong></p>
-<ol>
-<li>每次更改 Vagrantfile 后，需要重启虚拟机 <code>vagrant reload</code>。</li>
-<li><strong>提高安全性</strong>，root 账户建议通过密钥登录。</li>
-</ol>
-<p>如果出现一下报错：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Permission denied - /Users/xxx/.vagrant.d/data/machine-index/index (Errno::EACCES)</span><br></pre></td></tr></table></figure>
-<ol>
-<li>rm -rf ~/.vagrant.d</li>
-<li>启动：vagrant up</li>
-</ol>
-<h3 id="打包镜像"><a href="#打包镜像" class="headerlink" title="打包镜像"></a>打包镜像</h3><ol>
-<li>关闭虚拟机：<code>vagrant halt</code></li>
-<li><code>mkdir -p backup/centos7</code></li>
-<li>打包：<code>vagrant package --output backup/centos7/centos7.box --vagrantfile Vagrantfile</code></li>
-</ol>
-<h3 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">vagrant -v          # 查看版本</span><br><span class="line">vagrant status      # 查看状态</span><br><span class="line">vagrant up          # 启动虚拟机</span><br><span class="line">vagrant ssh         # 访问虚拟机</span><br><span class="line">vagrant reload      # 重启虚拟机</span><br><span class="line">vagrant suspend     # 挂起虚拟机（虚拟机内存都保存在硬盘上，启动可快速恢复）</span><br><span class="line">vagrant resume      # 恢复虚拟机(与挂起对应)</span><br><span class="line">vagrant halt        # 关闭虚拟机</span><br><span class="line">vagrant destroy     # 销毁虚拟机</span><br><span class="line">vagrant package     # 打包镜像（以后任何地方都能用）</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> box</span></span><br><span class="line">vagrant box list    # 镜像列表</span><br><span class="line">vagrant box add     # 添加镜像</span><br><span class="line">vagrant box remove  # 删除镜像</span><br></pre></td></tr></table></figure>
-<h2 id="Docker"><a href="#Docker" class="headerlink" title="Docker"></a>Docker</h2><h3 id="克隆-Docker-Compose"><a href="#克隆-Docker-Compose" class="headerlink" title="克隆 Docker Compose"></a>克隆 <a href="https://github.com/liz-x/docker-server" target="_blank" rel="noopener">Docker Compose</a></h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 宿主机</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 文件共享目录是 /Users</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 所以只能挂载 /User 的文件</span></span><br><span class="line">cd ~</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 拉取项目</span></span><br><span class="line">git clone https://github.com/liz-x/docker-server.git websvr</span><br><span class="line">cd websvr</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 删除 git 信息</span></span><br><span class="line">rm -rf .git*</span><br></pre></td></tr></table></figure>
-<h3 id="系统初始化"><a href="#系统初始化" class="headerlink" title="系统初始化"></a>系统初始化</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">cd ~/vagrant</span><br><span class="line">vagrant ssh</span><br><span class="line"></span><br><span class="line">cd /websvr/</span><br><span class="line">sh centos-vagrant-init.sh</span><br></pre></td></tr></table></figure>
-<p><strong>备注：</strong>vagrant 内 <code>chown -R www-data:www-data /websvr/</code> 无效</p>
-<ol>
-<li>退出虚拟机</li>
-<li><p>修改 Vagrantfile</p>
- <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">config.vm.synced_folder "~/websvr", "/websvr"       # 共享目录</span><br><span class="line">    owner: "www-data", group: "www-data"            # 指定目录的拥有者和拥有组</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>vagrant reload</p>
-</li>
-</ol>
-<h3 id="启动容器"><a href="#启动容器" class="headerlink" title="启动容器"></a>启动容器</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">cd ~/vagrant</span><br><span class="line">vagrant ssh</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> Demo 服务</span></span><br><span class="line">cd /websrv/compose/demo</span><br><span class="line">docker-compose up -d</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 查看容器状态</span></span><br><span class="line">docker-compose ps</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 测试</span></span><br><span class="line">[vagrant@localhost ~] curl 127.0.0.1</span><br><span class="line">Hello World.</span><br></pre></td></tr></table></figure>
-<p><strong>备注：</strong>根据工作所需，安装工具与服务，确认一切正常后，就可以打包镜像，共享给其他开发小伙伴啦！！！</p>
-<p>如果容器启动报错：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker: Error response from daemon: OCI runtime create failed: container_linux.go:344: starting container process caused "process_linux.go:297: getting the final child's pid from pipe caused \"read init-p: connection reset by peer\"": unknown.</span><br></pre></td></tr></table></figure>
-<p>原因：docker 版本过高，内核版本过低造成。<br>解决：降低 docker 版本或升级内核版本。</p>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://blog.liz-x.com/2019/03/18/绩效面谈模板/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="liz">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="https://ws4.sinaimg.cn/large/006tNc79ly1fzc1i18qexj30wz0u0gr3.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="不负">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2019/03/18/绩效面谈模板/" class="post-title-link" itemprop="url">绩效面谈模板</a>
-              
-            
-          </h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2019-03-18 15:28:18" itemprop="dateCreated datePublished" datetime="2019-03-18T15:28:18+08:00">2019-03-18</time>
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/管理/" itemprop="url" rel="index"><span itemprop="name">管理</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>最近在做团队绩效面谈，总结下具体流程，精简出一个模板。<br>本模板是根据个人工作经验与公司敏捷团队管理模式所提炼，谨供参考。</p>
-<p>面谈目的：回顾过去，展望未来。<br>面谈原则：极度求真，极度透明。</p>
-<h2 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h2><ol>
-<li><a href="https://www.jianshu.com/p/a614d8ec3536" target="_blank" rel="noopener">Coaching</a>：通过启发式提问，激发个人潜能；</li>
-<li>表扬：简单罗列个人去年关键成果，并针对具体的事项进行表扬（先认可对方）；</li>
-<li>改进：针对去年做得不足的地方（以事实说话），共同讨论如何改进（聆听为主，适当提供建议）；</li>
-<li>批评：可选，如果有严重不良的行为或错误的思想导向，必须指明；</li>
-<li>期望：根据过去的成果、个人发展潜力、组织未来的目标，表达新一年对个人成长的期望；</li>
-<li>总结：根据实际情况，总结讨论内容，同步绩效与调薪结果（要明确以成果为导向）；</li>
-<li>反馈：会后总结交流内容，补充规划、目标、寄语，发送面谈反馈邮件。</li>
-</ol>
-<p>备注：邮件会补充绩效说明与个人寄语，同步企业价值观。</p>
-<h2 id="模板"><a href="#模板" class="headerlink" title="模板"></a>模板</h2><blockquote>
-<p>面谈模板含：Coaching、表扬、改进、批评、期望、总结<br>邮件反馈模板含：表扬、改进、期望、小结、寄语</p>
-</blockquote>
-<h3 id="Coaching"><a href="#Coaching" class="headerlink" title="Coaching"></a>Coaching</h3><ol>
-<li>去年感觉自己有什么变化？（让个人意识自己有哪些成长）</li>
-<li>觉得自己有哪些做得好的地方？（表扬好的习惯并表示希望继续坚持）</li>
-<li>觉得自己有哪些不足？（发现个人盲区并思考如何改进）</li>
-<li>今年有什么计划？（树立个人目标）</li>
-<li>如何帮助身边的小伙伴成长？</li>
-<li>对团队或公司有什么建议？</li>
-</ol>
-<blockquote>
-<p>备注：不是逐个询问已知的问题就完事了，而是每个问题都有捕捉里面的细节，挖掘更深层次的子问题。</p>
-</blockquote>
-<h3 id="表扬"><a href="#表扬" class="headerlink" title="表扬"></a>表扬</h3><blockquote>
-<p>罗列具体的成果。<br>说明哪里做得好，为什么值得肯定，好的行为习惯希望继续保持。</p>
-</blockquote>
-<p>关键成果：</p>
-<ol>
-<li>xxx；</li>
-<li>xxx；</li>
-<li>……</li>
-</ol>
-<h3 id="改进"><a href="#改进" class="headerlink" title="改进"></a>改进</h3><blockquote>
-<p>罗列具体做得不足的地方。<br>说明问题的影响，共同讨论如何改进，聆听为主，适当提供建议，最后对改进方案达成共识。</p>
-</blockquote>
-<p>不足之处：</p>
-<ol>
-<li>xxx；</li>
-<li>xxx；</li>
-<li>……</li>
-</ol>
-<p>改进方案：</p>
-<ol>
-<li>xxx；</li>
-<li>xxx；</li>
-<li>……</li>
-</ol>
-<h3 id="批评"><a href="#批评" class="headerlink" title="批评"></a>批评</h3><blockquote>
-<p>可选，如果有严重不良的行为或错误的思想导向，必须指明。</p>
-</blockquote>
-<h3 id="期望"><a href="#期望" class="headerlink" title="期望"></a>期望</h3><blockquote>
-<p>根据过去的成果、个人发展潜力、组织未来的目标，表达新一年对个人成长的期望；</p>
-</blockquote>
-<ol>
-<li>完成 xxx 专项；</li>
-<li>提升 xxx 能力；</li>
-<li>……</li>
-</ol>
-<p>备注：<a href="https://en.wikipedia.org/wiki/Personal_development_planning" target="_blank" rel="noopener">PDP</a> 规划中，一定要有一个里程碑的规划，目标是要有可量化的成果。</p>
-<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><blockquote>
-<p>小结一番后，明确绩效以成果为导向，同步绩效与调薪结果。</p>
-</blockquote>
-<h4 id="绩效"><a href="#绩效" class="headerlink" title="绩效"></a>绩效</h4><blockquote>
-<p>突出个人对团队的价值体现，同步绩效结果。</p>
-</blockquote>
-<p>绩效评级：A<br>奖金系数：2<br>奖金金额：100W</p>
-<h4 id="调薪"><a href="#调薪" class="headerlink" title="调薪"></a>调薪</h4><blockquote>
-<p>突出公司对个人未来的期望，同步结果。</p>
-</blockquote>
-<p>上涨：10%<br>月薪：10W</p>
-<h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><blockquote>
-<p>邮件反馈通用模板</p>
-</blockquote>
-<p>绩效面向过去，调薪面向未来。</p>
-<p><strong>关于绩效</strong>：无论是团队，还是个人，绩效都是以结果为导向，根据去年的成果与表现，得到合理的收获。<br><strong>关于调薪：</strong>综合工作成果、工作表现、发展潜力（对未来的期待），再根据职级的薪资范围，给予调整。<br>备注：入职半年以上，享受调薪机会（根据公司政策调整）。</p>
-<p>产品优秀、服务稳定、客户认可，团队高质量完成 OKR（业绩目标+产品目标），年终绩效得优，团队奖金包大，大家都有一个好丰收。</p>
-<p>相反，整天需要处理一堆重复而杂乱的问题，产品毫无亮点，个人没成长、工作没干劲。企业为了长远的发展，也会调整资源、升级人才，团队 Leader 和 PM 随时都会下课。</p>
-<p><strong>PS：要有创业者的危机感，路才能走得更远。</strong></p>
-<h3 id="寄语"><a href="#寄语" class="headerlink" title="寄语"></a>寄语</h3><blockquote>
-<p>邮件反馈通用模板，可添加针对性补充。</p>
-</blockquote>
-<p>我们一直倡导<a href="https://book.douban.com/subject/26308014/" target="_blank" rel="noopener">联盟</a>文化，相互投资，共生共赢，一个人能力再强，也敌不过团队的力量。<br>好比一支篮球队，有前锋、中锋、后卫、教练等同伴，大家的目标一致：赢得比赛，拿到冠军。<br>—— 加盟、转会都是为了打造更合适、更凝聚、更优秀的球队！</p>
-<p><strong>对于个人：</strong><br>持续成长，让你能从容应对未来的挑战。<br>敬畏工作，让你拥有更广阔的职业空间。</p>
-<p><strong>对于团队：</strong><br>以<strong>共同</strong>解决问题为导向，与团队一起成长，传播正能量。<br>互相信任、互相帮助、互相驱动，整体的力量超乎想象。</p>
-<p><strong>人生是所有选择的总和！！！</strong><br>越努力，越幸运。</p>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://blog.liz-x.com/2019/03/13/Mac-npm、node-安装与更新/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="liz">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="https://ws4.sinaimg.cn/large/006tNc79ly1fzc1i18qexj30wz0u0gr3.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="不负">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2019/03/13/Mac-npm、node-安装与更新/" class="post-title-link" itemprop="url">Mac npm、node 安装与更新</a>
-              
-            
-          </h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2019-03-13 17:29:17" itemprop="dateCreated datePublished" datetime="2019-03-13T17:29:17+08:00">2019-03-13</time>
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/Mac/" itemprop="url" rel="index"><span itemprop="name">Mac</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="Mac-npm、node-安装与更新"><a href="#Mac-npm、node-安装与更新" class="headerlink" title="Mac npm、node 安装与更新"></a>Mac npm、node 安装与更新</h1><h2 id="npm-安装"><a href="#npm-安装" class="headerlink" title="npm 安装"></a>npm 安装</h2><p>homebrew 方式：<code>brew install npm</code></p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 使用淘宝镜像</span></span><br><span class="line"><span class="comment"># 支持 npm 除了 publish 之外的所有命令</span></span><br><span class="line"><span class="comment"># 如果 npm 安装缓慢或失败，可使用 cnpm</span></span><br><span class="line">sudo npm install -g cnpm --registry=https://registry.npm.taobao.org</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看版本</span></span><br><span class="line">cnpm -v</span><br></pre></td></tr></table></figure>
-<h2 id="查看版本"><a href="#查看版本" class="headerlink" title="查看版本"></a>查看版本</h2><p>本地版本：<code>npm -v</code></p>
-<p><code>npm outdated</code> 检查模块是否已经过时</p>
-<p><img src="https://ws1.sinaimg.cn/large/006tKfTcgy1g11akrx54pj30uu05odg0.jpg" alt=""></p>
-<h2 id="更新版本"><a href="#更新版本" class="headerlink" title="更新版本"></a>更新版本</h2><p>最新版本：<code>sudo npm -g install npm@latest</code><br>指定版本：<code>sudo npm -g install npm@6.0.0</code></p>
-<p><strong>常用命令</strong></p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">npm help # 查看某条命令的详细帮助</span><br><span class="line">npm install # 安装模块</span><br><span class="line">npm uninstall # 卸载模块</span><br><span class="line">npm update # 更新模块</span><br><span class="line">npm start # 启动模块</span><br><span class="line">npm stop # 停止模块</span><br><span class="line">npm restart # 重新启动模块</span><br><span class="line">npm test # 测试模块</span><br><span class="line">npm version # 查看模块版本</span><br></pre></td></tr></table></figure>
-<h2 id="node-安装"><a href="#node-安装" class="headerlink" title="node 安装"></a>node 安装</h2><p>—— node 版本管理工具</p>
-<h3 id="n"><a href="#n" class="headerlink" title="n"></a>n</h3><p><a href="https://github.com/tj/n" target="_blank" rel="noopener">https://github.com/tj/n</a></p>
-<ol>
-<li>清除 node.js cache：<code>sudo npm cache clean -f</code></li>
-<li>安装 n 工具（node.js 版本管理工具）：<code>sudo npm install -g n</code></li>
-<li>安装稳定版：<code>sudo n stable</code></li>
-<li>查看 node 版本：<code>node -v</code></li>
-</ol>
-<p>安装稳定版本：<code>sudo n stable</code><br>安装指定版本：<code>sudo n v8.0.0</code><br>删除指定版本：<code>sudo n rm v8.0.0</code></p>
-<h3 id="nvm"><a href="#nvm" class="headerlink" title="nvm"></a>nvm</h3><p><a href="https://github.com/creationix/nvm" target="_blank" rel="noopener">https://github.com/creationix/nvm</a></p>
-<ol>
-<li><code>brew install nvm</code></li>
-<li><p>在 shell 配置文件（~/.bashrc 或 ~/.zshrc）中添加以下内容：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 在 shell 中使用 nvm 指令</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 查看官方最新说明：https://github.com/creationix/nvm<span class="comment">#manual-install</span></span></span><br><span class="line">export NVM_DIR="$HOME/.nvm"</span><br><span class="line">[ -s "$NVM_DIR/nvm.sh" ] &amp;&amp; \. "$NVM_DIR/nvm.sh" # This loads nvm</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>重新source<br><code>. ~/.bashrc</code><br><code>. ~/.zshrc</code></p>
-</li>
-</ol>
-<p>安装稳定版本：<code>sudo nvm install stable</code><br>安装指定版本：<code>sudo nvm install v8.0.0</code><br>删除指定版本：<code>sudo nvm uninstall v8.0.0</code></p>
-<p>列出本地版本：<code>nvm ls</code><br>切换本地版本：<code>nvm use v8.0.0</code></p>
-<h3 id="n-与-nvm"><a href="#n-与-nvm" class="headerlink" title="n 与 nvm"></a>n 与 nvm</h3><p><strong>n</strong></p>
-<ol>
-<li>不支持  win</li>
-<li>node 模块，安装简单</li>
-<li>n 切换版本时，共用全局的 node/npm 目录</li>
-</ol>
-<p><strong>nvm</strong></p>
-<ol>
-<li>更加流行</li>
-<li>shell 脚本，需要手动指定路径</li>
-<li>不同版本都会安装自有的 node 模块（版本间不冲突，但占用硬盘资源）</li>
-</ol>
-<p>普通用户二选一即可，专业开发建议使用 nvm。</p>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://blog.liz-x.com/2019/02/25/通过-Docker-快速搭建-Web-服务(CentOS-版)/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="liz">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="https://ws4.sinaimg.cn/large/006tNc79ly1fzc1i18qexj30wz0u0gr3.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="不负">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2019/02/25/通过-Docker-快速搭建-Web-服务(CentOS-版)/" class="post-title-link" itemprop="url">通过 Docker 快速搭建 Web 服务(CentOS 版)</a>
-              
-            
-          </h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2019-02-25 18:00:37" itemprop="dateCreated datePublished" datetime="2019-02-25T18:00:37+08:00">2019-02-25</time>
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/Linux/" itemprop="url" rel="index"><span itemprop="name">Linux</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p><a href="https://github.com/liz-x/docker-server" target="_blank" rel="noopener">git 仓库</a></p>
-<h2 id="文件说明"><a href="#文件说明" class="headerlink" title="文件说明"></a>文件说明</h2><p><strong>centos-init.sh：</strong><br>—— 系统初始化</p>
-<ul>
-<li>更换 YUM 源</li>
-<li>安装 Docker</li>
-<li>安装 Docker-Compose —— 通过 YMAL 配置，定义和运行多个 Docker 应用的工具</li>
-</ul>
-<p><strong>Dockerfile：</strong></p>
-<p>dockerfile/php72/Dockerfile<br>本地构建镜像：docker build -t php-fpm:7.2 .</p>
-<p><strong>websvr 目录：</strong></p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 项目目录</span></span><br><span class="line">/websvr/www <span class="comment"># web 站点</span></span><br><span class="line">/websvr/ssl <span class="comment"># cert key</span></span><br><span class="line">/websvr/<span class="built_in">log</span> <span class="comment"># svr 日志</span></span><br><span class="line">/websvr/vhost <span class="comment"># 虚拟主机</span></span><br><span class="line">/websvr/script <span class="comment"># 脚本</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># docker-compose</span></span><br><span class="line">/websvr/compose <span class="comment"># compose 根目录</span></span><br><span class="line">/websvr/compose/conf <span class="comment"># 基础配置</span></span><br><span class="line">/websvr/compose/demo <span class="comment"># demo 服务</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># NMP LOG 目录</span></span><br><span class="line">/websvr/<span class="built_in">log</span>/nginx <span class="comment"># nginx 日志</span></span><br><span class="line">/websvr/<span class="built_in">log</span>/mysql <span class="comment"># mysql 日志</span></span><br><span class="line">/websvr/<span class="built_in">log</span>/php <span class="comment"># php 日志</span></span><br></pre></td></tr></table></figure>
-<p><strong>/websvr/compose：</strong></p>
-<p>存放 docker-compose.ymal，在 compose 目录中可以建立不同的服务，例如：</p>
-<ul>
-<li>/websvr/compose/demo</li>
-<li>/websvr/compose/nginx-proxy</li>
-<li>/websvr/compose/api-gateway</li>
-</ul>
-<h2 id="搭建服务"><a href="#搭建服务" class="headerlink" title="搭建服务"></a>搭建服务</h2><h3 id="初始化"><a href="#初始化" class="headerlink" title="初始化"></a>初始化</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> /</span><br><span class="line"></span><br><span class="line"><span class="comment"># 拉取项目</span></span><br><span class="line">git <span class="built_in">clone</span> https://github.com/liz-x/docker-server.git websvr</span><br><span class="line"><span class="built_in">cd</span> websvr</span><br><span class="line"></span><br><span class="line"><span class="comment"># 删除 git 信息</span></span><br><span class="line">rm -rf .git*</span><br><span class="line"></span><br><span class="line"><span class="comment"># 系统初始化（ECS 版）</span></span><br><span class="line">sudo sh ./centos-init.sh</span><br></pre></td></tr></table></figure>
-<h3 id="启动-Demo"><a href="#启动-Demo" class="headerlink" title="启动 Demo"></a>启动 Demo</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Demo 服务</span></span><br><span class="line"><span class="built_in">cd</span> /websrv/compose/demo</span><br><span class="line">docker-compose up -d</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看容器状态</span></span><br><span class="line">[root@zsky sky] docker-compose ps</span><br><span class="line"></span><br><span class="line"><span class="comment"># 测试</span></span><br><span class="line">[root@zsky ~] curl localhost</span><br><span class="line">Hello World.</span><br></pre></td></tr></table></figure>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2338,7 +2293,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">24</span>
+                    <span class="site-state-item-count">30</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -2375,7 +2330,13 @@
                     
                       
                     
-                    <span class="site-state-item-count">10</span>
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">12</span>
                     <span class="site-state-item-name">分类</span>
                   </a>
                 </div>
@@ -2418,7 +2379,15 @@
                     
                       
                     
-                    <span class="site-state-item-count">13</span>
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">17</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>

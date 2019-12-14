@@ -1,6 +1,83 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[NodeClub 镜像]]></title>
+    <url>%2F2019%2F12%2F13%2FNodeClub-%E9%95%9C%E5%83%8F%2F</url>
+    <content type="text"><![CDATA[DOCKER-NODECLUBGit Link 说明1docker-install.sh 安装 Docker 安装 Docker-Compose nodeclub-install.sh 生成 NodeClub 镜像 目录 123456conf # 配置re-nodeclub # 重写（个性化目录）data # 数据file # 文件log # 日志script # 脚本 搭建初始化12345678910111213141516# 拉取项目git clone https://github.com/liz-x/docker-nodeclub.git nodeclubcd nodeclub# 安装 Docker（如未安装）sudo sh docker-install.sh.sh# 生成 NodeClub 镜像sudo sh nodeclub-init.sh# 启动docker-compose up -d# 查看容器状态docker-compose ps Mongo 设置 （可选）1234567891011121314151617# 创建 admin 账号和数据库# Step 1docker exec -it mongo mongo admin# Step 2db.createUser(&#123; user: 'admin', pwd: '123456', roles: [ &#123; role: 'userAdminAnyDatabase', db: 'admin' &#125; ] &#125;); # 创建账号exit # 退出# 创建 nodeclub 账号和数据库# Step 1docker exec -it mongo mongo admin# Step 2db.auth('admin', '123456');# Step 3use nodeclub # 不存在会自动创建db.createUser(&#123; user: 'nodeclub', pwd: '123456', roles: [ &#123; role: 'readWrite', db: 'nodeclub' &#125; ] &#125;); # 创建账号 其他1234db.grantRolesToUser( 'userName' , [ &#123; role: '&lt;role&gt;', db: '&lt;database&gt;' &#125; ]) # 授予角色db.grantRolesToUser( 'userName' , [ &#123; role: '&lt;role&gt;', db: '&lt;database&gt;' &#125; ]) # 取消角色db.system.users.remove(&#123;user:'userName'&#125;) # 删除用户db.changeUserPassword('userName', 'new password') # 修改密码]]></content>
+      <categories>
+        <category>工具</category>
+      </categories>
+      <tags>
+        <tag>Docker</tag>
+        <tag>工具</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Scrum 小册子 - 什么是站会（Daily Scrum）]]></title>
+    <url>%2F2019%2F11%2F02%2FScrum-%E5%B0%8F%E5%86%8C%E5%AD%90-%E4%BB%80%E4%B9%88%E6%98%AF%E7%AB%99%E4%BC%9A%EF%BC%88Daily-Scrum%EF%BC%89%2F</url>
+    <content type="text"><![CDATA[说明13站会是 Scrum 开发框架的组成部分，团队每天在固定的时间，固定的地点开会，促进团队沟通： 互相了解彼此的工作进展，发现并共同解决阻碍 Sprint 的问题 配合 Kanban)，清晰明了的检视 Sprint 的进度，确保按时交付 注：站会时长建议在 15 分钟内 价值对团队： 信息共享 进度可视 风险管控 群策群力 对个人： 个人工作的概括 表达能力的锻炼 仪式感（明确当日目标） PO 能清晰的了解整体的进度，QA 能快速的规划待测的清单，TL 能及时的发现迭代的问题。Team 一起完成目标。 Demo步骤： 昨天完成的内容 今天的安排与计划（时间评估） 遇到了哪些障碍或困难（可选） 例子： 昨天完成会员活动的前端页面 今天计划能完成 API 对接，明天可以 push 到测试环境 障碍：刚刚 Designer 说 UX 有改动，我需要多半天时间修改，会影响活动上线时间（问题同步 / 风险评估） 简单沟通： 【PO】我大概会在上午 11 点与 Designer、Marketing、Operation 沟通清楚，然后再同步最新的规划 困难：大量数据分析引起性能问题，计划引用 Cache 来解决（抛出问题与解决方案） 群策群力： 【A 君】我有集成过一个 Redis 类库，巴拉巴拉！！！ 【B 君】类似的问题我们用队列解决过，巴拉巴拉~~~ 【C 君】… 【TL】Nice，细节大家会后继续讨论。 注：为什么是“刚刚”，因为有问题，一定要及时沟通，不能等到站会才同步。 反例： 昨天完成一个页面 今天准备做这个（贴上便利贴），额…添加一个上传功能。 … … …（懵圈） 锻炼站会每人平均会讲一分钟，一分钟能感受到什么： 表达能力 —— 描述是否清晰 逻辑能力、分析能力 —— 任务拆解 解决问题的能力、风险意识 —— 风险评估与备用方案 主动性、领导力 —— 帮助伙伴们解决问题 产品思维、追求、专研 —— 方案选择（是否有助于产品体验 / 是否引入新技术或新思想） 总结站会不仅是用于同步信息的方式，还是锻炼和展示个人综合能力的平台。心态不一样，收获也不一样。敏捷是一种思想指导，Kanban 和 Scrum 只是实现思想的方案，根据团队的特性，找到适合的敏捷流程。]]></content>
+      <categories>
+        <category>Agile</category>
+      </categories>
+      <tags>
+        <tag>Agile</tag>
+        <tag>Scrum</tag>
+        <tag>敏捷</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Scrum 小册子 - 故事点估算（Story Points）]]></title>
+    <url>%2F2019%2F10%2F20%2FScrum-%E5%B0%8F%E5%86%8C%E5%AD%90-%E6%95%85%E4%BA%8B%E7%82%B9%E4%BC%B0%E7%AE%97%EF%BC%88Story-Points%EF%BC%89%2F</url>
+    <content type="text"><![CDATA[说明Story Points（故事点）是团队用来衡量 Story（故事）的业务复杂度、技术难度、协作成本，由团队共同评估，共同完成。 分数值使用斐波那契数，即 1、2、3、5、8、13、21… Why，感受下选择：5 与 8，7 与 8，没感觉？试试 13 与 21，19 与 21。 对比传统的人天估算，由个人评估，是一个精确值，例如：2h，1d… 实践证明，人类并不善于做精确的估算： 1评估的人天往往与预期不符合（例如，估算：5d，实际：10d，每天的变化太多了） 估算结果与评估者的能力、经验相关（例如，新人：2d，导师：1d） 敏捷的 Story Points，由团队评估，是一个相对值，例如：3，5，8…以苹果作为参照物，例如：苹果重量为 100g，能估算出西瓜的重量（精确值）么？那如果问西瓜的大小（相对值）是苹果的多少倍呢？ Sprint 1，尝试 50 点，感觉游刃有余。Sprint 2，挑战 70 点，觉得尚有余力。Sprint 3，挑战 90 点，发现有点吃力。Sprint 4，改为 80 点，不多不少，刚刚好。Sprint 5，80 点。…… 场景一：Sprint 20，80 点，发现轻松（团队：能力的提升 / 业务的熟悉）Sprint 21，挑战 90 点。 场景二：Sprint 20，80 点，发现困难（团队：人员调整 / 新增业务）Sprint 21，改为 70 点。 …….Sprint xxx，xxx 点Sprint xxx，xxx 点Sprint xxx，xxx 点 条件 估算法 参照物 估算T恤尺码分类法（比数字更形象，入门推荐，快速评估） XS S（参照物） M L XL 1/2 3 5 8 13 备注：超过 XL，需要拆解，不建议使用 XXL，该减肥了:） 计划扑克法（进阶，适合 5 ~ 8 人的小团队，评估复杂业务）使用带编号的扑克牌估算，估算时匿名出牌，如果出现较大分歧，展开讨论（各自说明原因），然后再次投票，直到团队对估计值达成共识，一般不超过 3 轮，同样，超过 13 都建议再拆分。 参照物举个栗子 修改文本、链接、SEO、简单的 bug（XS 码） 复杂的查询页面（M 码） 多条件查询 跨表查询 模糊查询 全栈开发]]></content>
+      <categories>
+        <category>Agile</category>
+      </categories>
+      <tags>
+        <tag>Agile</tag>
+        <tag>Scrum</tag>
+        <tag>敏捷</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Scrum 小册子 - 需求模板（User Story Template）]]></title>
+    <url>%2F2019%2F09%2F21%2FScrum-%E5%B0%8F%E5%86%8C%E5%AD%90-%E9%9C%80%E6%B1%82%E6%A8%A1%E6%9D%BF%EF%BC%88User-Story-Template%EF%BC%89%2F</url>
+    <content type="text"><![CDATA[需求说明 业务背景 业务逻辑 业务流程 验收标准 行为驱动开发：业务场景（GWT: 条件 / 行为 / 结果） Given：前提条件是 xxx When：做了某件事 Then：预期的结果为 xxx 业务规则（检查清单） 原型图（Axure RP / Mockplus）/ 高保真模型（UI / UX） 选择：史诗、分类、优先级、标签、关联]]></content>
+      <categories>
+        <category>Agile</category>
+      </categories>
+      <tags>
+        <tag>Agile</tag>
+        <tag>Scrum</tag>
+        <tag>敏捷</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Scrum 小册子 - 如何做代码审查（Code Review - Lite）]]></title>
+    <url>%2F2019%2F09%2F18%2FScrum%20%E5%B0%8F%E5%86%8C%E5%AD%90%20-%20%E5%A6%82%E4%BD%95%E5%81%9A%E4%BB%A3%E7%A0%81%E5%AE%A1%E6%9F%A5%EF%BC%88Code%20Review%20-%20Lite%EF%BC%89%2F</url>
+    <content type="text"><![CDATA[—— 将 Code Review 培养成文化，而非设立制度。 目标 提高代码质量和可读性 共享知识与编程技巧 给予有意义的反馈帮助小伙伴们成长 注：因为“旁观者清，当局者迷”，所以需要伙伴的帮助来发现个人的不足。 时机代码待合并且完成以下步骤： 代码自检 / 项目自测 Linter 检查与代码格式化（IDE） Sonar 扫描 自动化测试 原则 代码逻辑是否简单明了？ 代码是否符合公司规范？ 单次 Review 时间建议少于 30 分，不超过 60 分（可分批 Review） 单次查阅建议少于 400 行，不超过 1000 行 确保代码逻辑正确，安全可靠、可读性强（而非个人偏好） 不要在 Review 中讨论需求（Review 是 Review，Planning 是 Planning） 面对面给予正向反馈（文明用语，尊重彼此，保持互相学习的心态） 注：没有完美的代码，不要纠结。 清单 代码规范 设计模式 (JavaScript) 质量属性 可靠性 可维护性 可扩展性 可伸缩性 可读性 安全 性能 …]]></content>
+      <categories>
+        <category>Agile</category>
+        <category>编程</category>
+      </categories>
+      <tags>
+        <tag>Agile</tag>
+        <tag>Scrum</tag>
+        <tag>敏捷</tag>
+        <tag>编程</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Blog 从零搭建涉及的技术点]]></title>
+    <url>%2F2019%2F07%2F13%2FBlog-%E4%BB%8E%E9%9B%B6%E6%90%AD%E5%BB%BA%E6%B6%89%E5%8F%8A%E7%9A%84%E6%8A%80%E6%9C%AF%E7%82%B9%2F</url>
+    <content type="text"><![CDATA[本站是基于 Hexo + Github，同时也通过 CI 同步到云服务器上，虽然只是一个小博客，但如果是自己一步步搭建，对 IT 初学者来说，不仅能学到蛮多的基础知识，还能锻炼动手能力。如果你的好奇心比较强，那会驱动你学得更多。 程序Node.js、Npm、Webpack（打包的原理、前端优化军规） 域名Domain、DNS、IP、HTTP/TCP、SSL（加解密原理、证书申请）、网络链路（ISP、IDC、节点、路由、交换机） 主机IDC、云计算（何为 IaaS、PaaS）、VPS、梯子、OpenSSH、Linux 基础语法 Web ServerDocker、Nginx、正向/反向代理、负载均衡（DNS、LVS、Haproxy、Nginx） 部署 GitHub：git、git-flow CI/CD：Travis CI/Jenkins、Pipeline 运营CDN、SEO（关键字、HTML + CSS、页面布局）、网站收录（百度+谷歌） 编写Markdown 延展集群、分布式、异步、队列等]]></content>
+      <categories>
+        <category>记录</category>
+      </categories>
+      <tags>
+        <tag>记录</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[gdb 调试 core dump]]></title>
     <url>%2F2019%2F06%2F26%2Fgdb-%E8%B0%83%E8%AF%95-core-dump%2F</url>
     <content type="text"><![CDATA[何为 core dumpcore dump 中文翻译为“核心转储”，它是进程运行时突然崩溃的那一刻的内存快照。 操作系统在程序发生异常而异常在进程内部又没有被捕获的情况下，会把进程此刻内存、寄存器状态、运行堆栈等信息转储保存在一个文件里，可使用 gdb 工具来分析。 core dump 生产环境一般处于禁用状态，对于内存消耗性的进程，core dump 时会占用很多系统资源，磁盘空间也可能被写满。 查看核心转储文件大小的最大值：ulimit -c，如果是 0，则表示禁止核心转储。 开启 core dump临时开启 开启 core dump： ulimit -c 1024（限制文件大小为 1024k） ulimit -c unlimited（不限制文件大小） 关闭 core dump：ulimit -c 0 自动开启 打开 /etc/profile，尾部追加 ulimit -S -c unlimited &gt; /dev/null 2&gt;&amp;1； 执行 source /etc/profile 使配置生效； 通过 ulimit -c 查看下是否已经打开。 备注：由于核心转储文件比较大，因此建议不要限制 core 文件的大小，当调试完毕之后关闭 core dump 即可。 打开 core 后，如果进程发生 crash，默认情况下，会在应用所在位置，产生一个【core.pid】文件。 查看正在使用的 core 文件路径和格式 more /proc/sys/kernel/core_pattern，后面自动添加 pid 的配置是在 more /proc/sys/kernel/core_uses_pid 里面配置的，如果为 1 就是自动添加。 修改 core 文件的保存路径和文件名格式： 修改 /etc/sysctl.conf 文件，添加需要保存的路径 kernel.core_pattern = /tmp/corefile/core.%e.%t（要有写的权限），再执行命令 sysctl -p 即可生效。 core 文件支持的格式列表： 1234567%p – insert pid into filename%u – insert current uid into filename%g – insert current gid into filename%s – insert signal that caused the coredump into the filename%t – insert UNIX time that the coredump occurred into filename%h – insert hostname where the coredump happened into filename%e – insert coredumping executable name into filename 以 PHP 为例，开启 core dump 一段时间的运行之后，调试生成的 core 文件： 进入存放 core 文件的目录，假设 php 安装在 /usr/local/php/ 下面，core 文件为 core.666： gdb /usr/local/php/bin/php -c core.666 调试 core dumpgdb 的 3 种使用方式： 跟踪正在运行的 PHP 程序，使用 gdb -p 进程 ID 使用 gdb 运行并调试 PHP 程序，使用 gdb php -&gt; run server.php 进行调试 PHP 程序发生 core dump 后使用 gdb 加载 core 内存镜像进行调试 gdb php corefile 执行 gdb 后，进程会变成 T 的状态，表示正在 Trace，这个是独占的，所以不能再使用 strace/gdb 或者其他 ptrace 工具对此进程进行调试。另外此进程会中断执行，gdb 输入 c 后，程序继续向下运行，按下 ctrl + c 则会中断程序，通过 bt 命令查看进程的调用栈。 常用指令 p：print，打印 C 变量的值 c：continue，继续运行被中止的程序 b：breakpoint，设置断点，可以按照函数名设置，如 b zif_php_function，也可以按照源代码的行数指定断点，如 b src/networker/Server.c:1000 t：thread，切换线程，如果进程拥有多个线程，可以使用 t 指令，切换到不同的线程 ctrl + c：中断当前正在运行的程序，和 c 指令配合使用 n：next，执行下一行，单步调试 info threads：查看运行的所有线程 l：list，查看源码，可以使用 l 函数名 或者 l 行号 bt：backtrace，查看运行时的函数调用栈 finish：完成当前函数 f：frame，与 bt 配合使用，可以切换到函数调用栈的某一层 r：run，运行程序 zbacktracezbacktrace 是 PHP 源码包提供的一个 gdb 自定义指令，功能与 bt 指令类似，与 bt 不同的是 zbacktrace 看到的调用栈是 PHP 函数调用栈，而不是 C 函数。 下载 php-src，解压后从根目录中找到一个 .gdbinit 文件，在 gdb shell 中输入 12source .gdbinitzbacktrace .gdbinit 还提供了其他更多指令，可以查看源码了解详细的信息。 使用 gdb + zbacktrace 跟踪死循环问题1gdb -p 进程ID 使用 ps aux 工具找出需要调试的进程 ID gdb -p 跟踪指定的进程 反复调用 ctrl + c 、zbacktrace、c 查看程序在哪段 PHP 代码发生异常 找到对应的 PHP 代码进行解决 参考： http://imhuchao.com/1018.html https://wiki.swoole.com/wiki/page/442.html https://www.cnblogs.com/paul8339/p/8967689.html]]></content>
@@ -30,12 +107,12 @@
     <url>%2F2019%2F05%2F20%2F%E6%B8%85%E7%A9%BA%E5%AD%98%E9%87%8F%E6%80%9D%E7%BB%B4%EF%BC%8C%E7%8F%8D%E8%A7%86%E5%AD%98%E9%87%8F%2F</url>
     <content type="text"><![CDATA[清空存量思维，珍视存量 随着认知的改变，思维也需要随之升级； 珍视活跃的存量，盘活重要的存量，复盘历史的存量； 存量也是变量，变量促进增量； 对于历史存量，反思、总结，做到断舍离； 成为伙伴们活的存量，为彼此带来增量。 举个栗子 — AI 与人类下棋：AI 的每一步棋都是新的决策，依据棋盘（存量），做最优的判断，不受思维束缚。而人类，下一步棋只是过去的一个延续，也就是棋手的棋风、下棋的战术（固化的存量思维）。]]></content>
       <categories>
-        <category>感悟</category>
+        <category>记录</category>
       </categories>
       <tags>
+        <tag>记录</tag>
         <tag>思维</tag>
         <tag>感悟</tag>
-        <tag>记录</tag>
       </tags>
   </entry>
   <entry>
@@ -78,8 +155,8 @@
       <tags>
         <tag>Docker</tag>
         <tag>Mac</tag>
-        <tag>Linux</tag>
         <tag>工具</tag>
+        <tag>Linux</tag>
       </tags>
   </entry>
   <entry>
@@ -141,7 +218,7 @@
   <entry>
     <title><![CDATA[RabbmitMQ 整理]]></title>
     <url>%2F2019%2F02%2F18%2FRabbmitMQ-%E6%95%B4%E7%90%86%2F</url>
-    <content type="text"><![CDATA[基础概念Broker - 消息队列服务器的实体Connection - 建立一个 TCP 连接Channel - 虚拟连接，消息通道，数据流动都是在Channel中进行的，每个 Channel 代表一个会话Exchange - 接收消息，转发消息到绑定的队列上，指定消息按什么规则，路由到哪个队列Queue - 消息队列载体，用来存储消息，有自己的 erlang 进程Binding - 绑定，它的作用就是把 Exchange 和 Queue 按照路由规则绑定起来Routing Key - 路由关键字，Exchange 根据这个关键字进行消息投递Vhost - 虚拟主机，一个broker里可以开设多个vhost，用作不同用户的权限分离Producter - 消息生产者，产生消息的程序Consumer - 消息消费者，接收消息的程序Prefetch Count - 限制 Queue 每次发送给每个消费者的消息数（待消费处理完再重新发送） MessageQueue - 队列声明 消费者是无法订阅或者获取不存在的 MessageQueue 中信息； 消息被 Exchange 接受以后，如果没有匹配的 Queue，则会被丢弃； 队列属性：Exclusive：排他队列、Auto-delete：自动删除、Durable：持久化。 Message Acknowledgment - 消息回执 Pub Message 没有 ack 如果未启用持久化，服务重启消息会丢失 备注： 多个消费者可以订阅同一个 Queue，这时 Queue 中的消息会被平均分摊给多个消费者进行处理； 即使使用持久化，也存在小概率丢失事件，需要在业务逻辑上加上事务或者重试机制； 每个 Queue 中存放的 message 理论上无上限，取决于机器的内存； Channel 是真实 TCP 连接之上的虚拟连接，所有 AMQP 命令都是通过 Channel 发送的； 一个 Channel 只能被单独一个操作系统线程使用，一个操作系统线程上允许使用多个 Channel 。 为什么使用 Channel，而不是直接使用 TCP 连接？ 建立和关闭 TCP 连接是有代价的，频繁的建立关闭 TCP 连接对于系统的性能有很大的影响，而且 TCP 的连接数也有限制，这也限制了系统处理高并发的能力。在 TCP 连接中建立 Channel 是没有上述代价的。对于 Producer 或者 Consumer 来说，可以并发的使用多个 Channel 进行 Publish 或者 Receive。 大部分的业务操作是在 Channel 这个接口中完成的，包括定义 Queue、定义 Exchange、绑定 Queue 与 Exchange、发布消息等。Channel 之间是完全隔离的。 关键组件 - ExchangeExchange - 接受生产者消息并将消息路由到消息队列（生产者不会直接把消息投给 Queue） Routing Key - 指定消息路由规则，决定消息流向哪里； Binding - 将 Exchange 与 Queue 关联起来，将消息路由到指定的 Queue； Binding Key - 当 binding key 与 routing key 相匹配时，消息将会被路由到对应的 Queue； Exchange Type： fanout：广播是式交换器，把所有发送到该 Exchange 的消息投递到所有与它绑定的队列 direct：直接交换器，把消息投递到那些 binding key 与 routing key 完全匹配的队列 topic：主题交换器，将消息路由到 binding key 与 routing key 模式匹配的队列 Exchange、Binding 生产者将消息投递到队列中，实际的情况是，生产者将消息发送到 Exchange（交换器），再通过 Binding 将 Exchange 与 Queue 关联起来。 在绑定（Binding）Exchange 与 Queue 的同时，一般会指定一个 binding key。在绑定多个 Queue 到同一个Exchange 的时候，这些 Binding 允许使用相同的 binding key。 生产者在将消息发送给 Exchange 的时候，一般会指定一个 routing key，来指定这个消息的路由规则，生产者就可以在发送消息给 Exchange 时，通过指定 routing key 来决定消息流向哪里。 流程 客户端连接（Connection）到消息队列服务器，打开一个 Channel； 客户端声明一个 Exchange，并设置相关属性； 客户端声明一个 Queue，并设置相关属性； 客户端使用 Routing Key，通过 Bind 在 Exchange 和 Queue 之间建立好绑定关系； 客户端投递消息到 Exchange。 Web 管理说明引用：https://www.jianshu.com/p/7b6e575fd451 overview -&gt; Totals Ready：待消费的消息总数Unacked：待应答的消息总数Total：Ready + Unacked Publish：producter pub 消息的速率Publisher confirm：broker 确认 pub 消息的速率Deliver(manual ack)：customer 手动确认的速率Deliver( auto ack)：customer 自动确认的速率Consumer ack：customer 正在确认的速率Redelivered：正在传递 ‘redelivered’ 标志集的消息的速率Get (manual ack)：响应 basic.get 而要求确认的消息的传输速率Get (auto ack)：响应于 basic.get 而发送不需要确认的消息的速率Return：将 basic.return 发送给 producter 的速率Disk read：queue 从磁盘读取消息的速率Disk write：queue 从磁盘写入消息的速率 Connections：client 的 tcp 连接的总数Channels：通道的总数Exchange：交换器的总数Queues：队列的总数Consumers：消费者的总数 Overview -&gt; Nodes启动一个broker都会产生一个node]]></content>
+    <content type="text"><![CDATA[基础概念Broker - 消息队列服务器的实体 Connection - 建立一个 TCP 连接 Channel - 虚拟连接，消息通道，数据流动都是在Channel中进行的，每个 Channel 代表一个会话 Exchange - 接收消息，转发消息到绑定的队列上，指定消息按什么规则，路由到哪个队列 Queue - 消息队列载体，用来存储消息，有自己的 erlang 进程 Binding - 绑定，它的作用就是把 Exchange 和 Queue 按照路由规则绑定起来 Routing Key - 路由关键字，Exchange 根据这个关键字进行消息投递 Vhost - 虚拟主机，一个broker里可以开设多个vhost，用作不同用户的权限分离 Producter - 消息生产者，产生消息的程序 Consumer - 消息消费者，接收消息的程序 Prefetch Count - 限制 Queue 每次发送给每个消费者的消息数（待消费处理完再重新发送） MessageQueue - 队列声明 消费者是无法订阅或者获取不存在的 MessageQueue 中信息； 消息被 Exchange 接受以后，如果没有匹配的 Queue，则会被丢弃； 队列属性：Exclusive：排他队列、Auto-delete：自动删除、Durable：持久化。 Message Acknowledgment - 消息回执 Pub Message 没有 ack 如果未启用持久化，服务重启消息会丢失 备注： 多个消费者可以订阅同一个 Queue，这时 Queue 中的消息会被平均分摊给多个消费者进行处理； 即使使用持久化，也存在小概率丢失事件，需要在业务逻辑上加上事务或者重试机制； 每个 Queue 中存放的 message 理论上无上限，取决于机器的内存； Channel 是真实 TCP 连接之上的虚拟连接，所有 AMQP 命令都是通过 Channel 发送的； 一个 Channel 只能被单独一个操作系统线程使用，一个操作系统线程上允许使用多个 Channel 。 为什么使用 Channel，而不是直接使用 TCP 连接？ 建立和关闭 TCP 连接是有代价的，频繁的建立关闭 TCP 连接对于系统的性能有很大的影响，而且 TCP 的连接数也有限制，这也限制了系统处理高并发的能力。在 TCP 连接中建立 Channel 是没有上述代价的。对于 Producer 或者 Consumer 来说，可以并发的使用多个 Channel 进行 Publish 或者 Receive。 大部分的业务操作是在 Channel 这个接口中完成的，包括定义 Queue、定义 Exchange、绑定 Queue 与 Exchange、发布消息等。Channel 之间是完全隔离的。 关键组件 - ExchangeExchange - 接受生产者消息并将消息路由到消息队列（生产者不会直接把消息投给 Queue） Routing Key - 指定消息路由规则，决定消息流向哪里； Binding - 将 Exchange 与 Queue 关联起来，将消息路由到指定的 Queue； Binding Key - 当 binding key 与 routing key 相匹配时，消息将会被路由到对应的 Queue； Exchange Type： fanout：广播是式交换器，把所有发送到该 Exchange 的消息投递到所有与它绑定的队列 direct：直接交换器，把消息投递到那些 binding key 与 routing key 完全匹配的队列 topic：主题交换器，将消息路由到 binding key 与 routing key 模式匹配的队列 Exchange、Binding 生产者将消息投递到队列中，实际的情况是，生产者将消息发送到 Exchange（交换器），再通过 Binding 将 Exchange 与 Queue 关联起来。 在绑定（Binding）Exchange 与 Queue 的同时，一般会指定一个 binding key。在绑定多个 Queue 到同一个Exchange 的时候，这些 Binding 允许使用相同的 binding key。 生产者在将消息发送给 Exchange 的时候，一般会指定一个 routing key，来指定这个消息的路由规则，生产者就可以在发送消息给 Exchange 时，通过指定 routing key 来决定消息流向哪里。 流程 客户端连接（Connection）到消息队列服务器，打开一个 Channel； 客户端声明一个 Exchange，并设置相关属性； 客户端声明一个 Queue，并设置相关属性； 客户端使用 Routing Key，通过 Bind 在 Exchange 和 Queue 之间建立好绑定关系； 客户端投递消息到 Exchange。 Web 管理说明引用：https://www.jianshu.com/p/7b6e575fd451 overview -&gt; Totals Ready：待消费的消息总数Unacked：待应答的消息总数Total：Ready + Unacked Publish：producter pub 消息的速率Publisher confirm：broker 确认 pub 消息的速率Deliver(manual ack)：customer 手动确认的速率Deliver( auto ack)：customer 自动确认的速率Consumer ack：customer 正在确认的速率Redelivered：正在传递 ‘redelivered’ 标志集的消息的速率Get (manual ack)：响应 basic.get 而要求确认的消息的传输速率Get (auto ack)：响应于 basic.get 而发送不需要确认的消息的速率Return：将 basic.return 发送给 producter 的速率Disk read：queue 从磁盘读取消息的速率Disk write：queue 从磁盘写入消息的速率 Connections：client 的 tcp 连接的总数Channels：通道的总数Exchange：交换器的总数Queues：队列的总数Consumers：消费者的总数 Overview -&gt; Nodes启动一个 broker 都会产生一个 node]]></content>
       <categories>
         <category>工具</category>
       </categories>
@@ -192,9 +269,9 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[Restful API 规范]]></title>
-    <url>%2F2019%2F01%2F27%2FRestful-API-%E8%A7%84%E8%8C%83%2F</url>
-    <content type="text"><![CDATA[基本规范协议：https通信数据格式：JSON 命名规范： 接口命名：统一使用小写字母加“-”，如add-service 接口参数命名：统一使用小写字母 + &#39;_&#39;下划线分隔，如：user_id 返回格式：{“code” : 200, “message” : “success”, “data” : {}} 返回状态码： 协议级（如：200、301、302、401、403、502） 系统级（如：10001、10002） 业务级（如：20001、30001、50001） 异常级（如：40001） 标准请求： GET（SELECT）：从服务器取出资源（一项或多项） POST（CREATE）：在服务器新建一个资源 PUT（UPDATE）：在服务器更新资源（客户端提供完整资源数据） PATCH（UPDATE）：在服务器更新资源（客户端提供需要修改的资源数据） DELETE（DELETE）：从服务器删除资源 RESTful API 中的 url 是指向资源的，而不是描述行为的，因此设计API时，应使用名词而非动词来描述语义。 备注：不强制要求 代码实现： GET 请求​ 公开的查询接口（无需鉴权） POST 请求​ 增删改接口​ 私密的查询接口（需要鉴权） 备注：通过修改路由规则实现 Restful 标准规范 API URL 示例api/名词/动词/api/名词/名词-动词/ 12345/api/wordbook/list // 词库列表/api/wordbook/get // 词库获取/api/wordbook/keywords-list // 词库关键字列表/api/wordbook/keywords-update // 词库关键字更新 API 动词示例参考阿里开放平台 api 接口文档 1234567891011121314151617181920212223242526272829303132333435363738394041create // 数据添加（创建）delete // 数据删除update // 数据更新get // 数据信息list // 数据列表count // 数据统计batch // 批量search // 数据搜索query // 数据查询apply // 申请confirm // 确认check // 检查verify // 验证change // 数据更改（某个字段更改或转换）fetch // 获取（拉数据）push // 推送send // 发送notify // 通知sync // 同步bind // 绑定unbind // 解绑open // 开启close // 关闭cancel // 取消status // 状态done // 结束success // 成功log // 日志history // 历史upload // 文件上传accept // 同意reply // 回复refresh // 刷新（例如：token） API 参数小写加下划线 1/api/wordbook/list?page=1&amp;page_size=20 API 返回 Json 串正确： 123456789101112131415161718&#123;&quot;code&quot; : 200, &quot;message&quot; : &quot;success&quot;, &quot;data&quot; : &#123;&#125;&#125;&#123; &quot;code&quot;:200, &quot;message&quot;:&quot;success&quot;, &quot;data&quot;:&#123; &quot;items&quot;:[ &#123; &quot;id&quot;:1, &quot;name&quot;:&quot;xxx&quot; &#125;, &#123; &quot;id&quot;:2, &quot;name&quot;:&quot;xxx&quot; &#125; ] &#125;&#125; 错误： 12345&#123;&quot;code&quot; : 404, &quot;message&quot; : &quot;Page not found&quot;, &quot;data&quot; : &#123;&#125;&#125;&#123;&quot;code&quot; : 500, &quot;message&quot; : &quot;Sth. worng&quot;, &quot;data&quot; : &#123;&#125;&#125;&#123;&quot;status&quot; : 10001, &quot;message&quot; : &quot;Id is empty&quot;, &quot;data&quot; : &#123;&#125;&#125; 错误码： 1234540x：HTTP 请求错误50x：服务器错误1000x：系统错误4000x：异常错误(2|3|[5-9])000x：业务错误 HTTP 状态码： 12345678910111213141516171819200 SUCCESS - GET 获取资源201 CREATED - POST 创建数据成功时204 No Content - 对不会返回响应体的成功请求进行响应（比如DELETE请求）301 Moved Permanently - 请求的资源已永久移动到新位置302 Move temporarily - 临时重定向304 Not Modified - 文档的内容并未改变，禁止包含消息体400 Bad Request - 请求异常，比如请求中的 body 无法解析401 Unauthorized - 没有进行认证或者认证非法403 Forbidden - 当认证成功，但是认证过的用户没有访问资源的权限404 Not Found - 当一个不存在的资源被请求405 Method Not Allowed - 所请求的HTTP方法不允许当前认证用户访问410 Gone - 表示当前请求的资源不再可用，当调用老版本API的时候很有用415 Unsupported Media Type - 如果请求中的内容类型是错误的422 Unprocessable Entity - 用来表示校验错误429 Too Many Requests - 由于请求频次达到上限而被拒绝访问500 Internal Server Error - 服务器遇到了一个未曾预料的状况502 Bad Gateway - 网关或者代理出错503 Service Unavailable - 服务器临时维护或者过载，服务器当前无法处理请求504 Gateway Timeout - 请求超时]]></content>
+    <title><![CDATA[API 规范]]></title>
+    <url>%2F2019%2F01%2F27%2FAPI-%E8%A7%84%E8%8C%83%2F</url>
+    <content type="text"><![CDATA[基本规范协议：https通信数据格式：JSON 命名规范： 接口命名：统一使用小写字母加“-”，如add-service 接口参数命名：统一使用小写字母 + &#39;_&#39;下划线分隔，如：user_id 返回格式：{“code” : 200, “message” : “success”, “data” : {}} 返回状态码： 协议级（如：200、301、302、401、403、502） 系统级（如：10001、10002） 业务级（如：20001、30001、50001） 异常级（如：40001） 标准请求： GET（SELECT）：从服务器取出资源（一项或多项） POST（CREATE）：在服务器新建一个资源 PUT（UPDATE）：在服务器更新资源（客户端提供完整资源数据） PATCH（UPDATE）：在服务器更新资源（客户端提供需要修改的资源数据） DELETE（DELETE）：从服务器删除资源 RESTful API 中的 url 是指向资源的，而不是描述行为的，因此设计API时，应使用名词而非动词来描述语义。 备注：不强制要求 代码实现： GET 请求​ 公开的查询接口（无需鉴权） POST 请求​ 增删改接口​ 私密的查询接口（需要鉴权） 备注：通过修改路由规则实现 Restful 标准规范 API URL 示例api/名词/ api/名词/动词/ api/名词/名词-动词/ 1234/api/book/api/book/list/api/book/get/api/book/title-update API 动词示例参考阿里开放平台 api 接口文档 1234567891011121314151617181920212223242526272829303132333435363738create // 添加delete // 删除update // 更新get // 获取list // 列表count // 统计batch // 批量search // 搜索query // 查询apply // 申请confirm // 确认check // 检查verify // 验证change // 更改fetch // 拉取push // 推送send // 发送notify // 通知sync // 同步bind // 绑定unbind // 解绑open // 开启close // 关闭cancel // 取消done // 结束upload // 上传accept // 同意reply // 回复refresh // 刷新（例如：token） API 参数小写加下划线 1/api/wordbook/list?page=1&amp;page_size=20 API 返回 Json 串正确： 123456789101112131415161718&#123;&quot;code&quot; : 200, &quot;message&quot; : &quot;success&quot;, &quot;data&quot; : &#123;&#125;&#125;&#123; &quot;code&quot;:200, &quot;message&quot;:&quot;success&quot;, &quot;data&quot;:&#123; &quot;items&quot;:[ &#123; &quot;id&quot;:1, &quot;name&quot;:&quot;xxx&quot; &#125;, &#123; &quot;id&quot;:2, &quot;name&quot;:&quot;xxx&quot; &#125; ] &#125;&#125; 错误： 12345&#123;&quot;code&quot; : 404, &quot;message&quot; : &quot;Page not found&quot;, &quot;data&quot; : &#123;&#125;&#125;&#123;&quot;code&quot; : 500, &quot;message&quot; : &quot;Sth. worng&quot;, &quot;data&quot; : &#123;&#125;&#125;&#123;&quot;status&quot; : 10001, &quot;message&quot; : &quot;Id is empty&quot;, &quot;data&quot; : &#123;&#125;&#125; 错误码： 1234540x：HTTP 请求错误50x：服务器错误1000x：系统错误4000x：异常错误(2|3|[5-9])000x：业务错误 HTTP 状态码： 12345678910111213141516171819200 SUCCESS - GET 获取资源201 CREATED - POST 创建数据成功时204 No Content - 对不会返回响应体的成功请求进行响应（比如DELETE请求）301 Moved Permanently - 请求的资源已永久移动到新位置302 Move temporarily - 临时重定向304 Not Modified - 文档的内容并未改变，禁止包含消息体400 Bad Request - 请求异常，比如请求中的 body 无法解析401 Unauthorized - 没有进行认证或者认证非法403 Forbidden - 当认证成功，但是认证过的用户没有访问资源的权限404 Not Found - 当一个不存在的资源被请求405 Method Not Allowed - 所请求的HTTP方法不允许当前认证用户访问410 Gone - 表示当前请求的资源不再可用，当调用老版本API的时候很有用415 Unsupported Media Type - 如果请求中的内容类型是错误的422 Unprocessable Entity - 用来表示校验错误429 Too Many Requests - 由于请求频次达到上限而被拒绝访问500 Internal Server Error - 服务器遇到了一个未曾预料的状况502 Bad Gateway - 网关或者代理出错503 Service Unavailable - 服务器临时维护或者过载，服务器当前无法处理请求504 Gateway Timeout - 请求超时]]></content>
       <categories>
         <category>编程</category>
         <category>规范</category>

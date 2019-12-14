@@ -349,6 +349,1180 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://blog.liz-x.com/2019/02/12/Let-s-Encrypt-证书申请及配置/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="liz">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://ws4.sinaimg.cn/large/006tNc79ly1fzc1i18qexj30wz0u0gr3.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="不负">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/02/12/Let-s-Encrypt-证书申请及配置/" class="post-title-link" itemprop="url">Let's Encrypt 证书申请及配置</a>
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-02-12 16:25:57" itemprop="dateCreated datePublished" datetime="2019-02-12T16:25:57+08:00">2019-02-12</time>
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/工具/" itemprop="url" rel="index"><span itemprop="name">工具</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p><a href="https://letsencrypt.org/" target="_blank" rel="noopener">Let’s Encrypt</a> —— 是一个由非营利性组织 <a href="https://letsencrypt.org/isrg/" target="_blank" rel="noopener">互联网安全研究小组</a>（ISRG）提供的免费、自动化和开放的证书颁发机构（CA），简单的说，就是为网站提供免费的 SSL/TLS 证书。</p>
+<h2 id="签发工具"><a href="#签发工具" class="headerlink" title="签发工具"></a>签发工具</h2><p>Let’s Encrypt 生成证书的<a href="https://letsencrypt.org/docs/client-options/" target="_blank" rel="noopener">工具</a>很多，<a href="https://certbot.eff.org/" target="_blank" rel="noopener">certbot</a> 是官方推荐的签发工具，也可以通过在线服务申请，例如：</p>
+<ul>
+<li><a href="https://freessl.cn/" target="_blank" rel="noopener">FreeSSL</a>（不支持自动续签）</li>
+<li><a href="https://www.qiniu.com/ssl" target="_blank" rel="noopener">七牛</a>（不支持 DV 泛域名）</li>
+<li><a href="https://www.upyun.com/products/ssl" target="_blank" rel="noopener">又拍云</a>（不支持 DV 泛域名）</li>
+</ul>
+<p>在线一站式服务管理方便，但可能需要绑定业务，个人用户还是推荐通过工具生成证书。<br>这里推荐 <a href="https://github.com/Neilpang/acme.sh" target="_blank" rel="noopener">acme.sh</a>，它不仅有详细的<a href="https://github.com/Neilpang/acme.sh/wiki/%E8%AF%B4%E6%98%8E" target="_blank" rel="noopener">中文文档</a>，操作更为方便，还支持 <a href="https://github.com/Neilpang/acme.sh/wiki/Run-acme.sh-in-docker" target="_blank" rel="noopener">Docker</a>。</p>
+<h2 id="acme-sh"><a href="#acme-sh" class="headerlink" title="acme.sh"></a>acme.sh</h2><p>以 root 用户为例</p>
+<h3 id="在线安装"><a href="#在线安装" class="headerlink" title="在线安装"></a>在线安装</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl https://get.acme.sh | sh</span><br></pre></td></tr></table></figure>
+<p>安装过程：</p>
+<ol>
+<li><p><code>home</code>  目录下生成 <code>.acme.sh</code> 文件夹，查看文件夹内容：<code>ls ~/.acme.sh/</code>；</p>
+</li>
+<li><p>自动添加 bash alias：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># ~/.bashrc 添加：</span></span><br><span class="line">. <span class="string">"/root/.acme.sh/acme.sh.env"</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># acme.sh.env 内容：</span></span><br><span class="line"><span class="comment"># alias acme.sh="/root/.acme.sh/acme.sh"</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>自动添加定时任务（时间随机）：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 每天凌晨检查证书的有效期，如有需要，自动续签。</span></span><br><span class="line">30 0 * * * <span class="string">"/root/.acme.sh"</span>/acme.sh --cron --home <span class="string">"/root/.acme.sh"</span> &gt; /dev/null</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h3 id="相关命令"><a href="#相关命令" class="headerlink" title="相关命令"></a>相关命令</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 查看帮助</span></span><br><span class="line">acme.sh -h</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看列表</span></span><br><span class="line">acme.sh --list</span><br><span class="line"></span><br><span class="line"><span class="comment"># 卸载 acme.sh</span></span><br><span class="line"><span class="comment"># 编辑 ~/.bashrc，删除 acme.sh alias</span></span><br><span class="line">acme.sh --uninstall</span><br></pre></td></tr></table></figure>
+<h3 id="脚本更新"><a href="#脚本更新" class="headerlink" title="脚本更新"></a>脚本更新</h3><p>自动更新：<code>acme.sh --upgrade --auto-upgrade</code><br>手动更新：<code>acme.sh --upgrade</code><br>关闭更新：<code>acme.sh --upgrade --auto-upgrade 0</code></p>
+<h2 id="证书申请"><a href="#证书申请" class="headerlink" title="证书申请"></a>证书申请</h2><p>域名所有权验证方式：HTTP 和 DNS</p>
+<ul>
+<li>HTTP：在网站的根目录下添加一个文件</li>
+<li>DNS：在域名上添加一条 txt 解析记录</li>
+</ul>
+<h3 id="HTTP"><a href="#HTTP" class="headerlink" title="HTTP"></a>HTTP</h3><p>acme.sh 会自动生成验证文件，并放到站点的根目录，然后自动完成验证，最后自动删除文件。</p>
+<ul>
+<li>-d：同 <code>--domain</code>，域名</li>
+<li>-w：同 <code>--webroot</code>，站点根目录</li>
+</ul>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">acme.sh --issue -d mydomain.com -d www.mydomain.com -w /websvr/mydomain.com/</span><br></pre></td></tr></table></figure>
+<p>Nginx：自动从配置中获取站点的根目录</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">acme.sh --issue -d mydomain.com --nginx</span><br></pre></td></tr></table></figure>
+<p><strong>注：根据中国大陆工信部的规定，所有托管在中国大陆服务器上的网站均需要备案。</strong></p>
+<p>—— 站点如未备案，80 端口处于禁用状态，acme.sh 无法使用 HTTP 验证域名所有权。</p>
+<h3 id="DNS"><a href="#DNS" class="headerlink" title="DNS"></a>DNS</h3><p>优势：不需要服务器与公网 ip，只要配置 DNS 解析即可。<br>不足：必须配置 Automatic DNS API 才可以自动续签。</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># https://github.com/Neilpang/acme.sh/wiki/dns-manual-mode</span></span><br><span class="line"><span class="comment"># 注：DNS 不支持自动续签</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 步骤：</span></span><br><span class="line"><span class="comment"># 1. 生成相应的解析记录</span></span><br><span class="line"><span class="comment"># 2. 域名解析中添加生成的 txt 记录</span></span><br><span class="line"><span class="comment"># 3. 等待解析其生效</span></span><br><span class="line">acme.sh --issue --dns -d mydomain.com --yes-I-know-dns-manual-mode-enough-go-ahead-please</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查询域名 txt 记录</span></span><br><span class="line">nslookup -<span class="built_in">type</span>=txt _acme-challenge.mydomain.com</span><br><span class="line"></span><br><span class="line"><span class="comment"># 解析生效后，重新生成证书(注：确实是 renew)</span></span><br><span class="line">acme.sh --renew -d mydomain.com --yes-I-know-dns-manual-mode-enough-go-ahead-please</span><br></pre></td></tr></table></figure>
+<h4 id="DNS-API（推荐）"><a href="#DNS-API（推荐）" class="headerlink" title="DNS API（推荐）"></a>DNS API（推荐）</h4><p>根据域名服务商，选择对应的 <a href="https://github.com/Neilpang/acme.sh/blob/master/dnsapi/README.md" target="_blank" rel="noopener">DNS API</a>。</p>
+<p>阿里云：<a href="https://usercenter.console.aliyun.com/#/manage/ak" target="_blank" rel="noopener">控制台</a></p>
+<p>创建 Accesskey</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 获取到 Key 和 Secret 后，设置环境变量</span></span><br><span class="line"><span class="built_in">export</span> Ali_Key=<span class="string">"123"</span></span><br><span class="line"><span class="built_in">export</span> Ali_Secret=<span class="string">"abc"</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 生产证书</span></span><br><span class="line">acme.sh --issue --dns dns_ali -d mydomain.com -d www.mydomain.com</span><br></pre></td></tr></table></figure>
+<p>DNSPod：<a href="https://www.dnspod.cn/console/user/security" target="_blank" rel="noopener">控制台</a>（注：非腾讯云控制台）</p>
+<p>创建 API Token</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 获取到 ID 和 Key 后，设置环境变量</span></span><br><span class="line"><span class="built_in">export</span> DP_Id=<span class="string">"123"</span></span><br><span class="line"><span class="built_in">export</span> DP_Key=<span class="string">"abc"</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 生产证书</span></span><br><span class="line">acme.sh --issue --dns dns_dp -d mydomain.com -d www.mydomain.com</span><br></pre></td></tr></table></figure>
+<h3 id="通配符证书"><a href="#通配符证书" class="headerlink" title="通配符证书"></a>通配符证书</h3><p> Wildcard 证书，目前只支持 <code>DNS-01</code> 验证方式。</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 阿里 DNS API</span></span><br><span class="line">acme.sh --issue --dns dns_ali -d mydomain.com -d *.mydomain.com</span><br></pre></td></tr></table></figure>
+<h2 id="证书配置"><a href="#证书配置" class="headerlink" title="证书配置"></a>证书配置</h2><p>生成的证书都在 <code>home</code> 目录下: <code>~/.acme.sh/</code></p>
+<h3 id="导出证书"><a href="#导出证书" class="headerlink" title="导出证书"></a>导出证书</h3><p>使用 <code>--install-cert</code> 命令</p>
+<ul>
+<li>-d：域名</li>
+<li>–key-file：私钥位置</li>
+<li>–fullchain-file：证书位置</li>
+<li>–reloadcmd：重载命令</li>
+</ul>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">acme.sh --install-cert -d mydomain.com \</span><br><span class="line">        --key-file /websvr/ssl/mydomain.key \</span><br><span class="line">        --fullchain-file /websvr/ssl/fullchain.cer \</span><br><span class="line">        --reloadcmd <span class="string">"docker exec -t nginx nginx -s reload"</span></span><br></pre></td></tr></table></figure>
+<h3 id="Nginx-配置"><a href="#Nginx-配置" class="headerlink" title="Nginx 配置"></a>Nginx 配置</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">server &#123;</span><br><span class="line">    listen 80;</span><br><span class="line">    server_name mydomain.com;</span><br><span class="line">    <span class="comment"># 重定向到 https</span></span><br><span class="line">    rewrite ^(.*)$  https://<span class="variable">$host</span><span class="variable">$1</span> permanent;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">server &#123;</span><br><span class="line">    listen 443;</span><br><span class="line">    server_name mydomain.com;</span><br><span class="line">    root   /websvr/www/mydomain.com;</span><br><span class="line">    index  index.html index.htm;</span><br><span class="line"></span><br><span class="line">    access_log /dev/null;</span><br><span class="line">    error_log  /websvr/<span class="built_in">log</span>/nginx/mydomain.com.error.log warn;</span><br><span class="line"></span><br><span class="line">    <span class="comment"># SSL 配置</span></span><br><span class="line">    ssl on;</span><br><span class="line">    ssl_certificate /websvr/ssl/fullchain.cer; <span class="comment"># 证书文件</span></span><br><span class="line">    ssl_certificate_key /websvr/ssl/mydomain.key; <span class="comment"># 私钥文件</span></span><br><span class="line">    ssl_session_timeout 5m; <span class="comment"># 会话缓存过期时间</span></span><br><span class="line">    ssl_protocols TLSv1 TLSv1.1 TLSv1.2; <span class="comment"># 开启 SSL 支持</span></span><br><span class="line">    ssl_prefer_server_ciphers on; <span class="comment"># 设置协商加密算法时，优先使用服务端的加密套件</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>重启 Nginx 服务：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker <span class="built_in">exec</span> -t nginx nginx -s reload</span><br></pre></td></tr></table></figure>
+<h3 id="SSL-检测"><a href="#SSL-检测" class="headerlink" title="SSL 检测"></a>SSL 检测</h3><p><a href="https://myssl.com" target="_blank" rel="noopener">https://myssl.com</a></p>
+<h3 id="更新证书"><a href="#更新证书" class="headerlink" title="更新证书"></a>更新证书</h3><p>定时任务会自动更新</p>
+<p>强制续签证书：<code>acme.sh --renew -d mydomain.com --force</code></p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://blog.liz-x.com/2019/02/11/Git-撤销修改/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="liz">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://ws4.sinaimg.cn/large/006tNc79ly1fzc1i18qexj30wz0u0gr3.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="不负">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/02/11/Git-撤销修改/" class="post-title-link" itemprop="url">Git 撤销修改（转）</a>
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-02-11 12:05:00" itemprop="dateCreated datePublished" datetime="2019-02-11T12:05:00+08:00">2019-02-11</time>
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/工具/" itemprop="url" rel="index"><span itemprop="name">工具</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="Git-撤销修改"><a href="#Git-撤销修改" class="headerlink" title="Git 撤销修改"></a>Git 撤销修改</h1><p>原文：<a href="https://gb.yekai.net/questions/revert" target="_blank" rel="noopener">https://gb.yekai.net/questions/revert</a><br>本文对原文格式稍微调整，并补充部分细节。</p>
+<p><strong>注：git 命令行代码，行内注释中标注对应的 zsh alias。</strong></p>
+<hr>
+<h2 id="git-clean"><a href="#git-clean" class="headerlink" title="git clean"></a>git clean</h2><p><strong>新建的文件和目录，且从未提交至版本库。</strong></p>
+<p>此类文件的状态为 <code>Untracked files</code> ，撤销方法如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git clean -fd . # gclean .</span><br><span class="line">git clean test.txt # gclean text.txt 撤销指定文件</span><br></pre></td></tr></table></figure>
+<p>其中，<code>.</code> 表示当前目录及所有子目录中的文件，也可以直接指定对应的文件路径，以下其他情况类似。</p>
+<p>-f 所有没有 track 过的文件</p>
+<p>-d 所有没有 track 过的文件夹</p>
+<h2 id="git-checkout"><a href="#git-checkout" class="headerlink" title="git checkout"></a>git checkout</h2><p><strong>提交过版本库，但未提交至暂存区的文件（未执行 git add）。</strong></p>
+<p>此类文件的状态为 <code>Changes not staged for commit</code>，撤销方法：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git checkout . # gco .</span><br><span class="line">git checkout test.txt # gco text.txt 撤销指定文件</span><br></pre></td></tr></table></figure>
+<h2 id="git-reset"><a href="#git-reset" class="headerlink" title="git reset"></a>git reset</h2><p><strong>已提交至暂存区的文件</strong></p>
+<p>此类文件的状态为 <code>Changes to be committed</code>，撤销方法：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git reset . # grh .</span><br><span class="line">git reset test.txt # grh text.txt 撤销指定文件</span><br></pre></td></tr></table></figure>
+<p>执行之后文件将会回到以上的 1 或者 2 状态，可继续按以上步骤执行撤销，若 git reset 同时加上 <code>--hard</code> 参数（alias 为 <code>grhh</code>），将会把修改过的文件也还原成版本库中的版本。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">--hard : 回退版本库、暂存区、工作区（因此我们修改过的代码就没了，需要谨慎使用）</span><br><span class="line"></span><br><span class="line">--mixed: 回退版本库、暂存区(默认)</span><br><span class="line"></span><br><span class="line">--soft: 回退版本库</span><br></pre></td></tr></table></figure>
+<h2 id="git-reset-lt-commit-hash-gt"><a href="#git-reset-lt-commit-hash-gt" class="headerlink" title="git reset &lt;commit_hash&gt;"></a>git reset &lt;commit_hash&gt;</h2><p><strong>已提交至版本库（执行了 git commit）</strong></p>
+<p>每次提交都会生成一个 commit hash，通过以下命令可查阅 hash id 并将其回滚：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git log # glol</span><br><span class="line">git reset &lt;commit_hash&gt; # grh</span><br></pre></td></tr></table></figure>
+<p>如果需要「回滚至上一次提交」，可直接使用以下命令：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git reset head~1 # grh head~1</span><br></pre></td></tr></table></figure>
+<p>执行之后，再按照 1 或者 2 状态进行处理即可，如果回滚之后的代码同时需要提交至 origin 仓库（即回滚 origin 线上仓库的代码），需要使用 <code>-f</code> 强制提交参数，且当前用户需要具备「强制提交的权限」。</p>
+<h2 id="git-reset-与-revert-的区别"><a href="#git-reset-与-revert-的区别" class="headerlink" title="git reset 与 revert 的区别"></a>git reset 与 revert 的区别</h2><p>二者都是做回滚操作，不同之处在于：</p>
+<p><code>reset</code> 直接将 head 指向了回滚的记录，丢弃了这条记录之后所有的提交时间线；</p>
+<p><code>revert</code> 更类似 <code>cherry-pick</code> 的反向操作，它不会改变历史时间线。在选中某次特定的历史提交后，它在时间上新增一条提交记录，还原了那次特定提交的所有变更。</p>
+<h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><p><strong>如果回滚了之后又不想回滚了怎么办？</strong></p>
+<p>如果是以上的情况 1 或者 2，因为修改没入过版本库，无法回滚。</p>
+<p>如果是情况 4，回滚之后通过 git log 将看不到回滚之前的 commit hash，但可通过 <code>git reflog</code> 命令（所有记录过的 commit hash）找到回滚之前的 commit hash，然后 <code>git reset &lt;commit_hash&gt;</code> 。</p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://blog.liz-x.com/2019/01/30/多-SSH-密钥/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="liz">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://ws4.sinaimg.cn/large/006tNc79ly1fzc1i18qexj30wz0u0gr3.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="不负">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/01/30/多-SSH-密钥/" class="post-title-link" itemprop="url">多 SSH 密钥</a>
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-01-30 23:57:58" itemprop="dateCreated datePublished" datetime="2019-01-30T23:57:58+08:00">2019-01-30</time>
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/Linux/" itemprop="url" rel="index"><span itemprop="name">Linux</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>如果已经有了一套名为 <code>id_rsa</code> 的公秘钥，还要生成另外一个公钥，比如 sky</p>
+<ol>
+<li>生成新公钥：<br><code>ssh-keygen -t rsa -C &quot;sky&quot; -f ~/.ssh/sky</code><br>-C “email” -f 公钥名<br>执行完成后，会在 ~/.ssh/目录下生成一个 sky 和 sky.pub 文件。</li>
+<li>添加私钥<br><code>ssh-add ~/.ssh/sky</code></li>
+<li>在 SSH 用户配置文件 ~/.ssh/config 中指定对应服务所使用的公秘钥名称，如果没有 config 文件的话就新建一个，并输入以下内容：</li>
+</ol>
+<p>以 git 为例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"># 默认(可不添加，仅做对比说明)</span><br><span class="line">Host github.com</span><br><span class="line">    IdentityFile ~/.ssh/id_rsa</span><br><span class="line"></span><br><span class="line"># sky</span><br><span class="line">Host github.com</span><br><span class="line">    IdentityFile ~/.ssh/sky</span><br><span class="line"></span><br><span class="line"># gitlab</span><br><span class="line">Host gitlab.com</span><br><span class="line">    IdentityFile ~/.ssh/gitlab</span><br></pre></td></tr></table></figure>
+<ol>
+<li>添加 sky.pub 到 git 服务器网站上</li>
+<li>测试配置文件是否正常工作：ssh -T <a href="mailto:git@github.com" target="_blank" rel="noopener">git@github.com</a></li>
+</ol>
+<p>成功则返回：<code>You&#39;ve successfully authenticated, but GitHub does not provide shell access.</code></p>
+<h2 id="自定义-host"><a href="#自定义-host" class="headerlink" title="自定义 host"></a>自定义 host</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Host github-sky # 别名</span><br><span class="line">HostName github.com # 域名</span><br><span class="line">User git</span><br><span class="line">IdentityFile ~/.ssh/sky</span><br></pre></td></tr></table></figure>
+<p>git remote add test git@github-sky:liz-x/test.git</p>
+<h2 id="ssh-agent-代理转发"><a href="#ssh-agent-代理转发" class="headerlink" title="ssh-agent 代理转发"></a>ssh-agent 代理转发</h2><p>ssh-agent：ssh 代理，临时性的 session 服务<br>ssh-add 将私钥交给 ssh-agent 保管<br>说明：<a href="http://wiki.jikexueyuan.com/project/github-developer-guides/using-ssh-agent.html" target="_blank" rel="noopener">http://wiki.jikexueyuan.com/project/github-developer-guides/using-ssh-agent.html</a></p>
+<p>查看代理： <code>ssh-add -l</code><br>添加私钥： <code>ssh-add ~/.ssh/sky</code><br>删除私钥： <code>ssh-add -d ~/.ssh/sky</code><br>清空私钥： <code>ssh-add -D</code><br>添加私钥： <code>ssh-add ~/.ssh/id_rsa ~/.ssh/sky</code></p>
+<p><strong>备注：</strong>使用 ssh-add ~/.ssh/id_rsa 如果报异常：<code>Could not open a connection to your authentication agent.</code>，则需要先运行一下 ssh-agent bash，再执行 ssh-add …等命令。</p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://blog.liz-x.com/2019/01/27/API-规范/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="liz">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://ws4.sinaimg.cn/large/006tNc79ly1fzc1i18qexj30wz0u0gr3.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="不负">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/01/27/API-规范/" class="post-title-link" itemprop="url">API 规范</a>
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-01-27 19:20:50" itemprop="dateCreated datePublished" datetime="2019-01-27T19:20:50+08:00">2019-01-27</time>
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/编程/" itemprop="url" rel="index"><span itemprop="name">编程</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/编程/规范/" itemprop="url" rel="index"><span itemprop="name">规范</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="基本规范"><a href="#基本规范" class="headerlink" title="基本规范"></a>基本规范</h2><p>协议：https<br>通信数据格式：JSON</p>
+<p>命名规范：</p>
+<ol>
+<li>接口命名：统一使用<code>小写字母加“-”</code>，如<code>add-service</code></li>
+<li>接口参数命名：统一使用<code>小写字母 + &#39;_&#39;下划线分隔</code>，如：<code>user_id</code></li>
+</ol>
+<p>返回格式：{“code” : 200, “message” : “success”, “data” : {}}</p>
+<p>返回状态码：</p>
+<ol>
+<li>协议级（如：200、301、302、401、403、502）</li>
+<li>系统级（如：10001、10002）</li>
+<li>业务级（如：20001、30001、50001）</li>
+<li>异常级（如：40001）</li>
+</ol>
+<p>标准请求：</p>
+<ul>
+<li>GET（SELECT）：从服务器取出资源（一项或多项）</li>
+<li>POST（CREATE）：在服务器新建一个资源</li>
+<li>PUT（UPDATE）：在服务器更新资源（客户端提供完整资源数据）</li>
+<li>PATCH（UPDATE）：在服务器更新资源（客户端提供需要修改的资源数据）</li>
+<li>DELETE（DELETE）：从服务器删除资源</li>
+</ul>
+<p>RESTful API 中的 url 是指向资源的，而不是描述行为的，因此设计API时，应使用名词而非动词来描述语义。</p>
+<p><strong>备注：</strong>不强制要求</p>
+<p>代码实现：</p>
+<ul>
+<li>GET 请求<br>​   公开的查询接口（无需鉴权）</li>
+<li>POST 请求<br>​   增删改接口<br>​   私密的查询接口（需要鉴权）</li>
+</ul>
+<p><strong>备注：</strong>通过修改路由规则实现 Restful 标准规范</p>
+<h2 id="API-URL-示例"><a href="#API-URL-示例" class="headerlink" title="API URL 示例"></a>API URL 示例</h2><p>api/名词/</p>
+<p>api/名词/动词/</p>
+<p>api/名词/名词-动词/</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">/api/book</span><br><span class="line">/api/book/list</span><br><span class="line">/api/book/get</span><br><span class="line">/api/book/title-update</span><br></pre></td></tr></table></figure>
+<h2 id="API-动词示例"><a href="#API-动词示例" class="headerlink" title="API 动词示例"></a>API 动词示例</h2><p>参考阿里开放平台 api 接口文档</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line">create     <span class="comment">// 添加</span></span><br><span class="line"><span class="keyword">delete</span>     <span class="comment">// 删除</span></span><br><span class="line">update     <span class="comment">// 更新</span></span><br><span class="line">get        <span class="comment">// 获取</span></span><br><span class="line">list       <span class="comment">// 列表</span></span><br><span class="line">count      <span class="comment">// 统计</span></span><br><span class="line">batch      <span class="comment">// 批量</span></span><br><span class="line"></span><br><span class="line">search     <span class="comment">// 搜索</span></span><br><span class="line">query      <span class="comment">// 查询</span></span><br><span class="line"></span><br><span class="line">apply      <span class="comment">// 申请</span></span><br><span class="line">confirm    <span class="comment">// 确认</span></span><br><span class="line">check      <span class="comment">// 检查</span></span><br><span class="line">verify     <span class="comment">// 验证</span></span><br><span class="line">change     <span class="comment">// 更改</span></span><br><span class="line"></span><br><span class="line">fetch      <span class="comment">// 拉取</span></span><br><span class="line">push       <span class="comment">// 推送</span></span><br><span class="line">send       <span class="comment">// 发送</span></span><br><span class="line">notify     <span class="comment">// 通知</span></span><br><span class="line">sync       <span class="comment">// 同步</span></span><br><span class="line"></span><br><span class="line">bind       <span class="comment">// 绑定</span></span><br><span class="line">unbind     <span class="comment">// 解绑</span></span><br><span class="line"></span><br><span class="line">open       <span class="comment">// 开启</span></span><br><span class="line">close      <span class="comment">// 关闭</span></span><br><span class="line">cancel     <span class="comment">// 取消</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">done       <span class="comment">// 结束</span></span><br><span class="line"></span><br><span class="line">upload     <span class="comment">// 上传</span></span><br><span class="line"></span><br><span class="line">accept     <span class="comment">// 同意</span></span><br><span class="line">reply      <span class="comment">// 回复</span></span><br><span class="line">refresh    <span class="comment">// 刷新（例如：token）</span></span><br></pre></td></tr></table></figure>
+<h2 id="API-参数"><a href="#API-参数" class="headerlink" title="API 参数"></a>API 参数</h2><p>小写加下划线</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/api/wordbook/list?page=1&amp;page_size=20</span><br></pre></td></tr></table></figure>
+<h2 id="API-返回-Json-串"><a href="#API-返回-Json-串" class="headerlink" title="API 返回 Json 串"></a>API 返回 Json 串</h2><p>正确：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">&#123;&quot;code&quot; : 200, &quot;message&quot; : &quot;success&quot;, &quot;data&quot; : &#123;&#125;&#125;</span><br><span class="line"></span><br><span class="line">&#123;</span><br><span class="line">    &quot;code&quot;:200,</span><br><span class="line">    &quot;message&quot;:&quot;success&quot;,</span><br><span class="line">    &quot;data&quot;:&#123;</span><br><span class="line">        &quot;items&quot;:[</span><br><span class="line">            &#123;</span><br><span class="line">                &quot;id&quot;:1,</span><br><span class="line">                &quot;name&quot;:&quot;xxx&quot;</span><br><span class="line">            &#125;,</span><br><span class="line">            &#123;</span><br><span class="line">                &quot;id&quot;:2,</span><br><span class="line">                &quot;name&quot;:&quot;xxx&quot;</span><br><span class="line">            &#125;</span><br><span class="line">        ]</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>错误：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#123;&quot;code&quot; : 404, &quot;message&quot; : &quot;Page not found&quot;, &quot;data&quot; : &#123;&#125;&#125;</span><br><span class="line"></span><br><span class="line">&#123;&quot;code&quot; : 500, &quot;message&quot; : &quot;Sth. worng&quot;, &quot;data&quot; : &#123;&#125;&#125;</span><br><span class="line"></span><br><span class="line">&#123;&quot;status&quot; : 10001, &quot;message&quot; : &quot;Id is empty&quot;, &quot;data&quot; : &#123;&#125;&#125;</span><br></pre></td></tr></table></figure>
+<p>错误码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">40x：HTTP 请求错误</span><br><span class="line">50x：服务器错误</span><br><span class="line">1000x：系统错误</span><br><span class="line">4000x：异常错误</span><br><span class="line">(2|3|[5-9])000x：业务错误</span><br></pre></td></tr></table></figure>
+<p>HTTP 状态码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">200 SUCCESS - GET 获取资源</span><br><span class="line">201 CREATED - POST 创建数据成功时</span><br><span class="line">204 No Content - 对不会返回响应体的成功请求进行响应（比如DELETE请求）</span><br><span class="line">301 Moved Permanently - 请求的资源已永久移动到新位置</span><br><span class="line">302 Move temporarily - 临时重定向</span><br><span class="line">304 Not Modified - 文档的内容并未改变，禁止包含消息体</span><br><span class="line">400 Bad Request - 请求异常，比如请求中的 body 无法解析</span><br><span class="line">401 Unauthorized - 没有进行认证或者认证非法</span><br><span class="line">403 Forbidden - 当认证成功，但是认证过的用户没有访问资源的权限</span><br><span class="line">404 Not Found - 当一个不存在的资源被请求</span><br><span class="line">405 Method Not Allowed - 所请求的HTTP方法不允许当前认证用户访问</span><br><span class="line">410 Gone - 表示当前请求的资源不再可用，当调用老版本API的时候很有用</span><br><span class="line">415 Unsupported Media Type - 如果请求中的内容类型是错误的</span><br><span class="line">422 Unprocessable Entity - 用来表示校验错误</span><br><span class="line">429 Too Many Requests - 由于请求频次达到上限而被拒绝访问</span><br><span class="line">500 Internal Server Error - 服务器遇到了一个未曾预料的状况</span><br><span class="line">502 Bad Gateway - 网关或者代理出错</span><br><span class="line">503 Service Unavailable - 服务器临时维护或者过载，服务器当前无法处理请求</span><br><span class="line">504 Gateway Timeout - 请求超时</span><br></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://blog.liz-x.com/2019/01/26/数据删改规范/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="liz">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://ws4.sinaimg.cn/large/006tNc79ly1fzc1i18qexj30wz0u0gr3.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="不负">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/01/26/数据删改规范/" class="post-title-link" itemprop="url">数据删改规范</a>
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-01-26 20:01:50" itemprop="dateCreated datePublished" datetime="2019-01-26T20:01:50+08:00">2019-01-26</time>
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/编程/" itemprop="url" rel="index"><span itemprop="name">编程</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/编程/规范/" itemprop="url" rel="index"><span itemprop="name">规范</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="删除铁律"><a href="#删除铁律" class="headerlink" title="删除铁律"></a>删除铁律</h2><p><strong>禁止程序物理删除数据</strong></p>
+<h3 id="软删除"><a href="#软删除" class="headerlink" title="软删除"></a>软删除</h3><ol>
+<li>根据删除条件，查询数据 ID，通过 ID 批量软删除；</li>
+<li>禁止通过子查询、联表查询来更新数据（会存在性能问题，且数据不好批量还原）；</li>
+<li>所有删除数据的操作，必须有 jira 留痕；</li>
+<li>同批数据涉及多个 jira 时，必须在当前 jira 备注历史 jira 地址。</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">-- modified_by 例如：Jira008-20180808-01</span><br><span class="line">UPDATE `table` SET `is_deleted` = 1, `modified_by` = &apos;jira 编号 + 版本号&apos;,  `modified_on` = NOW() WHERE `is_deleted` = 0 AND `id` IN (&apos;xxxxxxxxxxxx&apos;);</span><br></pre></td></tr></table></figure>
+<h3 id="硬删除（物理删除）"><a href="#硬删除（物理删除）" class="headerlink" title="硬删除（物理删除）"></a>硬删除（物理删除）</h3><p>避免数据库无效数据不断增长，定期清理软删除的历史数据。</p>
+<ol>
+<li>提前通知交付、区域、客户；</li>
+<li><strong>jira 留痕，备注执行流程；</strong></li>
+<li>提前发起停服公告（凌晨停服）；</li>
+<li>区分需要保留的历史数据；</li>
+<li>凌晨执行删除操作：<ol>
+<li>nginx 跳转停服公告页面；</li>
+<li>备份数据库；</li>
+<li>物理删除1年前<strong>被软删除</strong>的<strong>无用数据</strong>；</li>
+<li>区域及时验证数据。</li>
+</ol>
+</li>
+</ol>
+<h2 id="修改数据"><a href="#修改数据" class="headerlink" title="修改数据"></a>修改数据</h2><ol>
+<li><strong>必须通过 jira 留痕；</strong></li>
+<li>根据修改条件，<strong>备份原始数据</strong>（修改出错可马上还原）；</li>
+<li>modified_by = ‘jira 编号 + 版本号’；</li>
+<li>禁止通过子查询、联表查询来更新数据；</li>
+<li>通过自定义脚本，生成更新 SQL；</li>
+<li>如果需要还原，根据备份数据，生成还原 SQL。</li>
+</ol>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://blog.liz-x.com/2019/01/25/PHP-编程规范/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="liz">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://ws4.sinaimg.cn/large/006tNc79ly1fzc1i18qexj30wz0u0gr3.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="不负">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/01/25/PHP-编程规范/" class="post-title-link" itemprop="url">PHP 编程规范</a>
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-01-25 18:10:30" itemprop="dateCreated datePublished" datetime="2019-01-25T18:10:30+08:00">2019-01-25</time>
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/编程/" itemprop="url" rel="index"><span itemprop="name">编程</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/编程/规范/" itemprop="url" rel="index"><span itemprop="name">规范</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="代码要求"><a href="#代码要求" class="headerlink" title="代码要求"></a>代码要求</h2><ol>
+<li>代码分层 —— 整洁、面向对象<ul>
+<li>module-controller-service-repository-model</li>
+<li>module：模块 —— 业务分层</li>
+<li>controller：控制器 —— 输入处理，调用 service</li>
+<li>service：服务 —— 业务逻辑处理，调用 repository</li>
+<li>repository：仓库 —— 数据持久化封装、聚合根（切割实体的相依性），调用 model</li>
+<li>model：数据访问层（entity/实体）</li>
+</ul>
+</li>
+<li>代码格式 —— 基于语言规范格式化<br><a href="https://psr.phphub.org/" target="_blank" rel="noopener"><strong>PHP FIG</strong></a><ul>
+<li><a href="https://laravel-china.org/topics/2078" target="_blank" rel="noopener">PSR-1</a></li>
+<li><a href="https://laravel-china.org/topics/2078" target="_blank" rel="noopener">PSR-2</a></li>
+</ul>
+</li>
+<li>代码规范 —— sonar 监控</li>
+<li>关键目录（非框架内目录）<ul>
+<li>config：项目配置</li>
+<li>bootstrap：框架启动（可选）</li>
+<li>commands：控制台命令、脚本运行</li>
+<li>utils：工具类（静态），与业务无关</li>
+<li>components：业务组件</li>
+<li>events：事件处理</li>
+<li>sdk：第三方工具包</li>
+<li>tests：单元测试</li>
+</ul>
+</li>
+<li>增量数据禁止联表查询 —— 水平扩展（分表）</li>
+<li>命名方式：<br>驼峰式：Camel case<br>蛇式：Snake Case<br>烤肉串式：Kebab Case<br>1、 类名命名：<strong>大</strong>驼峰，如：class RoomService {}；<br>2、 方法命名：小驼峰，如：public function getRoomById($id = ‘’) {}；<br>3、 对象命名：小驼峰，如：$this-&gt;baseService = new BaseService()；<br>4、 常量命名：<strong>大</strong>蛇式，如：const MAX_NUM = 100、define(‘MAX_NUM’, 100)；<br>5、 变量命名：小驼峰，如：$roomId；<br>6、 函数命名：小蛇式，如：function random_str($length = 10) {}<br>7、 URL 命名：烤肉串，如：<a href="https://xxx.com/user/get-info-by-id" target="_blank" rel="noopener">https://xxx.com/user/get-info-by-id</a></li>
+</ol>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://blog.liz-x.com/2019/01/22/实践版-Git-Flow/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
@@ -1140,7 +2314,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">24</span>
+                    <span class="site-state-item-count">30</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -1177,7 +2351,13 @@
                     
                       
                     
-                    <span class="site-state-item-count">10</span>
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">12</span>
                     <span class="site-state-item-name">分类</span>
                   </a>
                 </div>
@@ -1220,7 +2400,15 @@
                     
                       
                     
-                    <span class="site-state-item-count">13</span>
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">17</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
