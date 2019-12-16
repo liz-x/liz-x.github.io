@@ -55,6 +55,14 @@
 #}</div>
 {% endif %}
 
+{% if theme.footer.icp.enable %}
+  <span class="post-meta-divider">|</span>
+  <div class="icp">{#
+  #}{{ __('footer.icp_text') }} {{ next_url(__('footer.icp_url'), __('footer.icp_number'), {class: 'theme-link'}) }}{#
+  #}{#
+#}</div>
+{% endif %}
+
 {% if theme.footer.custom_text %}
   <div class="footer-custom">{#
   #}{{ theme.footer.custom_text }}{#

@@ -48,6 +48,9 @@ footer:
   theme: 主题
   total_views: 总访问量
   total_visitors: 总访客量
+  icp_text: 粤ICP备
+  icp_url: http://www.beian.miit.gov.cn
+  icp_number: 19039569号
 counter:
   tag_cloud:
     zero: 暂无标签
