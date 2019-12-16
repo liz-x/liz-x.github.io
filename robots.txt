@@ -7,3 +7,7 @@ Allow: /tags/
 
 Sitemap: https://blog.liz-x.com/sitemap.xml
 Sitemap: https://blog.liz-x.com/baidusitemap.xml
+
+
+Sitemap: https://liz-x.com/sitemap.xml
+Sitemap: https://liz-x.com/baidusitemap.xml
