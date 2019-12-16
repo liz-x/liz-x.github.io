@@ -12,16 +12,13 @@ tags:
 
 [Git Link](https://github.com/liz-x/docker-nodeclub.git)
 
-## 说明1
-
-**docker-install.sh**
+## 说明
 
 - 安装 Docker
-- 安装 Docker-Compose
-
-**nodeclub-install.sh**
-
 - 生成 NodeClub 镜像
+- 远程镜像：registry.cn-hangzhou.aliyuncs.com/xt/nodeclub
+
+
 
 **目录**
 
@@ -33,6 +30,8 @@ file                # 文件
 log                 # 日志
 script              # 脚本
 ```
+
+
 
 ## 搭建
 
