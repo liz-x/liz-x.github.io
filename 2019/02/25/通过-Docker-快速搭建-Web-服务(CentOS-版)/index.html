@@ -103,7 +103,7 @@
 <meta property="og:site_name" content="不负">
 <meta property="og:description" content="git 仓库 文件说明centos-init.sh：—— 系统初始化  更换 YUM 源 安装 Docker 安装 Docker-Compose —— 通过 YMAL 配置，定义和运行多个 Docker 应用的工具  Dockerfile： dockerfile/php72/Dockerfile本地构建镜像：docker build -t php-fpm:7.2 . websvr 目录： 1234">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-07-25T10:11:55.064Z">
+<meta property="og:updated_time" content="2019-12-16T10:01:43.159Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="通过 Docker 快速搭建 Web 服务(CentOS 版)">
 <meta name="twitter:description" content="git 仓库 文件说明centos-init.sh：—— 系统初始化  更换 YUM 源 安装 Docker 安装 Docker-Compose —— 通过 YMAL 配置，定义和运行多个 Docker 应用的工具  Dockerfile： dockerfile/php72/Dockerfile本地构建镜像：docker build -t php-fpm:7.2 . websvr 目录： 1234">
@@ -448,7 +448,7 @@
       
 
       
-        <p><a href="https://github.com/liz-x/docker-server" target="_blank" rel="noopener">git 仓库</a></p>
+        <p><a href="https://github.com/liz-x/docker-lnmp-server" target="_blank" rel="noopener">git 仓库</a></p>
 <h2 id="文件说明"><a href="#文件说明" class="headerlink" title="文件说明"></a>文件说明</h2><p><strong>centos-init.sh：</strong><br>—— 系统初始化</p>
 <ul>
 <li>更换 YUM 源</li>
@@ -466,7 +466,7 @@
 <li>/websvr/compose/nginx-proxy</li>
 <li>/websvr/compose/api-gateway</li>
 </ul>
-<h2 id="搭建服务"><a href="#搭建服务" class="headerlink" title="搭建服务"></a>搭建服务</h2><h3 id="初始化"><a href="#初始化" class="headerlink" title="初始化"></a>初始化</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> /</span><br><span class="line"></span><br><span class="line"><span class="comment"># 拉取项目</span></span><br><span class="line">git <span class="built_in">clone</span> https://github.com/liz-x/docker-server.git websvr</span><br><span class="line"><span class="built_in">cd</span> websvr</span><br><span class="line"></span><br><span class="line"><span class="comment"># 删除 git 信息</span></span><br><span class="line">rm -rf .git*</span><br><span class="line"></span><br><span class="line"><span class="comment"># 系统初始化（ECS 版）</span></span><br><span class="line">sudo sh ./centos-init.sh</span><br></pre></td></tr></table></figure>
+<h2 id="搭建服务"><a href="#搭建服务" class="headerlink" title="搭建服务"></a>搭建服务</h2><h3 id="初始化"><a href="#初始化" class="headerlink" title="初始化"></a>初始化</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> /</span><br><span class="line"></span><br><span class="line"><span class="comment"># 拉取项目</span></span><br><span class="line">git <span class="built_in">clone</span> https://github.com/liz-x/docker-lnmp-server.git websvr</span><br><span class="line"><span class="built_in">cd</span> websvr</span><br><span class="line"></span><br><span class="line"><span class="comment"># 删除 git 信息</span></span><br><span class="line">rm -rf .git*</span><br><span class="line"></span><br><span class="line"><span class="comment"># 系统初始化（ECS 版）</span></span><br><span class="line">sudo sh ./centos-init.sh</span><br></pre></td></tr></table></figure>
 <h3 id="启动-Demo"><a href="#启动-Demo" class="headerlink" title="启动 Demo"></a>启动 Demo</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Demo 服务</span></span><br><span class="line"><span class="built_in">cd</span> /websrv/compose/demo</span><br><span class="line">docker-compose up -d</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看容器状态</span></span><br><span class="line">[root@zsky sky] docker-compose ps</span><br><span class="line"></span><br><span class="line"><span class="comment"># 测试</span></span><br><span class="line">[root@zsky ~] curl localhost</span><br><span class="line">Hello World.</span><br></pre></td></tr></table></figure>
 
       
@@ -776,6 +776,11 @@
 
 
   <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+  <div class="icp">粤ICP备 <a href="http://www.beian.miit.gov.cn" class="theme-link" rel="noopener" target="_blank">19039569号</a></div>
 
 
 

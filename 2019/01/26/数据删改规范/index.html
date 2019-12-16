@@ -103,7 +103,7 @@
 <meta property="og:site_name" content="不负">
 <meta property="og:description" content="删除铁律禁止程序物理删除数据 软删除 根据删除条件，查询数据 ID，通过 ID 批量软删除； 禁止通过子查询、联表查询来更新数据（会存在性能问题，且数据不好批量还原）； 所有删除数据的操作，必须有 jira 留痕； 同批数据涉及多个 jira 时，必须在当前 jira 备注历史 jira 地址。  12-- modified_by 例如：Jira008-20180808-01UPDATE `tab">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-12-14T16:10:10.314Z">
+<meta property="og:updated_time" content="2019-12-16T10:01:43.157Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="数据删改规范">
 <meta name="twitter:description" content="删除铁律禁止程序物理删除数据 软删除 根据删除条件，查询数据 ID，通过 ID 批量软删除； 禁止通过子查询、联表查询来更新数据（会存在性能问题，且数据不好批量还原）； 所有删除数据的操作，必须有 jira 留痕； 同批数据涉及多个 jira 时，必须在当前 jira 备注历史 jira 地址。  12-- modified_by 例如：Jira008-20180808-01UPDATE `tab">
@@ -464,18 +464,21 @@
 </ol>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">-- modified_by 例如：Jira008-20180808-01</span><br><span class="line">UPDATE `table` SET `is_deleted` = 1, `modified_by` = &apos;jira 编号 + 版本号&apos;,  `modified_on` = NOW() WHERE `is_deleted` = 0 AND `id` IN (&apos;xxxxxxxxxxxx&apos;);</span><br></pre></td></tr></table></figure>
 <h3 id="硬删除（物理删除）"><a href="#硬删除（物理删除）" class="headerlink" title="硬删除（物理删除）"></a>硬删除（物理删除）</h3><p>避免数据库无效数据不断增长，定期清理软删除的历史数据。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">除了物理删除历史数据，还有以下做法：</span><br><span class="line">1. 分布式数据库（扩容）</span><br><span class="line">2. 冷热数据存储（分离）</span><br><span class="line">3. 增量备份，不停服处理</span><br><span class="line"></span><br><span class="line">这里仅注重介绍物理删除的规范</span><br></pre></td></tr></table></figure>
 <ol>
 <li>提前通知交付、区域、客户；</li>
 <li><strong>jira 留痕，备注执行流程；</strong></li>
 <li>提前发起停服公告（凌晨停服）；</li>
 <li>区分需要保留的历史数据；</li>
-<li>凌晨执行删除操作：<ol>
+<li>凌晨停止对外服务并执行删除操作：<ol>
 <li>nginx 跳转停服公告页面；</li>
 <li>备份数据库；</li>
-<li>物理删除1年前<strong>被软删除</strong>的<strong>无用数据</strong>；</li>
-<li>区域及时验证数据。</li>
+<li>导出<strong>被软删除</strong> 2 年以上的数据（历史备份），</li>
+<li>物理删除<strong>被软删除</strong> 2 年以上的数据；</li>
+<li>团队、区域及时验证数据。</li>
 </ol>
 </li>
+<li>验证通过恢复产品使用。</li>
 </ol>
 <h2 id="修改数据"><a href="#修改数据" class="headerlink" title="修改数据"></a>修改数据</h2><ol>
 <li><strong>必须通过 jira 留痕；</strong></li>
@@ -795,6 +798,11 @@
 
 
   <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+  <div class="icp">粤ICP备 <a href="http://www.beian.miit.gov.cn" class="theme-link" rel="noopener" target="_blank">19039569号</a></div>
 
 
 
