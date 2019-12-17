@@ -50,7 +50,7 @@ travis login --auto
 1. 生成 `travis`，`travis.pub`
 
    ```sh
-   cd ~/.ssh
+   cd /home/www-data/.ssh
    ssh-keygen -t rsa -C "travis" -f travis
    ```
 
